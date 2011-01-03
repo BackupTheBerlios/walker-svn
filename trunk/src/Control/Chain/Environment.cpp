@@ -1,8 +1,6 @@
 #include "Control/Chain/Environment.h"
 #include <slon/Physics/PhysicsManager.h>
 
-#include <slon/Physics/Bullet/BulletRotationalMotor.h>
-
 namespace ctrl {
 namespace chain {
 
