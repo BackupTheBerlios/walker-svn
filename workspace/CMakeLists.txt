@@ -30,7 +30,6 @@ MACRO (COPY_DLLS SOURCE DESTINATION COPY_FILES)
     ENDFOREACH(FILENAME)
 ENDMACRO (COPY_DLLS)
 
-
 SET (BOOST_DLLS
     boost_date_time-vc90-mt-gd-1_42.dll 
     boost_filesystem-vc90-mt-gd-1_42.dll
