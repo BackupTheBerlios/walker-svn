@@ -199,7 +199,7 @@ Scene::Scene(const DESC& desc)
                         break;
                 }
 
-                controlIndex = 0;
+                controlIndex = 2;
 			}
 
             // create scene
@@ -358,7 +358,7 @@ void Scene::switchRealtime()
 void Scene::switchLearning()
 {
     controls[controlIndex]->unacquire();
-    if ( ++controlIndex > controls.size() ) {
+    if ( ++controlIndex >= controls.size() ) {
         controlIndex = 0;
     }
     controls[controlIndex]->acquire();

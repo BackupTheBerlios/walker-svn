@@ -294,9 +294,7 @@ void Control::drawDebugInfo()
 											   iter != physicsModel->endConstraint(); 
 											   ++iter)
 		{
-			const physics::Constraint& constraint = (**iter);
-
-            (*debugMesh) << constraint;
+            (*debugMesh) << graphics::debug::constraint(**iter, 2.0f, 1.0f / environment->getMaxForce());
 /*
 			math::Vector3f force(0.0f, 0.0f, 0.0f);
 			for (int i = 0; i<3; ++i)
