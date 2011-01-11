@@ -30,17 +30,23 @@ MACRO (COPY_DLLS SOURCE DESTINATION COPY_FILES)
     ENDFOREACH(FILENAME)
 ENDMACRO (COPY_DLLS)
 
-
 SET (BOOST_DLLS
-    boost_date_time-vc90-mt-gd-1_42.dll 
-    boost_filesystem-vc90-mt-gd-1_42.dll
-    boost_iostreams-vc90-mt-1_42.dll 
-    boost_math_c99-vc90-mt-1_42.dll
-    boost_prg_exec_monitor-vc90-mt-gd-1_42.dll
-    boost_signals-vc90-mt-gd-1_42.dll
-    boost_system-vc90-mt-1_42.dll
-    boost_system-vc90-mt-gd-1_42.dll
-    boost_thread-vc90-mt-gd-1_42.dll
+	boost_date_time-vc90-mt-1_45.dll 
+    boost_date_time-vc90-mt-gd-1_45.dll 
+    boost_filesystem-vc90-mt-1_45.dll
+    boost_filesystem-vc90-mt-gd-1_45.dll
+    boost_iostreams-vc90-mt-1_45.dll 
+    boost_iostreams-vc90-mt-gd-1_45.dll 
+    boost_math_c99-vc90-mt-1_45.dll
+    boost_math_c99-vc90-mt-gd-1_45.dll
+    boost_prg_exec_monitor-vc90-mt-1_45.dll
+    boost_prg_exec_monitor-vc90-mt-gd-1_45.dll
+    boost_signals-vc90-mt-1_45.dll
+    boost_signals-vc90-mt-gd-1_45.dll
+    boost_system-vc90-mt-1_45.dll
+    boost_system-vc90-mt-gd-1_45.dll
+    boost_thread-vc90-mt-1_45.dll
+    boost_thread-vc90-mt-gd-1_45.dll
 )
 
 SET (DEVIL_DLLS
@@ -63,20 +69,20 @@ SET (SDL_DLLS
     SDL_image.dll
 )
 
+SET (RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+SET (3RD_PARTY_TARGET_DIRECTORY ${RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR})
+COPY_DLLS(${3RD_PARTY_DIRECTORY}/boost/lib  ${3RD_PARTY_TARGET_DIRECTORY}   BOOST_DLLS)
+COPY_DLLS(${3RD_PARTY_DIRECTORY}/DevIL/lib  ${3RD_PARTY_TARGET_DIRECTORY}   DEVIL_DLLS)
+COPY_DLLS(${3RD_PARTY_DIRECTORY}/GLEW/bin   ${3RD_PARTY_TARGET_DIRECTORY}   GLEW_DLLS)
+COPY_DLLS(${3RD_PARTY_DIRECTORY}/SDL/bin    ${3RD_PARTY_TARGET_DIRECTORY}   SDL_DLLS)
+	
 SET (SIMPLE_GL_CONFIGURE_INTRUSIVE 		ON)	
 SET (SIMPLE_GL_PATH						${PROJECT_SOURCE_DIR}/SimpleGL)
 SET (XMLPP_CONFIGURE_INTRUSIVE 			ON)
 SET (XMLPP_PATH							${PROJECT_SOURCE_DIR}/XML++)
 SET (SLON_ENGINE_CONFIGURE_INTRUSIVE 	ON)
 SET (SLON_ENGINE_PATH					${PROJECT_SOURCE_DIR}/SlonEngine)
-SET (RUNTIME_OUTPUT_DIRECTORY           ${PROJECT_BINARY_DIR}/bin)
 SET (3RD_PARTY_TARGET                   CopyDLL)
-
-SET (3RD_PARTY_TARGET_DIRECTORY ${RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR})
-COPY_DLLS(${3RD_PARTY_DIRECTORY}/boost/lib  ${3RD_PARTY_TARGET_DIRECTORY}   BOOST_DLLS)
-COPY_DLLS(${3RD_PARTY_DIRECTORY}/DevIL/lib  ${3RD_PARTY_TARGET_DIRECTORY}   DEVIL_DLLS)
-COPY_DLLS(${3RD_PARTY_DIRECTORY}/GLEW/bin   ${3RD_PARTY_TARGET_DIRECTORY}   GLEW_DLLS)
-COPY_DLLS(${3RD_PARTY_DIRECTORY}/SDL/bin    ${3RD_PARTY_TARGET_DIRECTORY}   SDL_DLLS)
 
 ADD_SUBDIRECTORY(SimpleGL)
 ADD_SUBDIRECTORY(XML++)
