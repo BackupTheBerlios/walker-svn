@@ -41,6 +41,8 @@ SET (BOOST_DLLS
     boost_math_c99-vc90-mt-gd-1_45.dll
     boost_prg_exec_monitor-vc90-mt-1_45.dll
     boost_prg_exec_monitor-vc90-mt-gd-1_45.dll
+    boost_serialization-vc90-mt-1_45.dll
+    boost_serialization-vc90-mt-gd-1_45.dll
     boost_signals-vc90-mt-1_45.dll
     boost_signals-vc90-mt-gd-1_45.dll
     boost_system-vc90-mt-1_45.dll
