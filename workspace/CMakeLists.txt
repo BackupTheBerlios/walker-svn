@@ -20,6 +20,10 @@ LIST ( APPEND CMAKE_LIBRARY_PATH
 	${3RD_PARTY_DIRECTORY}/SDL/lib
 )
 
+LIST ( APPEND CMAKE_PROGRAM_PATH
+    ${3RD_PARTY_DIRECTORY}/gnuplot
+)
+
 # copy dlls into target binary dir
 ADD_CUSTOM_TARGET (CopyDLL)
 
