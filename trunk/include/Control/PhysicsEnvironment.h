@@ -75,7 +75,7 @@ private:
     void handleAppearingContact(const physics::Contact& c);
     void handleDissappearingContact(const physics::Contact& c);
 
-protected:
+public:
     rigid_body_vector           rigidBodies;
     constraint_vector           constraints;
     motor_vector                motors;
