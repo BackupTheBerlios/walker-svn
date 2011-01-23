@@ -117,45 +117,13 @@ double PDControl::pre_sync()
         return physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().fixedTimeStep + math::EPS_6f;
     }
 
-    math::Vector3f g = physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().gravity;
-
     environment->makeState();
 
-	// calculate jacobian for gravity compensation
-	ublas::matrix<math::Vector3f> jacobian( environment->constraints.size(), environment->motors.size() ) ;
-    for (size_t i = 0; i<environment->constraints.size(); ++i)
-    {
-		for (size_t j = 0; j<environment->motors.size(); ++j) 
-		{
-			const physics::Constraint* c = environment->constraints[i].get();
-			if (j > i*2 + 1) {
-				jacobian(i, j) = math::Vector3f(0.0f, 0.0f, 0.0f);
-			}
-			else 
-			{
-				math::Vector3f sp = math::get_translation(c->getRigidBodyB()->getTransform() * c->getStateDesc().frames[1]) 
-								  - math::get_translation(c->getRigidBodyB()->getTransform());
-				math::Vector3f v  = environment->motors[j]->getAxis();
-				jacobian(i, j)    = math::cross(environment->motors[j]->getAxis(), sp);
-			}
-		}
-	}
-	jacobian = ublas::trans(jacobian);
-	
-	// calculate gravity compensation term
-	ublas::vector<math::Vector3f> gc( environment->constraints.size() );
-    for (size_t i = 0; i<environment->constraints.size(); ++i) {
-		gc(i) = -g * environment->constraints[i]->getRigidBodyB()->getMass();
-	}
-	gc = ublas::prod(jacobian, gc);
-
-	ublas::vector<float> gcTorque( environment->motors.size() );
-    for (size_t i = 0; i<environment->motors.size(); ++i) {
-		gcTorque[i] = 0.1f * (gc(i)[0] + gc(i)[1] + gc(i)[2]);
-    }
-
 	// calculate pd term
-    environment->targetForce = gcTorque + ublas::prod(Kd, targetVelocity - environment->velocity) + ublas::prod(Kp, targetPosition - environment->position);
+    environment->targetForce = ublas::prod(Kd, targetVelocity - environment->velocity) + ublas::prod(Kp, targetPosition - environment->position);
+    if (gravityCompensation) {
+        environment->targetForce += getGravityCompensation();
+    }
     environment->makeAction();
     
     return timeInterval;

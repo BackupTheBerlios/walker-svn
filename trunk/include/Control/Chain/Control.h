@@ -1,6 +1,7 @@
 #ifndef __WALKER_YARD_CONTROL_CHAIN_CONTROL_H__
 #define __WALKER_YARD_CONTROL_CHAIN_CONTROL_H__
 
+#include "../../Utility/Math.h"
 #include "../PhysicsControl.h"
 #include "../Utility/LooseTimer.h"
 #include "Environment.h"
@@ -45,10 +46,14 @@ protected:
 	void   unacquire_safe();
     double post_sync();
 
+    // Misc
+    ublas::vector<float> getGravityCompensation() const;
+
 protected:
 	// settings
     bool            freeJoints;
     bool            randomStartup;
+    bool            gravityCompensation;
     double          episodeLength;
     float           maxForce;
     float           maxVelocity;

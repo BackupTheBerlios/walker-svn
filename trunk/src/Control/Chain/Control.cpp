@@ -2,6 +2,7 @@
 #include <slon/Graphics/Common.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawCommon.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawPhysics.h>
+#include <slon/Physics/PhysicsManager.h>
 #include <slon/Physics/ServoMotor.h>
 #include <slon/Realm/World.h>
 #include <boost/property_tree/ptree.hpp>
@@ -96,6 +97,7 @@ void Control::loadConfig(const std::string& fileName)
 
     freeJoints          = properties.get("FreeJoints", true);
     randomStartup       = properties.get("RandomStartup", false);
+    gravityCompensation = properties.get("GravityCompensation", false);
     maxForce            = properties.get("MaxForce", 20.0f);
     maxVelocity         = properties.get("MaxVelocity", 10.0f);
 }
@@ -253,6 +255,47 @@ double Control::post_sync()
 	}
 
 	return -1.0;
+}
+    
+ublas::vector<float> Control::getGravityCompensation() const
+{
+    math::Vector3f g = physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().gravity;
+
+	// calculate jacobian for gravity compensation
+	ublas::matrix<math::Vector3f> jacobian( environment->constraints.size(), environment->motors.size() ) ;
+    for (size_t i = 0; i<environment->constraints.size(); ++i)
+    {
+		const physics::Constraint* c = environment->constraints[i].get();
+        math::Vector3f             s = math::get_translation(c->getRigidBodyB()->getTransform());
+		for (size_t j = 0; j<environment->motors.size(); ++j) 
+		{
+			if (j > i*2 + 1) {
+				jacobian(i, j) = math::Vector3f(0.0f, 0.0f, 0.0f);
+			}
+			else 
+			{
+                c                = environment->motors[j]->getConstraint();
+                math::Vector3f p = math::get_translation(c->getRigidBodyB()->getTransform() * c->getStateDesc().frames[1]);
+                math::Vector3f v = environment->motors[j]->getAxis();
+                jacobian(i, j)   = math::cross(environment->motors[j]->getAxis(), p - s);
+			}
+		}
+	}
+	jacobian = ublas::trans(jacobian);
+	
+	// calculate gravity compensation term
+	ublas::vector<math::Vector3f> gc( environment->constraints.size() );
+    for (size_t i = 0; i<environment->constraints.size(); ++i) {
+		gc(i) = -g * environment->constraints[i]->getRigidBodyB()->getMass();
+	}
+	gc = ublas::prod(jacobian, gc);
+
+	ublas::vector<float> gcForce( environment->motors.size() );
+    for (size_t i = 0; i<environment->motors.size(); ++i) {
+        gcForce[i] = gc(i)[0] + gc(i)[1] + gc(i)[2];
+    }
+
+    return gcForce;
 }
 
 void Control::drawDebugInfo()
