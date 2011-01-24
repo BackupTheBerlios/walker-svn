@@ -35,24 +35,26 @@ MACRO (COPY_DLLS SOURCE DESTINATION COPY_FILES)
 ENDMACRO (COPY_DLLS)
 
 SET (BOOST_DLLS
-	boost_date_time-vc100-mt-1_43.dll 
-    boost_date_time-vc100-mt-gd-1_43.dll 
-    boost_filesystem-vc100-mt-1_43.dll
-    boost_filesystem-vc100-mt-gd-1_43.dll
-    boost_iostreams-vc100-mt-1_43.dll 
-    boost_iostreams-vc100-mt-gd-1_43.dll 
-    boost_math_c99-vc100-mt-1_43.dll
-    boost_math_c99-vc100-mt-gd-1_43.dll
-    boost_prg_exec_monitor-vc100-mt-1_43.dll
-    boost_prg_exec_monitor-vc100-mt-gd-1_43.dll
-    boost_serialization-vc100-mt-1_43.dll
-    boost_serialization-vc100-mt-gd-1_43.dll
-    boost_signals-vc100-mt-1_43.dll
-    boost_signals-vc100-mt-gd-1_43.dll
-    boost_system-vc100-mt-1_43.dll
-    boost_system-vc100-mt-gd-1_43.dll
-    boost_thread-vc100-mt-1_43.dll
-    boost_thread-vc100-mt-gd-1_43.dll
+	boost_date_time-vc100-mt-1_45.dll 
+    boost_date_time-vc100-mt-gd-1_45.dll 
+    boost_filesystem-vc100-mt-1_45.dll
+    boost_filesystem-vc100-mt-gd-1_45.dll
+    boost_iostreams-vc100-mt-1_45.dll
+    boost_iostreams-vc100-mt-gd-1_45.dll 
+    boost_math_c99-vc100-mt-1_45.dll
+    boost_math_c99-vc100-mt-gd-1_45.dll
+    boost_prg_exec_monitor-vc100-mt-1_45.dll
+    boost_prg_exec_monitor-vc100-mt-gd-1_45.dll
+    boost_serialization-vc100-mt-1_45.dll
+    boost_serialization-vc100-mt-gd-1_45.dll
+    boost_signals-vc100-mt-1_45.dll
+    boost_signals-vc100-mt-gd-1_45.dll
+    boost_system-vc100-mt-1_45.dll
+    boost_system-vc100-mt-gd-1_45.dll
+    boost_thread-vc100-mt-1_45.dll
+    boost_thread-vc100-mt-gd-1_45.dll
+    boost_unit_test_framework-vc100-mt-1_45.dll
+    boost_unit_test_framework-vc100-mt-gd-1_45.dll
 )
 
 SET (DEVIL_DLLS
