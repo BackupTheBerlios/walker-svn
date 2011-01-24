@@ -133,8 +133,8 @@ Scene::Scene(const DESC& desc)
             physics::PhysicsManager& physicsManager = physics::currentPhysicsManager();
 
             physics::DynamicsWorld::state_desc dynamicsWorldDesc;
-            dynamicsWorldDesc.gravity = math::Vector3f(0.0f, -98.0f, 0.0f);
-            dynamicsWorldDesc.fixedTimeStep = 1.0f / 120.0f;
+            dynamicsWorldDesc.gravity = math::Vector3f(0.0f, -9.8f, 0.0f);
+            dynamicsWorldDesc.fixedTimeStep = 0.005f;
             physicsManager.initDynamicsWorld(dynamicsWorldDesc);
             physicsManager.getDynamicsWorld()->setMaxNumSubSteps(10000); // to make sure simulation is correct
 
@@ -240,8 +240,8 @@ Scene::Scene(const DESC& desc)
         }
 
         // setup states
-        camera->setPosition( math::Vector3f(15.0f, 20.0f, 15.0f) );
-        camera->setDirection( math::Vector3f(0.0f, 10.0f, 0.0f) - camera->getPosition() );
+        camera->setPosition( math::Vector3f(1.5f, 2.0f, 1.5f) );
+        camera->setDirection( math::Vector3f(0.0f, 1.0f, 0.0f) - camera->getPosition() );
         camera->setUp( math::Vector3f(0.0f, 1.0f, 0.0f) );
 
         // create debug mesh
@@ -255,6 +255,12 @@ Scene::Scene(const DESC& desc)
             image->LoadFromFile("Data/Fonts/font.png");
             debugFont->SetTexture( image->CreateTexture2D() );
         }
+
+		// create physics debug mesh
+		//PhysicsDebugVisitor vis;
+		//vis.traverse(*modelObject->getRoot());
+		//vis.traverse(*arenaObject->getRoot());
+		//vis.traverse(*cubeObject->getRoot());
 
         // attach signals
         graphicsManager.connectPostFrameRenderCallback( boost::bind(&Scene::OnPostRender, this) );
@@ -279,12 +285,12 @@ Scene::Scene(const DESC& desc)
         keyboardHandler->connectKeyPressEventHandler( input::KEY_r,         bind(&Scene::switchRealtime,    this) );
         keyboardHandler->connectKeyPressEventHandler( input::KEY_l,         bind(&Scene::switchLearning,    this) );
 
-        keyboardHandler->connectKeyDownHandler( input::KEY_w,   bind(&Scene::flyCamera, this, math::Vector3f(  0.0f,   0.0f,  10.0f)) );
-        keyboardHandler->connectKeyDownHandler( input::KEY_s,   bind(&Scene::flyCamera, this, math::Vector3f(  0.0f,   0.0f, -10.0f)) );
-        keyboardHandler->connectKeyDownHandler( input::KEY_d,   bind(&Scene::flyCamera, this, math::Vector3f( 10.0f,   0.0f,   0.0f)) );
-        keyboardHandler->connectKeyDownHandler( input::KEY_a,   bind(&Scene::flyCamera, this, math::Vector3f(-10.0f,   0.0f,   0.0f)) );
-        keyboardHandler->connectKeyDownHandler( input::KEY_q,   bind(&Scene::flyCamera, this, math::Vector3f(  0.0f,  10.0f,   0.0f)) );
-        keyboardHandler->connectKeyDownHandler( input::KEY_e,   bind(&Scene::flyCamera, this, math::Vector3f(  0.0f, -10.0f,   0.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_w,   bind(&Scene::flyCamera, this, math::Vector3f( 0.0f,  0.0f,  1.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_s,   bind(&Scene::flyCamera, this, math::Vector3f( 0.0f,  0.0f, -1.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_d,   bind(&Scene::flyCamera, this, math::Vector3f( 1.0f,  0.0f,  0.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_a,   bind(&Scene::flyCamera, this, math::Vector3f(-1.0f,  0.0f,  0.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_q,   bind(&Scene::flyCamera, this, math::Vector3f( 0.0f,  1.0f,  0.0f)) );
+        keyboardHandler->connectKeyDownHandler( input::KEY_e,   bind(&Scene::flyCamera, this, math::Vector3f( 0.0f, -1.0f,  0.0f)) );
 
         keyboardHandler->connectKeyDownHandler( input::KEY_UP,      bind(&Scene::modifyTimeScale, this,  0.5f) );
         keyboardHandler->connectKeyDownHandler( input::KEY_DOWN,    bind(&Scene::modifyTimeScale, this, -0.5f) );
@@ -432,7 +438,7 @@ void Scene::throwCube()
     physics::RigidBody&             rigidBody = **cubeObject->getPhysicsModel()->firstRigidBody();
     physics::RigidBody::state_desc  desc      = rigidBody.getStateDesc();
     desc.initialTransform = math::make_translation( camera->getPosition().x, camera->getPosition().y, camera->getPosition().z );
-    desc.linearVelocity   = camera->getDirection() * 100.0f;
+    desc.linearVelocity   = camera->getDirection() * 10.0f;
     rigidBody.reset(desc);
 
     world->add( cubeObject.get() );

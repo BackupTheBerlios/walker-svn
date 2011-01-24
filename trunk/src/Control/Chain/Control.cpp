@@ -267,6 +267,7 @@ ublas::vector<float> Control::getGravityCompensation() const
     {
 		const physics::Constraint* c = environment->constraints[i].get();
         math::Vector3f             s = math::get_translation(c->getRigidBodyB()->getTransform());
+
 		for (size_t j = 0; j<environment->motors.size(); ++j) 
 		{
 			if (j > i*2 + 1) {
@@ -337,7 +338,7 @@ void Control::drawDebugInfo()
 											   iter != physicsModel->endConstraint(); 
 											   ++iter)
 		{
-            (*debugMesh) << graphics::debug::constraint(**iter, 2.0f, 1.0f / environment->getMaxForce());
+            (*debugMesh) << graphics::debug::constraint(**iter, 0.2f, 1.0f / environment->getMaxForce());
 /*
 			math::Vector3f force(0.0f, 0.0f, 0.0f);
 			for (int i = 0; i<3; ++i)

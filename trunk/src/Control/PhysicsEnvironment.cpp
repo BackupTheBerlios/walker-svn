@@ -89,7 +89,7 @@ void PhysicsEnvironment::reset()
         {
             numDynamicRigidBodies++;
             initialMassCenter += math::get_translation( rigidBodies[i]->getTransform() ) * rigidBodies[i]->getMass();
-            mass       += rigidBodies[i]->getMass();
+            mass              += rigidBodies[i]->getMass();
         }
     }
     initialMassCenter /= mass;

@@ -168,6 +168,7 @@
 	<library_visual_scenes>
 		<visual_scene id="Scene" name="Scene">
 			<node layer="L1" id="Cube" name="Cube">
+				<scale sid="scale">0.10000 0.10000 0.10000</scale>
 				<instance_geometry url="#Cube_008-Geometry003">
 					<bind_material>
 						<technique_common>
@@ -233,7 +234,7 @@
 					<instance_physics_material url="#Cube-PhysicsMaterial"/>
 					<shape>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>0.10000 0.10000 0.10000</half_extents>
 						</box>
 					</shape>
 				</technique_common>
