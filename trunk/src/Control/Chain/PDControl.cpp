@@ -74,12 +74,12 @@ void PDControl::acquire_safe()
         Kd = ublas::identity_matrix<float>( environment->getActionSize(), environment->getActionSize() );
     }
 
-    targetVelocity = ublas::zero_vector<float>( environment->getActionSize() );
-    targetPosition = ublas::zero_vector<float>( environment->getActionSize() );
+    targetVelocity = ublas::zero_vector<physics::real>( environment->getActionSize() );
+    targetPosition = ublas::zero_vector<physics::real>( environment->getActionSize() );
 
     // compute mass for each joint
     size_t index = 0;
-    mass = ublas::zero_vector<float>( environment->getActionSize() );
+    mass = ublas::zero_vector<physics::real>( environment->getActionSize() );
     for (PhysicsModel::constraint_iterator iter  = physicsModel->firstConstraint();
                                            iter != physicsModel->endConstraint(); 
                                            ++iter)

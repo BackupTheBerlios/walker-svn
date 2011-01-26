@@ -79,9 +79,9 @@ void PhysicsEnvironment::reset()
 
     // find center of mass of the chain
     numDynamicRigidBodies = 0;
-    initialCenterHeight   = 0.0f;
-    initialMassCenter     = math::Vector3f(0.0f, 0.0f, 0.0f);
-    float mass            = 0.0f;
+    initialCenterHeight   = 0;
+    initialMassCenter     = math::Vector3r(0, 0, 0);
+    physics::real mass    = 0;
     for (size_t i = 0; i<rigidBodies.size(); ++i) 
     {
         initialCenterHeight += math::get_translation( rigidBodies[i]->getTransform() ).y / rigidBodies.size();
@@ -104,7 +104,7 @@ void PhysicsEnvironment::makeAction()
 {
     std::for_each( boost::make_indirect_iterator( rigidBodies.begin() ),
                    boost::make_indirect_iterator( rigidBodies.end() ),
-                   boost::bind(&physics::RigidBody::applyImpulse, _1, math::Vector3f(0.01f, 0.01f, 0.01f), math::Vector3f(0.0f, 0.0f, 0.0f)) );
+                   boost::bind(&physics::RigidBody::applyImpulse, _1, math::Vector3r( physics::real(0.01), physics::real(0.01), 0.01 ), math::Vector3r(0.0, 0.0, 0.0)) );
 
     switch (controlType)
     {

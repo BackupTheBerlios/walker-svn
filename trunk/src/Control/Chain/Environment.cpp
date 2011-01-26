@@ -27,23 +27,23 @@ void Environment::reset()
 */
     // get initial state
     terminal   = false;
-    reward     = 0.0f;
-    averageVel = 1.0f;
-    averagePos = 1.0f;
+    reward     = 0.0;
+    averageVel = 1.0;
+    averagePos = 1.0;
 }
 
 void Environment::makeReward()
 {
-    math::Vector3f gravity = physics::currentPhysicsManager().getDynamicsWorld()->getGravity();
+    physics::Vector3r gravity = physics::currentPhysicsManager().getDynamicsWorld()->getGravity();
 
     // find center of mass of the chain
-    centerHeight = 0.0f;
-    float mass   = 0.0f;
-    math::Vector3f massCenter(0.0f, 0.0f, 0.0f);
-    math::Vector3f footHold = math::get_translation( rigidBodies[0]->getTransform() );
+    centerHeight = 0.0;
+    physics::real     mass(0.0);
+    physics::Vector3r massCenter(0.0, 0.0, 0.0);
+    physics::Vector3r footHold = math::get_translation( rigidBodies[0]->getTransform() );
     for (size_t i = 0; i<rigidBodies.size(); ++i) 
     {
-        math::Vector3f center = math::get_translation( rigidBodies[i]->getTransform() );
+        math::Vector3r center = math::get_translation( rigidBodies[i]->getTransform() );
         centerHeight += center.y / rigidBodies.size();
 
         if ( math::dot(footHold, gravity) < math::dot(center, gravity) ) {
@@ -69,20 +69,20 @@ void Environment::makeReward()
 
     //reward = centerHeight - initialCenterHeight;
     // calculate mass center deviation
-    const float deviationFactor = 2.0f;
+    const physics::real deviationFactor = 2.0;
 
-    reward = 0.0f;
+    reward = 0.0;
     {
-        math::Vector3f vec = massCenter - footHold;
+        physics::Vector3r vec = massCenter - footHold;
 
         if ( math::length(vec) < math::EPS_3f ) {
-            reward = 0.0f;
+            reward = 0.0;
         }
         else
         {
             // cos(vec, gravity) ^ deviationFactor
-            float deviation = powf( math::dot(vec, -gravity) / ( math::length(gravity) * math::length(vec) ), deviationFactor );
-            reward          = deviation - 1.0f;
+            physics::real deviation = powf( math::dot(vec, -gravity) / ( math::length(gravity) * math::length(vec) ), deviationFactor );
+            reward = deviation - 1.0;
         }
     }
 /*

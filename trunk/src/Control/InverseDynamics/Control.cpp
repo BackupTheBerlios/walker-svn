@@ -263,7 +263,7 @@ void Control::drawDebugInfo()
 				(*debugMesh) << color(1.0f, 0.0f, 0.0f, 1.0f);
 			}
 
-			(*debugMesh) << transform( (*iter)->getTransform() )
+			(*debugMesh) << transform( math::Matrix4f((*iter)->getTransform()) )
 						 << static_cast<const physics::ConeShape&>( *(*iter)->getCollisionShape() );
 		}
 
@@ -280,17 +280,17 @@ void Control::drawDebugInfo()
 			{
                 const physics::Motor* motor = constraint.getMotor( physics::Motor::TYPE(physics::Motor::MOTOR_X_ROT + i) );
 				if (motor) {
-					force += axes[i] * motor->getForce();
+					force += axes[i] * (float)motor->getForce();
 				}
 			}
 
 			force *= debugDrawForceScale;
 			force /= environment->getMaxVelocity();
 
-			math::Vector3f origin0 = math::get_translation( constraint.getRigidBodyA()->getTransform() * constraint.getStateDesc().frames[0]  );
-			math::Vector3f origin1 = math::get_translation( constraint.getRigidBodyA()->getTransform() );
-			math::Vector3f origin2 = math::get_translation( constraint.getRigidBodyB()->getTransform() );
-			math::Vector3f tip     = math::xyz( constraint.getRigidBodyA()->getTransform() * constraint.getStateDesc().frames[0] * math::make_vec(force, 1.0f) );
+			math::Vector3f origin0( math::get_translation( constraint.getRigidBodyA()->getTransform() * constraint.getStateDesc().frames[0] ) );
+			math::Vector3f origin1( math::get_translation( constraint.getRigidBodyA()->getTransform() ) );
+			math::Vector3f origin2( math::get_translation( constraint.getRigidBodyB()->getTransform() ) );
+			math::Vector3f tip = math::xyz( math::Matrix4f(constraint.getRigidBodyA()->getTransform() * constraint.getStateDesc().frames[0]) * math::make_vec(force, 1.0f) );
 			(*debugMesh) << transform( math::make_identity<float, 4>() )
 						 << line(origin0, tip)
 						 << line(origin1, tip) 

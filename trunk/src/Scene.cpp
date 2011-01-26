@@ -133,9 +133,11 @@ Scene::Scene(const DESC& desc)
             physics::PhysicsManager& physicsManager = physics::currentPhysicsManager();
 
             physics::DynamicsWorld::state_desc dynamicsWorldDesc;
-            dynamicsWorldDesc.gravity = math::Vector3f(0.0f, -9.8f, 0.0f);
-            dynamicsWorldDesc.fixedTimeStep = 0.005f;
-            physicsManager.initDynamicsWorld(dynamicsWorldDesc);
+			{
+				dynamicsWorldDesc.gravity       = math::Vector3r(0.0, physics::real(-9.8), 0.0);
+				dynamicsWorldDesc.fixedTimeStep = physics::real(0.005);
+			}
+			physicsManager.initDynamicsWorld(dynamicsWorldDesc);
             physicsManager.getDynamicsWorld()->setMaxNumSubSteps(10000); // to make sure simulation is correct
 
 			// timer
@@ -435,11 +437,13 @@ void Scene::throwCube()
     }
 
     // throw rigid body
-    physics::RigidBody&             rigidBody = **cubeObject->getPhysicsModel()->firstRigidBody();
-    physics::RigidBody::state_desc  desc      = rigidBody.getStateDesc();
-    desc.initialTransform = math::make_translation( camera->getPosition().x, camera->getPosition().y, camera->getPosition().z );
-    desc.linearVelocity   = camera->getDirection() * 10.0f;
-    rigidBody.reset(desc);
+    physics::RigidBody& rigidBody = **cubeObject->getPhysicsModel()->firstRigidBody();
+    physics::RigidBody::state_desc desc = rigidBody.getStateDesc();
+	{
+		desc.initialTransform = physics::Matrix4r( math::make_translation(camera->getPosition().x, camera->getPosition().y, camera->getPosition().z) );
+		desc.linearVelocity   = physics::Vector3r( camera->getDirection() * 10.0f );
+	}
+	rigidBody.reset(desc);
 
     world->add( cubeObject.get() );
 }

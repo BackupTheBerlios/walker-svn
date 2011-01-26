@@ -30,8 +30,8 @@ public:
 
     struct DESC
     {
-        float                   maxForce;
-        float                   maxVelocity;
+        physics::real           maxForce;
+        physics::real           maxVelocity;
         bool                    freeJoints;
         unsigned                numRigidBodies;
         physics::RigidBody**    rigidBodies;
@@ -64,12 +64,12 @@ public:
     void setControlType(CONTROL_TYPE controlType);
 
     // get
-    CONTROL_TYPE getControlType() const  { return controlType; }
-    STATE        getState() const        { return state; }
-    size_t       getStateSize() const    { return stateSize; }
-    size_t       getActionSize() const   { return actionSize; }
-    float        getMaxForce() const     { return maxForce; }
-    float        getMaxVelocity() const  { return maxVelocity; }
+    CONTROL_TYPE  getControlType() const  { return controlType; }
+    STATE         getState() const        { return state; }
+    size_t        getStateSize() const    { return stateSize; }
+    size_t        getActionSize() const   { return actionSize; }
+    physics::real getMaxForce() const     { return maxForce; }
+    physics::real getMaxVelocity() const  { return maxVelocity; }
 
 private:
     void handleAppearingContact(const physics::Contact& c);
@@ -97,26 +97,26 @@ public:
     STATE                       state;
 
     unsigned                    numDynamicRigidBodies;
-    float                       centerHeight;
-    float                       initialCenterHeight;
-    math::Vector3f              initialMassCenter;
-    float                       maxVelocity;
-    float                       maxForce;
+    physics::real               centerHeight;
+    physics::real               initialCenterHeight;
+    physics::Vector3r           initialMassCenter;
+    physics::real               maxVelocity;
+    physics::real               maxForce;
     bool                        freeJoints;
     double                      updateTime;
 
     // state
-    math::Quaternionf           rotation;
-    math::Vector3f              angVelocity;
+    physics::Quaternionr        rotation;
+    physics::Vector3r           angVelocity;
 
     // action
     CONTROL_TYPE                controlType;
 
 public:
-    ublas::vector<float>        position;
-    ublas::vector<float>        velocity;
-    ublas::vector<float>        targetForce;
-    ublas::vector<float>        targetVelocity;
+    ublas::vector<physics::real> position;
+    ublas::vector<physics::real> velocity;
+    ublas::vector<physics::real> targetForce;
+    ublas::vector<physics::real> targetVelocity;
 };
 
 typedef boost::intrusive_ptr<PhysicsEnvironment>          physics_environment_ptr;

@@ -45,7 +45,7 @@ void Control::initialize()
 
         // create Environment
         {
-            Environment::DESC              desc;
+            Environment::DESC                   desc;
             std::vector<physics::RigidBody*>    rigidBodies;
             std::vector<physics::Constraint*>   constraints;
 
@@ -181,11 +181,11 @@ void Control::acquire_safe()
                                   boost::uniform_real<float> > generator(rng, boost::uniform_real<float>(0.0f, 1.0f));
 
         // std axes
-        math::Vector3f axes[3] = 
+        physics::Vector3r axes[3] = 
         {
-            math::Vector3f(1.0f, 0.0f, 0.0f),
-            math::Vector3f(0.0f, 1.0f, 0.0f),
-            math::Vector3f(0.0f, 0.0f, 1.0f),
+            physics::Vector3r(1.0, 0.0, 0.0),
+            physics::Vector3r(0.0, 1.0, 0.0),
+            physics::Vector3r(0.0, 0.0, 1.0),
         };
 
         // rotate rigid bodies around constraints
@@ -209,11 +209,11 @@ void Control::acquire_safe()
             assert(desc0 && desc1);
 
             // get transform of the constraint from bottom cone
-            math::Matrix4f transform = desc0->initialTransform * constraintsDescs[i].frames[0]; 
+            physics::Matrix4r transform = desc0->initialTransform * constraintsDescs[i].frames[0]; 
             for (int j = 0; j<3; ++j)
             {
-                float angle = constraintsDescs[i].angularLimits[0][j] + generator() * (constraintsDescs[i].angularLimits[1][j] - constraintsDescs[i].angularLimits[0][j]);
-                transform  *= math::make_rotation(angle, axes[j]);
+                physics::real angle = constraintsDescs[i].angularLimits[0][j] + generator() * (constraintsDescs[i].angularLimits[1][j] - constraintsDescs[i].angularLimits[0][j]);
+                transform *= math::make_rotation(angle, axes[j]);
             }
 
             desc1->initialTransform = transform * math::invert(constraintsDescs[i].frames[1]);
@@ -257,41 +257,41 @@ double Control::post_sync()
 	return -1.0;
 }
     
-ublas::vector<float> Control::getGravityCompensation() const
+ublas::vector<physics::real> Control::getGravityCompensation() const
 {
-    math::Vector3f g = physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().gravity;
+    physics::Vector3r g = physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().gravity;
 
 	// calculate jacobian for gravity compensation
-	ublas::matrix<math::Vector3f> jacobian( environment->constraints.size(), environment->motors.size() ) ;
+	ublas::matrix<physics::Vector3r> jacobian( environment->constraints.size(), environment->motors.size() ) ;
     for (size_t i = 0; i<environment->constraints.size(); ++i)
     {
 		const physics::Constraint* c = environment->constraints[i].get();
-        math::Vector3f             s = math::get_translation(c->getRigidBodyB()->getTransform());
+        physics::Vector3r          s = math::get_translation(c->getRigidBodyB()->getTransform());
 
 		for (size_t j = 0; j<environment->motors.size(); ++j) 
 		{
 			if (j > i*2 + 1) {
-				jacobian(i, j) = math::Vector3f(0.0f, 0.0f, 0.0f);
+				jacobian(i, j) = math::Vector3r(0);
 			}
 			else 
 			{
-                c                = environment->motors[j]->getConstraint();
-                math::Vector3f p = math::get_translation(c->getRigidBodyB()->getTransform() * c->getStateDesc().frames[1]);
-                math::Vector3f v = environment->motors[j]->getAxis();
-                jacobian(i, j)   = math::cross(environment->motors[j]->getAxis(), p - s);
+                c                   = environment->motors[j]->getConstraint();
+                physics::Vector3r p = math::get_translation(c->getRigidBodyB()->getTransform() * c->getStateDesc().frames[1]);
+                physics::Vector3r v = environment->motors[j]->getAxis();
+                jacobian(i, j)      = math::cross(environment->motors[j]->getAxis(), p - s);
 			}
 		}
 	}
 	jacobian = ublas::trans(jacobian);
 	
 	// calculate gravity compensation term
-	ublas::vector<math::Vector3f> gc( environment->constraints.size() );
+	ublas::vector<physics::Vector3r> gc( environment->constraints.size() );
     for (size_t i = 0; i<environment->constraints.size(); ++i) {
 		gc(i) = -g * environment->constraints[i]->getRigidBodyB()->getMass();
 	}
 	gc = ublas::prod(jacobian, gc);
 
-	ublas::vector<float> gcForce( environment->motors.size() );
+	ublas::vector<physics::real> gcForce( environment->motors.size() );
     for (size_t i = 0; i<environment->motors.size(); ++i) {
         gcForce[i] = gc(i)[0] + gc(i)[1] + gc(i)[2];
     }
@@ -328,7 +328,7 @@ void Control::drawDebugInfo()
 				(*debugMesh) << color(1.0f, 0.0f, 0.0f, 1.0f);
 			}
 
-			(*debugMesh) << transform( (*iter)->getTransform() )
+			(*debugMesh) << transform( math::Matrix4f((*iter)->getTransform()) )
 						 << static_cast<const physics::ConeShape&>( *(*iter)->getCollisionShape() );
 		}
 
@@ -338,7 +338,7 @@ void Control::drawDebugInfo()
 											   iter != physicsModel->endConstraint(); 
 											   ++iter)
 		{
-            (*debugMesh) << graphics::debug::constraint(**iter, 0.2f, 1.0f / environment->getMaxForce());
+            (*debugMesh) << graphics::debug::constraint(**iter, 0.2f, 1.0f / float(environment->getMaxForce()));
 /*
 			math::Vector3f force(0.0f, 0.0f, 0.0f);
 			for (int i = 0; i<3; ++i)

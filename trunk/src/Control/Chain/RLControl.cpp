@@ -455,7 +455,7 @@ void RLControl::drawDebugInfo()
 			{
                 const physics::Motor* motor = (*iter)->getMotor( physics::Motor::TYPE(physics::Motor::MOTOR_X_ROT + i) );
 				if (motor) {
-					force += motor->getForce();
+					force += (float)motor->getForce();
 				}
 			}
 		}

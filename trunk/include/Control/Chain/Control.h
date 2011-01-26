@@ -19,11 +19,21 @@ public:
 	
 protected:
     // physics
-    typedef sgl::vector<physics::RigidBody::state_desc,
-                        sgl::aligned_allocator<physics::RigidBody::state_desc> >    rigid_body_desc_vector;
+    typedef sgl::vector
+	<
+		physics::RigidBody::state_desc
+#ifndef SLON_ENGINE_USE_DOUBLE_PRECISION_PHYSICS
+		, sgl::aligned_allocator<physics::RigidBody::state_desc> 
+#endif
+	> rigid_body_desc_vector;
 
-    typedef sgl::vector<physics::Constraint::state_desc,
-                        sgl::aligned_allocator<physics::Constraint::state_desc> >   constraint_desc_vector;
+    typedef sgl::vector
+	<
+		physics::Constraint::state_desc
+#ifndef SLON_ENGINE_USE_DOUBLE_PRECISION_PHYSICS
+		, sgl::aligned_allocator<physics::Constraint::state_desc>
+#endif
+	> constraint_desc_vector;
 
 public:
     Control(const loose_timer_ptr& timer, bool multithreaded = true);
@@ -47,7 +57,7 @@ protected:
     double post_sync();
 
     // Misc
-    ublas::vector<float> getGravityCompensation() const;
+    ublas::vector<physics::real> getGravityCompensation() const;
 
 protected:
 	// settings
@@ -55,8 +65,8 @@ protected:
     bool            randomStartup;
     bool            gravityCompensation;
     double          episodeLength;
-    float           maxForce;
-    float           maxVelocity;
+    physics::real   maxForce;
+    physics::real   maxVelocity;
 	
     bool            debugDraw;
     float           debugDrawForceScale;

@@ -102,13 +102,13 @@ public:
         // copy state
         for (size_t i = 0; i<env->motors.size(); ++i) 
         {
-            float hi = env->motors[i]->getHiLimit();
-            float lo = env->motors[i]->getLoLimit();
+            physics::real hi = env->motors[i]->getHiLimit();
+            physics::real lo = env->motors[i]->getLoLimit();
             if (hi > lo) {
-                *stateOut++ = 2.0f * (env->position[i] - lo) / (hi - lo) - 1.0f;
+                *stateOut++ = physics::real(2.0) * (env->position[i] - lo) / (hi - lo) - physics::real(1.0);
             }
             else {
-                *stateOut++ = env->position[i] / math::PI - 1.0f;
+                *stateOut++ = env->position[i] / math::PI - physics::real(1.0);
             }
 
             //*stateOut++ = 2.0f * std::min(std::max(env->constraintVelocities[i].x, -env->maxVelocity), env->maxVelocity) / env->maxVelocity - 1.0f;

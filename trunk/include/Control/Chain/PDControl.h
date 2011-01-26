@@ -38,11 +38,11 @@ private:
     double          timeInterval;
 
     // PD control
-    ublas::vector<float>    mass;
-    ublas::matrix<float>    Kd;
-    ublas::vector<float>    targetVelocity;
-    ublas::matrix<float>    Kp;
-    ublas::vector<float>    targetPosition;
+    ublas::vector<physics::real>    mass;
+    ublas::matrix<physics::real>    Kd;
+    ublas::vector<physics::real>    targetVelocity;
+    ublas::matrix<physics::real>    Kp;
+    ublas::vector<physics::real>    targetPosition;
 };
 
 typedef boost::intrusive_ptr<PDControl>         pd_control_ptr;
