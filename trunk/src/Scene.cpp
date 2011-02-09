@@ -142,14 +142,37 @@ Scene::Scene(const DESC& desc)
 
 			// timer
 			timer.reset(new ctrl::LooseTimer);
+            timer->togglePause(true);
 			physicsManager.setTimer( timer.get() );
 
             // create base control
 			controlType = desc.control.type;
 			{
-				database::library_ptr       library       = database::loadLibrary(desc.control.model);
-				scene::node_ptr             graphicsModel = library->getVisualScenes().front().second;
-				physics::physics_model_ptr  physicsModel  = library->getPhysicsScenes().front().second;
+                scene::node_ptr             graphicsModel;
+                physics::physics_model_ptr  physicsModel;
+
+                if ( std::string(desc.control.graphicsModel) == desc.control.physicsModel )
+                {
+				    database::library_ptr library = database::loadLibrary(desc.control.graphicsModel);
+
+                    if ( !library->getVisualScenes().empty() ) {
+				        graphicsModel = library->getVisualScenes().front().second;
+                    }
+
+                    if ( !library->getPhysicsScenes().empty() ) {
+				        physicsModel = library->getPhysicsScenes().front().second;
+                    }
+                }
+                else
+                {
+				    database::library_ptr library = database::loadLibrary(desc.control.graphicsModel);
+
+                    if ( !library->getVisualScenes().empty() ) {
+				        graphicsModel = library->getVisualScenes().front().second;
+                    }
+
+                    physicsModel = database::loadPhysicsScene(desc.control.physicsModel);
+                }
 
                 if ( scene::MatrixTransform* transform = dynamic_cast<scene::MatrixTransform*>(graphicsModel.get()) ) {
                     transform->setTransform(desc.control.transform);
@@ -188,6 +211,8 @@ Scene::Scene(const DESC& desc)
                             controls.push_back( ctrl::physics_control_ptr(control) );
                         }
 
+                        controlIndex = 2;
+
                         break;
                     }
 
@@ -197,11 +222,22 @@ Scene::Scene(const DESC& desc)
                         break;
                     }
 
+                    case HUMANOID_CONTROL:
+                    {
+                        human_control* control = new human_control(timer);
+			            control->loadConfig(desc.control.config);
+			            control->setTargetModel(graphicsModel);
+			            control->setPhysicsModel(physicsModel);
+                        controls.push_back( ctrl::physics_control_ptr(control) );
+
+                        controlIndex = 0;
+
+                        break;
+                    }
+
                     default:
                         break;
                 }
-
-                controlIndex = 2;
 			}
 
             // create scene
@@ -310,6 +346,7 @@ Scene::Scene(const DESC& desc)
     Engine::DESC eDesc;
     eDesc.multithreaded = false;
     eDesc.grabInput     = false;
+    timer->togglePause(false);
     engine->run(eDesc);
 }
 

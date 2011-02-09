@@ -477,8 +477,12 @@
 					<mass>0</mass>
 					<instance_physics_material url="#Cube_005-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.001563 0.054469 -2.312161</translate>
+                        <rotate sid="rotateZ">0 0 1 -16.91197</rotate>
+                        <rotate sid="rotateY">0 1 0 -90.05223</rotate>
+                        <rotate sid="rotateX">1 0 0 16.91197</rotate>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>0.10000 0.10000 2.717491</half_extents>
 						</box>
 					</shape>
 				</technique_common>
@@ -489,8 +493,12 @@
 					<mass>0</mass>
 					<instance_physics_material url="#Cube_004-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.001563 0.055991 3.428379</translate>
+                        <rotate sid="rotateZ">0 0 1 -16.91197</rotate>
+                        <rotate sid="rotateY">0 1 0 -90.05223</rotate>
+                        <rotate sid="rotateX">1 0 0 16.91197</rotate>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>0.10000 0.10000 2.717491</half_extents>
 						</box>
 					</shape>
 				</technique_common>
@@ -501,8 +509,12 @@
 					<mass>0</mass>
 					<instance_physics_material url="#Cube_003-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">2.613582 0.055232 0.565888</translate>
+                        <rotate sid="rotateZ">0 0 1 0.00000</rotate>
+                        <rotate sid="rotateY">0 1 0 -0.00000</rotate>
+                        <rotate sid="rotateX">1 0 0 -0.01519</rotate>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>0.100000 0.100000 2.717491</half_extents>
 						</box>
 					</shape>
 				</technique_common>
@@ -513,8 +525,12 @@
 					<mass>0</mass>
 					<instance_physics_material url="#Cube_002-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">-2.628347 0.055232 0.565888</translate>
+                        <rotate sid="rotateZ">0 0 1 0.00000</rotate>
+                        <rotate sid="rotateY">0 1 0 -0.00000</rotate>
+                        <rotate sid="rotateX">1 0 0 -0.01519</rotate>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>0.100000 0.100000 2.717491</half_extents>
 						</box>
 					</shape>
 				</technique_common>
@@ -525,8 +541,12 @@
 					<mass>0</mass>
 					<instance_physics_material url="#GroundPlane-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.001371 -0.151536 0.548625</translate>
+                        <rotate sid="rotateZ">0 0 1 0.00000</rotate>
+                        <rotate sid="rotateY">0 1 0 -0.00000</rotate>
+                        <rotate sid="rotateX">1 0 0 -0.01519</rotate>
 						<box>
-							<half_extents>1.00000 1.00000 1.00000</half_extents>
+							<half_extents>2.800000 0.030000 3.000000</half_extents>
 						</box>
 					</shape>
 				</technique_common>

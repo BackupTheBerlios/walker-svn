@@ -3,6 +3,7 @@
 
 #include "Control/Chain/PDControl.h"
 #include "Control/Chain/RLControl.h"
+#include "Control/Humanoid/Control.h"
 #include "Control/PhysicsControl.h"
 #include "Control/InverseDynamics/RLControl.h"
 #include <sgl/Font.h>
@@ -26,6 +27,7 @@ private:
     typedef ctrl::chain::RLControl                  chain_rl_control;
     typedef ctrl::chain::PDControl                  chain_pd_control;
     typedef chain_rl_control::direct_control_type   chain_direct_control;
+    typedef ctrl::human::Control                    human_control;
 
     typedef std::vector<ctrl::physics_control_ptr>  control_vector;
 
@@ -33,12 +35,14 @@ public:
 	enum TARGET_CONTROL_TYPE
 	{
 		CHAIN_CONTROL,
-		INVERSE_DYNAMICS_CONTROL
+		INVERSE_DYNAMICS_CONTROL,
+        HUMANOID_CONTROL
 	};
 
 	struct CONTROL_DESC
 	{
-		const char*			model;
+		const char*			graphicsModel;
+		const char*			physicsModel;
 		const char*			config;
         math::Matrix4f      transform;
 		TARGET_CONTROL_TYPE	type;

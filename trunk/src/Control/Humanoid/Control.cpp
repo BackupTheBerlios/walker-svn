@@ -1,4 +1,4 @@
-#include "Control/Chain/Control.h"
+#include "Control/Humanoid/Control.h"
 #include <slon/Graphics/Common.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawCommon.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawPhysics.h>
@@ -18,7 +18,7 @@ namespace {
 }
 
 namespace ctrl {
-namespace chain {
+namespace human {
 
 Control::Control(const loose_timer_ptr& timer, bool multithreaded)
 :	PhysicsControl(timer, multithreaded)
@@ -30,6 +30,7 @@ Control::Control(const loose_timer_ptr& timer, bool multithreaded)
 void Control::initialize()
 {
     // copy descs
+    if (physicsModel)
     {
         rigidBodiesInitialDescs.resize( std::distance( physicsModel->firstRigidBody(), physicsModel->endRigidBody() ) );
         std::transform( physicsModel->firstRigidBody(), 
@@ -153,6 +154,7 @@ void Control::acquire_safe()
     constraint_desc_vector constraintsDescs(constraintsInitialDescs);
 
     // reset rigid bodies
+    if (physicsModel)
     {
         rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
         for (PhysicsModel::rigid_body_iterator iter  = physicsModel->firstRigidBody();
@@ -164,6 +166,7 @@ void Control::acquire_safe()
     }
 
     // reset constraints
+    if (physicsModel)
     {
         constraint_desc_vector::iterator descIter = constraintsDescs.begin();
         for (PhysicsModel::constraint_iterator iter  = physicsModel->firstConstraint();
@@ -387,5 +390,5 @@ void Control::drawDebugInfo()
 	}
 }
 
-} // namespace chain
+} // namespace human
 } // namespace ctrl

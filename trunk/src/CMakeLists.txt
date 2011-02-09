@@ -29,6 +29,11 @@ SET ( TARGET_CONTROL_INVERSE_DYNAMICS_HEADERS
 	${TARGET_HEADER_PATH}/Control/InverseDynamics/RLControl.h
 )
 
+SET ( TARGET_CONTROL_HUMANOID_HEADERS
+	${TARGET_HEADER_PATH}/Control/Humanoid/Control.h
+	${TARGET_HEADER_PATH}/Control/Humanoid/Environment.h
+)
+
 SET ( TARGET_CONTROL_PYTHON_HEADERS
 	${TARGET_HEADER_PATH}/Control/Python/PythonControl.h
 	${TARGET_HEADER_PATH}/Control/Python/PythonEnvironment.h
@@ -81,6 +86,7 @@ SOURCE_GROUP( headers FILES                             ${TARGET_HEADERS} )
 SOURCE_GROUP( headers\\Control FILES                    ${TARGET_CONTROL_HEADERS} )
 SOURCE_GROUP( headers\\Control\\Chain FILES             ${TARGET_CONTROL_CHAIN_HEADERS} )
 SOURCE_GROUP( headers\\Control\\InverseDynamics FILES   ${TARGET_CONTROL_INVERSE_DYNAMICS_HEADERS} )
+SOURCE_GROUP( headers\\Control\\Humanoid FILES          ${TARGET_CONTROL_HUMANOID_HEADERS} )
 SOURCE_GROUP( headers\\Control\\Python FILES            ${TARGET_CONTROL_PYTHON_HEADERS} )
 SOURCE_GROUP( headers\\Control\\Utility FILES           ${TARGET_CONTROL_UTILITY_HEADERS} )
 SOURCE_GROUP( headers\\Learning FILES                   ${TARGET_LEARNING_HEADERS} )
@@ -93,6 +99,7 @@ SET ( TARGET_HEADERS
     ${TARGET_CONTROL_HEADERS}
     ${TARGET_CONTROL_CHAIN_HEADERS}
 	${TARGET_CONTROL_INVERSE_DYNAMICS_HEADERS} 
+    ${TARGET_CONTROL_HUMANOID_HEADERS}
     ${TARGET_CONTROL_UTILITY_HEADERS}
     ${TARGET_LEARNING_HEADERS}
     ${TARGET_PLOT_HEADERS}
@@ -130,6 +137,11 @@ SET ( TARGET_CONTROL_INVERSE_DYNAMICS_SOURCES
     Control/InverseDynamics/RLControl.cpp
 )
 
+SET ( TARGET_CONTROL_HUMANOID_SOURCES
+    Control/Humanoid/Control.cpp
+    Control/Humanoid/Environment.cpp
+)
+
 SET ( TARGET_CONTROL_PYTHON_SOURCES
     Control/Python/PythonControl.cpp
     Control/Python/PythonEnvironment.cpp
@@ -159,6 +171,7 @@ SOURCE_GROUP( sources FILES                             ${TARGET_SOURCES} )
 SOURCE_GROUP( sources\\Control FILES                    ${TARGET_CONTROL_SOURCES} )
 SOURCE_GROUP( sources\\Control\\Chain FILES             ${TARGET_CONTROL_CHAIN_SOURCES} )
 SOURCE_GROUP( sources\\Control\\InverseDynamics FILES   ${TARGET_CONTROL_INVERSE_DYNAMICS_SOURCES} )
+SOURCE_GROUP( sources\\Control\\Humanoid FILES          ${TARGET_CONTROL_HUMANOID_SOURCES} )
 SOURCE_GROUP( sources\\Control\\Python FILES            ${TARGET_CONTROL_PYTHON_SOURCES} )
 SOURCE_GROUP( sources\\Control\\Utility FILES           ${TARGET_CONTROL_UTILITY_SOURCES} )
 SOURCE_GROUP( sources\\Learning FILES                   ${TARGET_LEARNING_SOURCES} )
@@ -171,6 +184,7 @@ SET ( TARGET_SOURCES
     ${TARGET_CONTROL_SOURCES}
     ${TARGET_CONTROL_CHAIN_SOURCES}
 	${TARGET_CONTROL_INVERSE_DYNAMICS_SOURCES}
+    ${TARGET_CONTROL_HUMANOID_SOURCES}
     ${TARGET_CONTROL_UTILITY_SOURCES}
     ${TARGET_LEARNING_SOURCES}
     ${TARGET_PLOT_SOURCES}

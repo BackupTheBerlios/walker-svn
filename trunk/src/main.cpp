@@ -4,7 +4,8 @@
 
 using namespace math;
 
-std::string model;
+std::string graphicsModel;
+std::string physicsModel;
 std::string configFile;
 
 void ReadConfigFile(const char* fileName, Scene::DESC& sceneDesc)
@@ -18,8 +19,18 @@ void ReadConfigFile(const char* fileName, Scene::DESC& sceneDesc)
     sceneDesc.ffp            = properties.get("FixedFuntionPipeline", false);
     sceneDesc.fullscreen     = properties.get("Fullscreen", false);
     sceneDesc.arenaFile      = properties.get("Arena", "");
-    model                    = properties.get("Model", "");
+    graphicsModel            = properties.get("Model", "");
+    physicsModel             = properties.get("PhysicsModel", graphicsModel);
+    graphicsModel            = properties.get("GraphicsModel", graphicsModel);
     configFile               = properties.get("ConfigFile", "");
+
+    std::string controlType  = properties.get("Control", "Chain");
+    if (controlType == "Chain") { 
+        sceneDesc.control.type = Scene::CHAIN_CONTROL;
+    }
+    else if (controlType == "Humanoid") { 
+        sceneDesc.control.type = Scene::HUMANOID_CONTROL;
+    }
 }
 
 void ParseCommandLine(int argc, char** argv, Scene::DESC& desc)
@@ -28,7 +39,7 @@ void ParseCommandLine(int argc, char** argv, Scene::DESC& desc)
     {
         std::string argStr(argv[i]);
         if (argStr == "-model" && i < argc + 1) {
-            model = "Data/Models/" + std::string(argv[i+1]);
+            graphicsModel = physicsModel = "Data/Models/" + std::string(argv[i+1]);
         }
     }
 }
@@ -54,10 +65,10 @@ int main(int argc, char** argv)
 
     try
     {
-		desc.control.model     = model.c_str();
-		desc.control.config	   = configFile.c_str();
-        desc.control.transform = math::make_translation(0.0f, 0.0f, 0.0f);
-        desc.control.type      = Scene::CHAIN_CONTROL;
+		desc.control.graphicsModel = graphicsModel.c_str();
+		desc.control.physicsModel  = physicsModel.c_str();
+		desc.control.config	       = configFile.c_str();
+        desc.control.transform     = math::make_translation(0.0f, 0.0f, 0.0f);
 
         Scene demoScene(desc);
     }

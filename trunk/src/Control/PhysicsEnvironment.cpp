@@ -102,10 +102,11 @@ void PhysicsEnvironment::reset()
 
 void PhysicsEnvironment::makeAction()
 {
+    /*
     std::for_each( boost::make_indirect_iterator( rigidBodies.begin() ),
                    boost::make_indirect_iterator( rigidBodies.end() ),
                    boost::bind(&physics::RigidBody::applyImpulse, _1, math::Vector3r( physics::real(0.01), physics::real(0.01), physics::real(0.01) ), math::Vector3r(0.0, 0.0, 0.0)) );
-
+*/
     switch (controlType)
     {
         case CONTROL_FORCE:

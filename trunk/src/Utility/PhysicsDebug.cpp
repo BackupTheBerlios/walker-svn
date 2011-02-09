@@ -11,22 +11,12 @@ void PhysicsDebugVisitor::visitTransform(scene::Transform& transform)
     RigidBodyTransform* rbTransform = dynamic_cast<RigidBodyTransform*>(&transform);
     if (rbTransform)
     {
-        physics::RigidBody*             rigidBody = rbTransform->getRigidBody();
-        const physics::CollisionShape*  colShape  = rigidBody->getCollisionShape();
-        math::Vector3f                  scaling   = rbTransform->getScaling();
-        math::Matrix4f                  objTrans  = math::make_scaling(1.0f / scaling.x, 1.0f / scaling.y, 1.0f / scaling.z);
-        graphics::DebugMesh*            debugMesh = new graphics::DebugMesh();
-        switch ( colShape->getShapeType() ) 
-        {
-        case physics::CollisionShape::BOX:
-            *debugMesh << graphics::debug::transform(objTrans) << *static_cast<const physics::BoxShape*>(colShape);
-            break;
+        physics::RigidBody*  rigidBody = rbTransform->getRigidBody();
+        math::Matrix4f       objTrans  = rigidBody->getTransform();
+        graphics::DebugMesh* debugMesh = new graphics::DebugMesh();
 
-        case physics::CollisionShape::CONE:
-            *debugMesh << graphics::debug::transform(objTrans) << *static_cast<const physics::ConeShape*>(colShape);
-            break;
-        }
-        rbTransform->addChild(*debugMesh);
+        *debugMesh << graphics::debug::transform(objTrans) << *rigidBody->getCollisionShape();
+        //rbTransform->addChild(*debugMesh);
     }
 
     base_type::visitTransform(transform);
