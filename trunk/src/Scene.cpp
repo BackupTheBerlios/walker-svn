@@ -15,7 +15,6 @@
 #include <slon/Realm/Object/EntityObject.h>
 #include <slon/Realm/World/ScalableWorld.h>
 #include <slon/Scene/Light/DirectionalLight.h>
-#include <slon/Scene/Physics/RigidBodyTransform.h>
 #include <slon/Scene/Group.h>
 #include <sstream>
 #undef CreateFont

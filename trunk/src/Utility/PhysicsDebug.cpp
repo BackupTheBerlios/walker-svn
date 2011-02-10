@@ -1,10 +1,9 @@
 #include "Utility/PhysicsDebug.h"
 #include <slon/Graphics/Renderable/Debug/DebugDrawCommon.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawPhysics.h>
-#include <slon/Scene/Physics/RigidBodyTransform.h>
 
 void PhysicsDebugVisitor::visitTransform(scene::Transform& transform)
-{
+{/*
     using namespace scene;
     using namespace graphics::debug;
 
@@ -18,6 +17,6 @@ void PhysicsDebugVisitor::visitTransform(scene::Transform& transform)
         *debugMesh << graphics::debug::transform(objTrans) << *rigidBody->getCollisionShape();
         //rbTransform->addChild(*debugMesh);
     }
-
+	*/
     base_type::visitTransform(transform);
 }
