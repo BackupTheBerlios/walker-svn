@@ -476,8 +476,8 @@ void Scene::throwCube()
     physics::RigidBody& rigidBody = **cubeObject->getPhysicsModel()->firstRigidBody();
     physics::RigidBody::state_desc desc = rigidBody.getStateDesc();
 	{
-		desc.initialTransform = physics::Matrix4r( math::make_translation(camera->getPosition().x, camera->getPosition().y, camera->getPosition().z) );
-		desc.linearVelocity   = physics::Vector3r( camera->getDirection() * 10.0f );
+		desc.transform      = physics::Matrix4r( math::make_translation(camera->getPosition().x, camera->getPosition().y, camera->getPosition().z) );
+		desc.linearVelocity = physics::Vector3r( camera->getDirection() * 10.0f );
 	}
 	rigidBody.reset(desc);
 
