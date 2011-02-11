@@ -212,14 +212,14 @@ void Control::acquire_safe()
             assert(desc0 && desc1);
 
             // get transform of the constraint from bottom cone
-            physics::Matrix4r transform = desc0->initialTransform * constraintsDescs[i].frames[0]; 
+            physics::Matrix4r transform = desc0->transform * constraintsDescs[i].frames[0]; 
             for (int j = 0; j<3; ++j)
             {
                 physics::real angle = constraintsDescs[i].angularLimits[0][j] + generator() * (constraintsDescs[i].angularLimits[1][j] - constraintsDescs[i].angularLimits[0][j]);
                 transform *= math::make_rotation(angle, axes[j]);
             }
 
-            desc1->initialTransform = transform * math::invert(constraintsDescs[i].frames[1]);
+            desc1->transform = transform * math::invert(constraintsDescs[i].frames[1]);
         }
 
         // reset rigid bodies

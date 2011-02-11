@@ -31,6 +31,9 @@ void ReadConfigFile(const char* fileName, Scene::DESC& sceneDesc)
     else if (controlType == "Humanoid") { 
         sceneDesc.control.type = Scene::HUMANOID_CONTROL;
     }
+	else {
+		throw std::runtime_error("Invalid config type");
+	}
 }
 
 void ParseCommandLine(int argc, char** argv, Scene::DESC& desc)
