@@ -4,8 +4,8 @@
         <contributor>
             <authoring_tool>CINEMA4D 12.032 COLLADA Exporter</authoring_tool>
         </contributor>
-        <created>2011-02-08T16:17:30Z</created>
-        <modified>2011-02-08T16:17:30Z</modified>
+        <created>2011-02-12T15:09:59Z</created>
+        <modified>2011-02-12T15:09:59Z</modified>
         <unit meter="0.01" name="centimeter"/>
         <up_axis>Y_UP</up_axis>
     </asset>
@@ -1500,10 +1500,10 @@
     <library_visual_scenes>
         <visual_scene id="ID11">
             <node id="ID12" name="Figure">
-                <translate sid="translate">0 0.986017 0</translate>
-                <rotate sid="rotateY">0 1 0 0</rotate>
-                <rotate sid="rotateX">1 0 0 0</rotate>
-                <rotate sid="rotateZ">0 0 1 0</rotate>
+                <translate sid="translate">4.37835e-009 0.979351 -4.60696e-008</translate>
+                <rotate sid="rotateY">0 1 0 2.57078e-007</rotate>
+                <rotate sid="rotateX">1 0 0 -9.25065e-005</rotate>
+                <rotate sid="rotateZ">0 0 1 -2.56132e-006</rotate>
                 <scale sid="scale">1 1 1</scale>
                 <instance_geometry url="#ID13">
                     <bind_material>
@@ -1515,9 +1515,9 @@
                     </bind_material>
                 </instance_geometry>
                 <node id="ID21" name="Left_Thigh">
-                    <translate sid="translate">0.0794815 -0.0548148 0</translate>
-                    <rotate sid="rotateY">0 1 0 0</rotate>
-                    <rotate sid="rotateX">1 0 0 -4</rotate>
+                    <translate sid="translate">0.0794815 -0.0548148 -7.33595e-008</translate>
+                    <rotate sid="rotateY">0 1 0 360</rotate>
+                    <rotate sid="rotateX">1 0 0 -3.99991</rotate>
                     <rotate sid="rotateZ">0 0 1 -357</rotate>
                     <scale sid="scale">1 1 1</scale>
                     <instance_geometry url="#ID22">
@@ -1530,9 +1530,9 @@
                         </bind_material>
                     </instance_geometry>
                     <node id="ID30" name="Left_Shin">
-                        <translate sid="translate">0 -0.391926 0</translate>
-                        <rotate sid="rotateY">0 1 0 0</rotate>
-                        <rotate sid="rotateX">1 0 0 9</rotate>
+                        <translate sid="translate">5.65095e-012 -0.391926 -1.08159e-011</translate>
+                        <rotate sid="rotateY">0 1 0 360</rotate>
+                        <rotate sid="rotateX">1 0 0 9.00001</rotate>
                         <rotate sid="rotateZ">0 0 1 -3</rotate>
                         <scale sid="scale">1 1 1</scale>
                         <instance_geometry url="#ID31">
@@ -1545,10 +1545,10 @@
                             </bind_material>
                         </instance_geometry>
                         <node id="ID39" name="Left_Foot">
-                            <translate sid="translate">0.00411111 -0.439889 0</translate>
-                            <rotate sid="rotateY">0 1 0 0</rotate>
-                            <rotate sid="rotateX">1 0 0 -5</rotate>
-                            <rotate sid="rotateZ">0 0 1 0</rotate>
+                            <translate sid="translate">0.00411111 -0.439889 -6.18283e-014</translate>
+                            <rotate sid="rotateY">0 1 0 1.19848e-009</rotate>
+                            <rotate sid="rotateX">1 0 0 -5.00001</rotate>
+                            <rotate sid="rotateZ">0 0 1 -360</rotate>
                             <scale sid="scale">1 1 1</scale>
                             <instance_geometry url="#ID40">
                                 <bind_material>
@@ -1619,9 +1619,9 @@
                     </node>
                 </node>
                 <node id="ID82" name="Right_Thigh">
-                    <translate sid="translate">-0.0794815 -0.0548148 0</translate>
-                    <rotate sid="rotateY">0 1 0 0</rotate>
-                    <rotate sid="rotateX">1 0 0 -4</rotate>
+                    <translate sid="translate">-0.0794815 -0.0548148 -7.38352e-008</translate>
+                    <rotate sid="rotateY">0 1 0 2.18793e-007</rotate>
+                    <rotate sid="rotateX">1 0 0 -3.99991</rotate>
                     <rotate sid="rotateZ">0 0 1 -3</rotate>
                     <scale sid="scale">1 1 1</scale>
                     <instance_geometry url="#ID83">
@@ -1634,9 +1634,9 @@
                         </bind_material>
                     </instance_geometry>
                     <node id="ID91" name="Right_Shin">
-                        <translate sid="translate">0 -0.391926 0</translate>
-                        <rotate sid="rotateY">0 1 0 0</rotate>
-                        <rotate sid="rotateX">1 0 0 9</rotate>
+                        <translate sid="translate">-2.75464e-012 -0.391926 -5.94268e-012</translate>
+                        <rotate sid="rotateY">0 1 0 4.5852e-007</rotate>
+                        <rotate sid="rotateX">1 0 0 9.00001</rotate>
                         <rotate sid="rotateZ">0 0 1 -357</rotate>
                         <scale sid="scale">1 1 1</scale>
                         <instance_geometry url="#ID92">
@@ -1649,10 +1649,10 @@
                             </bind_material>
                         </instance_geometry>
                         <node id="ID100" name="Right_Foot">
-                            <translate sid="translate">-0.00411111 -0.439889 0</translate>
-                            <rotate sid="rotateY">0 1 0 0</rotate>
-                            <rotate sid="rotateX">1 0 0 -5</rotate>
-                            <rotate sid="rotateZ">0 0 1 0</rotate>
+                            <translate sid="translate">-0.00411111 -0.439889 7.33411e-011</translate>
+                            <rotate sid="rotateY">0 1 0 360</rotate>
+                            <rotate sid="rotateX">1 0 0 -5.00001</rotate>
+                            <rotate sid="rotateZ">0 0 1 -360</rotate>
                             <scale sid="scale">1 1 1</scale>
                             <instance_geometry url="#ID101">
                                 <bind_material>
@@ -1723,10 +1723,10 @@
                     </node>
                 </node>
                 <node id="ID143" name="Upper_Body">
-                    <translate sid="translate">0 0.232963 0</translate>
-                    <rotate sid="rotateY">0 1 0 0</rotate>
-                    <rotate sid="rotateX">1 0 0 0</rotate>
-                    <rotate sid="rotateZ">0 0 1 0</rotate>
+                    <translate sid="translate">5.17801e-008 0.232963 -2.53712e-006</translate>
+                    <rotate sid="rotateY">0 1 0 360</rotate>
+                    <rotate sid="rotateX">1 0 0 -0.00144724</rotate>
+                    <rotate sid="rotateZ">0 0 1 -3.24097e-005</rotate>
                     <scale sid="scale">1 1 1</scale>
                     <instance_geometry url="#ID144">
                         <bind_material>
@@ -1738,10 +1738,10 @@
                         </bind_material>
                     </instance_geometry>
                     <node id="ID152" name="Left_Upper_Arm">
-                        <translate sid="translate">0.14937 0.238444 0</translate>
-                        <rotate sid="rotateY">0 1 0 10</rotate>
-                        <rotate sid="rotateX">1 0 0 0</rotate>
-                        <rotate sid="rotateZ">0 0 1 -8.53774e-007</rotate>
+                        <translate sid="translate">0.149373 0.238445 1.50685e-005</translate>
+                        <rotate sid="rotateY">0 1 0 9.98197</rotate>
+                        <rotate sid="rotateX">1 0 0 0.00149044</rotate>
+                        <rotate sid="rotateZ">0 0 1 -360</rotate>
                         <scale sid="scale">1 1 1</scale>
                         <instance_geometry url="#ID153">
                             <bind_material>
@@ -1753,9 +1753,9 @@
                             </bind_material>
                         </instance_geometry>
                         <node id="ID161" name="Left_Lower_Arm">
-                            <translate sid="translate">0.339852 0 0</translate>
-                            <rotate sid="rotateY">0 1 0 350</rotate>
-                            <rotate sid="rotateX">1 0 0 0</rotate>
+                            <translate sid="translate">0.339852 1.09958e-009 8.10687e-007</translate>
+                            <rotate sid="rotateY">0 1 0 350.122</rotate>
+                            <rotate sid="rotateX">1 0 0 2.92225e-007</rotate>
                             <rotate sid="rotateZ">0 0 1 0</rotate>
                             <scale sid="scale">1 1 1</scale>
                             <instance_geometry url="#ID162">
@@ -1768,10 +1768,10 @@
                                 </bind_material>
                             </instance_geometry>
                             <node id="ID170" name="Left_Hand">
-                                <translate sid="translate">0.298741 0 0</translate>
-                                <rotate sid="rotateY">0 1 0 0</rotate>
-                                <rotate sid="rotateX">1 0 0 0</rotate>
-                                <rotate sid="rotateZ">0 0 1 0</rotate>
+                                <translate sid="translate">0.29874 2.6931e-008 0.000235325</translate>
+                                <rotate sid="rotateY">0 1 0 359.542</rotate>
+                                <rotate sid="rotateX">1 0 0 2.35597e-005</rotate>
+                                <rotate sid="rotateZ">0 0 1 -360</rotate>
                                 <scale sid="scale">1 1 1</scale>
                                 <instance_geometry url="#ID171">
                                     <bind_material>
@@ -1842,10 +1842,10 @@
                         </node>
                     </node>
                     <node id="ID213" name="Right_Upper_Arm">
-                        <translate sid="translate">-0.14937 0.238444 0</translate>
-                        <rotate sid="rotateY">0 1 0 350</rotate>
-                        <rotate sid="rotateX">1 0 0 0</rotate>
-                        <rotate sid="rotateZ">0 0 1 0</rotate>
+                        <translate sid="translate">-0.149373 0.238445 1.64573e-005</translate>
+                        <rotate sid="rotateY">0 1 0 350.019</rotate>
+                        <rotate sid="rotateX">1 0 0 0.00148782</rotate>
+                        <rotate sid="rotateZ">0 0 1 -0.000195425</rotate>
                         <scale sid="scale">1 1 1</scale>
                         <instance_geometry url="#ID214">
                             <bind_material>
@@ -1857,10 +1857,10 @@
                             </bind_material>
                         </instance_geometry>
                         <node id="ID222" name="Right_Lower_Arm">
-                            <translate sid="translate">-0.339852 0 0</translate>
-                            <rotate sid="rotateY">0 1 0 10</rotate>
-                            <rotate sid="rotateX">1 0 0 0</rotate>
-                            <rotate sid="rotateZ">0 0 1 -8.53774e-007</rotate>
+                            <translate sid="translate">-0.339852 -5.27128e-009 1.55706e-007</translate>
+                            <rotate sid="rotateY">0 1 0 9.87364</rotate>
+                            <rotate sid="rotateX">1 0 0 -7.28861e-007</rotate>
+                            <rotate sid="rotateZ">0 0 1 0</rotate>
                             <scale sid="scale">1 1 1</scale>
                             <instance_geometry url="#ID223">
                                 <bind_material>
@@ -1872,10 +1872,10 @@
                                 </bind_material>
                             </instance_geometry>
                             <node id="ID231" name="Right_Hand">
-                                <translate sid="translate">-0.298741 0 0</translate>
-                                <rotate sid="rotateY">0 1 0 0</rotate>
-                                <rotate sid="rotateX">1 0 0 0</rotate>
-                                <rotate sid="rotateZ">0 0 1 0</rotate>
+                                <translate sid="translate">-0.29874 4.14564e-008 0.000243544</translate>
+                                <rotate sid="rotateY">0 1 0 0.474958</rotate>
+                                <rotate sid="rotateX">1 0 0 3.96352e-005</rotate>
+                                <rotate sid="rotateZ">0 0 1 -8.86898e-005</rotate>
                                 <scale sid="scale">1 1 1</scale>
                                 <instance_geometry url="#ID232">
                                     <bind_material>
@@ -1946,10 +1946,10 @@
                         </node>
                     </node>
                     <node id="ID274" name="Head">
-                        <translate sid="translate">0 0.383704 0</translate>
-                        <rotate sid="rotateY">0 1 0 0</rotate>
-                        <rotate sid="rotateX">1 0 0 0</rotate>
-                        <rotate sid="rotateZ">0 0 1 0</rotate>
+                        <translate sid="translate">-1.12764e-007 0.383704 3.68908e-006</translate>
+                        <rotate sid="rotateY">0 1 0 0.000211624</rotate>
+                        <rotate sid="rotateX">1 0 0 0.00421197</rotate>
+                        <rotate sid="rotateZ">0 0 1 -360</rotate>
                         <scale sid="scale">1 1 1</scale>
                         <instance_geometry url="#ID275">
                             <bind_material>

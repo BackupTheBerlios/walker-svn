@@ -37,7 +37,7 @@ private:
         PlotDebugMesh(DrawLinePlot<Dimension>* plotter);
 
         // Override Entity
-        void accept(scene::TraverseVisitor& visitor);
+        void accept(scene::TransformVisitor& visitor);
         const math::AABBf& getBounds() const;
 
     private:

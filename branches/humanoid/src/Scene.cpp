@@ -71,6 +71,8 @@ Scene::Scene(const DESC& desc)
         {
             log::currentLogManager().redirectOutput("database", "database_log.txt");
             log::currentLogManager().redirectOutput("graphics", "graphics_log.txt");
+            log::currentLogManager().redirectOutput("physics", "physics_log.txt");
+            log::currentLogManager().redirectOutput("realm", "realm_log.txt");
         }
 
         graphics::GraphicsManager& graphicsManager = engine->getGraphicsManager();
@@ -264,7 +266,7 @@ Scene::Scene(const DESC& desc)
             light->setColor( math::Vector4f(0.8f, 0.8f, 0.8f, 1.0f) );
             light->setAmbient(0.3f);
             light->setIntensity(0.5f);
-            light->setDirection( math::Vector3f(-1.5f, -0.5f, 0.85f) );
+            light->setDirection( math::Vector3f(1.5f, -0.5f, 0.85f) );
 
             world->add( new realm::EntityObject(*light, false) );
         }
