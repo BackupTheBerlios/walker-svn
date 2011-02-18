@@ -213,7 +213,7 @@ void Control::acquire_safe()
     {
         // acquire_safe also called from LearningControl, so need check to disallow child duplicates
         if (debugMesh->getParent() != group) {
-            group->addChild(*debugMesh);
+            group->addChild(debugMesh.get());
         }
     }
 }
@@ -221,7 +221,7 @@ void Control::acquire_safe()
 void Control::unacquire_safe()
 {
     if ( scene::Group* group = dynamic_cast<scene::Group*>(targetModel.get()) ) {
-        group->removeChild(*debugMesh);
+        group->removeChild(debugMesh.get());
     }
 }
 

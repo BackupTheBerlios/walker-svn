@@ -105,15 +105,13 @@ DrawLinePlot<Dimension>::PlotDebugMesh::PlotDebugMesh(DrawLinePlot<Dimension>* p
 }
 
 template<int Dimension>
-void DrawLinePlot<Dimension>::PlotDebugMesh::accept(scene::TraverseVisitor& visitor)
+void DrawLinePlot<Dimension>::PlotDebugMesh::accept(scene::TransformVisitor& visitor)
 {
     if (plotter->dirty) 
     {
         plotter->plot();
         numPlotted = plotter->points.size();
     }
-
-    base_type::accept(visitor);
 }
 
 template<int Dimemsion>

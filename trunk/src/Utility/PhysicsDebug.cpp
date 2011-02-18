@@ -1,6 +1,4 @@
 #include "Utility/PhysicsDebug.h"
-#include <slon/Graphics/Renderable/Debug/DebugDrawCommon.h>
-#include <slon/Graphics/Renderable/Debug/DebugDrawPhysics.h>
 
 void PhysicsDebugVisitor::visitTransform(scene::Transform& transform)
 {/*
@@ -18,5 +16,4 @@ void PhysicsDebugVisitor::visitTransform(scene::Transform& transform)
         //rbTransform->addChild(*debugMesh);
     }
 	*/
-    base_type::visitTransform(transform);
 }

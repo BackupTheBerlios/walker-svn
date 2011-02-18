@@ -16,7 +16,7 @@ PDControl::PDControl(const loose_timer_ptr& timer)
 :	Control(timer, false)
 ,   needRestart(false)
 ,	lastUpdate(0.0)
-,	timeInterval(0.03)
+,	timeInterval(0.005)
 {
 }
 
@@ -64,13 +64,13 @@ void PDControl::acquire_safe()
 
     if ( Kp.size1() != environment->getActionSize() || Kp.size2() != environment->getActionSize() )
     {
-        logger << slog::WL_WARNING << "Kp size loaded from config differs from requested by model, reset" << LOG_FILE_AND_LINE;
+        logger << slog::S_WARNING << "Kp size loaded from config differs from requested by model, reset" << LOG_FILE_AND_LINE;
         Kp = ublas::identity_matrix<float>( environment->getActionSize(), environment->getActionSize() );
     }
 
     if ( Kd.size1() != environment->getActionSize() || Kd.size2() != environment->getActionSize() ) 
     {
-        logger << slog::WL_WARNING << "Kd size loaded from config differs from requested by model, reset" << LOG_FILE_AND_LINE;
+        logger << slog::S_WARNING << "Kd size loaded from config differs from requested by model, reset" << LOG_FILE_AND_LINE;
         Kd = ublas::identity_matrix<float>( environment->getActionSize(), environment->getActionSize() );
     }
 
