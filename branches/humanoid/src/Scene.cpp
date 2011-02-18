@@ -21,22 +21,6 @@
 
 namespace {
 
-    void printSceneGraph(const scene::Node& node, const std::string& indent = "")
-    {
-        using namespace scene;
-
-        std::cout << indent << node.getName() << std::endl;
-        if ( const Group* group = dynamic_cast<const Group*>(&node) )
-        {
-            for ( Group::const_node_iterator iter = group->firstChild();
-                                             iter != group->endChild();
-                                             ++iter )
-            {
-                printSceneGraph(**iter, indent + "  ");
-            }
-        }
-    }
-
     scene::LookAtCamera* createMainCamera(const sgl::rectangle& viewport)
     {
         // create camera
