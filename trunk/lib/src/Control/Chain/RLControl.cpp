@@ -50,6 +50,7 @@ using namespace boost::numeric::ublas;
 
 RLControl::RLControl(const loose_timer_ptr& timer)
 :	Control(timer)
+,   dumpFuncsOnExit(false)
 ,	needRestart(false)
 ,   complete(false)
 ,	lastUpdate(0.0)

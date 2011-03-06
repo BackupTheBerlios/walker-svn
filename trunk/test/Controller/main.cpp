@@ -1,375 +1,166 @@
-#include <Learning/neural_network.hpp>
-#include <Learning/scalar_neural_network.hpp>
-#include <Learning/td_lambda_learning.hpp>
-#include <boost/random.hpp>
-#include <cmath>
+#include <boost/lexical_cast.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+#include <slon/Engine.h>
+#include <slon/Graphics/Renderer/FixedPipelineRenderer.h>
+#include <slon/Realm/Object/CompoundObject.h>
+#include <slon/Realm/World/ScalableWorld.h>
+#include <slon/Utility/Plot/gnuplot.h>
+#include "Control/Chain/PDControl.h"
+#include "Control/Chain/RLControl.h"
 
-#define LEARN_SPEED             0.3
-#define NUM_EDUCATION_SAMPLES   20000
-#define NUM_LAYERS              3
+#define BOOST_TEST_MODULE ChainControllerTest
+#include <boost/test/unit_test.hpp>
 
-struct test1
+using namespace slon;
+
+ctrl::loose_timer_ptr        timer(new ctrl::LooseTimer);
+ctrl::chain::pd_control_ptr  pdControl(new ctrl::chain::PDControl(timer));
+ctrl::chain::rl_control_ptr  rlControl(new ctrl::chain::RLControl(timer));
+
+void InitializeEngine()
 {
-    typedef double                                              real_type;
-    typedef learn::logistic<real_type>                          activate_function;
-    typedef learn::neural_network<real_type, activate_function> learner_type;
-    typedef learn::uniform_weight_distributor<real_type>        weight_distributor;
+    Engine* engine = Engine::Instance();
+	engine->init();
+    engine->setWorld(new realm::ScalableWorld);
 
-    static const unsigned input_size  = 4;
-    static const unsigned output_size = 4;
-    static const unsigned test_size   = 160000;
+    // initialize logging
+    log::currentLogManager().redirectOutput("", "log.txt");
 
-    static real_type min_input()    { return real_type(0.0); }
-    static real_type max_input()    { return real_type(1.0); }
+    // initialize graphics
+    graphics::GraphicsManager& graphicsManager = engine->getGraphicsManager();
+    graphicsManager.setVideoMode(800, 600, 32, false, false, 1);
+    graphicsManager.initRenderer(graphics::FFPRendererDesc());
 
-    static real_type min_output()   { return real_type(0.0); }
-    static real_type max_output()   { return real_type(1.0); }
+    // initialize physics
+    physics::PhysicsManager& physicsManager = physics::currentPhysicsManager();
+    physics::DynamicsWorld::state_desc dynamicsWorldDesc;
+	{
+		dynamicsWorldDesc.gravity       = math::Vector3r(0.0, physics::real(-9.8), 0.0);
+		dynamicsWorldDesc.fixedTimeStep = physics::real(0.005);
+	}
+	physicsManager.initDynamicsWorld(dynamicsWorldDesc);
+    physicsManager.getDynamicsWorld()->setMaxNumSubSteps(10000); // to make sure simulation is correct
 
-    test1() 
+	// timer
+    timer->togglePause(true);
+	physicsManager.setTimer( timer.get() );
+
+}
+
+void InitializeScene(const std::string& fileName)
+{
+    boost::property_tree::ptree properties;
+    boost::property_tree::read_ini(fileName, properties);
+
+    std::string physicsModelFile  = properties.get("PhysicsModel", "");
+    std::string graphicsModelFile = properties.get("GraphicsModel", "");
+    std::string pdConfigFile      = properties.get("ConfigFile", "");
+
+    // setup controller
+    scene::node_ptr             graphicsModel;
+    physics::physics_model_ptr  physicsModel;
+    if (graphicsModelFile == physicsModelFile)
     {
-        learn::make_cascade_neural_network(learner, input_size, output_size, NUM_LAYERS, true);
-        learn::distribute_weights( learner, weight_distributor() );
+	    database::library_ptr library = database::loadLibrary(graphicsModelFile);
+
+        if ( !library->getVisualScenes().empty() ) {
+	        graphicsModel = library->getVisualScenes().front().second;
+        }
+
+        if ( !library->getPhysicsScenes().empty() ) {
+	        physicsModel = library->getPhysicsScenes().front().second;
+        }
     }
+    else
+    {
+	    database::library_ptr library = database::loadLibrary(graphicsModelFile);
+
+        if ( !library->getVisualScenes().empty() ) {
+	        graphicsModel = library->getVisualScenes().front().second;
+        }
+
+        physicsModel = database::loadPhysicsScene(physicsModelFile);
+    }
+    pdControl->setTargetModel(graphicsModel);
+    pdControl->setPhysicsModel(physicsModel);
+    pdControl->loadConfig(pdConfigFile);
+
+	realm::currentWorld()->add( new realm::CompoundObject(graphicsModel.get(), true, physicsModel.get()) );
+}
+
+// get distance between initial center of mass and current
+physics::Vector3r GetCOM(const ctrl::PhysicsEnvironment& env)
+{
+    physics::Vector3r COM(0);
+    for (size_t i = 0; i<env.rigidBodies.size(); ++i) {
+        COM += math::get_translation( env.rigidBodies[i]->getTransform() ) / env.rigidBodies.size();
+    }
+
+    return COM;
+}
+
+template<typename T>
+std::string PrintTable(size_t nRows, const T* data0, const T* data1, const T* data2)
+{
+    std::ostringstream dataOs;
+    for (size_t i = 0; i<nRows; ++i) {
+        dataOs << data0[i] << " " << data1[1] << " " << data2[i] << std::endl;
+    }
+
+    return dataOs.str();
+}
+
+BOOST_AUTO_TEST_CASE(chain_controller_test)
+{
+    const size_t      num_tests = 4;
+    const std::string test_configs[num_tests] =
+    {
+        "Data/Config/ChainTest_2.ini",
+        "Data/Config/ChainTest_3.ini",
+        "Data/Config/ChainTest_4.ini",
+        "Data/Config/ChainTest_5.ini"
+    };
     
-    real_type frac(real_type val) const
+    InitializeEngine();
+    for (size_t i = 0; i<num_tests; ++i)
     {
-        return val - floor(val);
-    }
-
-    void operator () (real_type input[4], real_type output[4]) const
-    {
-        output[0] = frac( sin(input[0]) + input[1]*input[2] );
-        output[1] = frac( cos(input[1]) * input[2] );
-        output[2] = frac( exp(input[0] + input[1]) * input[3] );
-        output[3] = frac( pow( (input[3] + input[2])*(input[3] + input[2]), real_type(0.3) ) + input[3] );
-    }
-
-    learner_type learner;
-};
-
-struct test2
-{
-    typedef double                                              real_type;
-    typedef learn::logistic<real_type>                          activate_function;
-    typedef learn::neural_network<real_type, activate_function> learner_type;
-    typedef learn::uniform_weight_distributor<real_type>        weight_distributor;
-
-    static const unsigned input_size  = 4;
-    static const unsigned output_size = 4;
-    static const unsigned test_size   = 160000;
-
-    static real_type min_input()    { return real_type(0.0); }
-    static real_type max_input()    { return real_type(1.0); }
-
-    static real_type min_output()   { return real_type(0.0); }
-    static real_type max_output()   { return real_type(1.0); }
-
-    test2() 
-    {
-        learn::make_cascade_neural_network(learner, input_size, output_size, NUM_LAYERS, true);
-        learn::distribute_weights( learner, weight_distributor() );
-    }
-
-    void operator () (real_type input[4], real_type output[4]) const
-    {
-        output[0] = sin(input[0] + input[3] * 4.0) * 0.5 + 0.5;
-        output[1] = cos(input[1] * input[2]) * 0.5 + 0.5;
-        output[2] = (input[0] + 2.0 * input[3] + 5.0 * input[1]) / 8.0;
-        output[3] = input[0] * input[2];
-    }
-
-    learner_type learner;
-};
-
-struct test3
-{
-    typedef double                                              real_type;
-    typedef learn::hyperbolic_tangent<real_type>                activate_function;
-    typedef learn::neural_network<real_type, activate_function> learner_type;
-    typedef learn::uniform_weight_distributor<real_type>        weight_distributor;
-
-    static const unsigned input_size  = 4;
-    static const unsigned output_size = 4;
-    static const unsigned test_size   = 160000;
-
-    static real_type min_input()    { return real_type(-1.0); }
-    static real_type max_input()    { return real_type(1.0); }
-
-    static real_type min_output()   { return real_type(-1.0); }
-    static real_type max_output()   { return real_type(1.0); }
-
-    test3() 
-    {
-        learn::make_cascade_neural_network(learner, input_size, output_size, NUM_LAYERS, true);
-        learn::distribute_weights( learner, weight_distributor() );
-    }
-
-    void operator () (real_type input[4], real_type output[4]) const
-    {
+        InitializeScene(test_configs[i]);
         
-        output[0] = cos(input[0] * input[3] * 2.0);
-        output[1] = sin(input[1] + input[2]);
-        output[2] = (input[0] + 2.0 * input[3] + 5.0 * input[1]) / 8.0;
-        output[3] = (input[0] * input[1] + input[2] * input[3])/2.0;
-        
-        /*
-        output[0] = 1;
-        output[1] = input[1];
-        output[2] = 1;
-        output[3] = -1;
-        */
-    }
+        slon::gnuplot plot;
+        std::string   plotName = std::string("Data/Plots/Ballance_") + boost::lexical_cast<std::string>(i + 2) + "_gc.png";
+        plot.define_macro_quoted("OUTPUT", plotName);
 
-    learner_type learner;
-};
-
-struct test4
-{
-    typedef double                                              real_type;
-    typedef learn::generic_function<real_type>                  activate_function;
-    typedef learn::neural_network<real_type, activate_function> learner_type;
-    typedef learn::uniform_weight_distributor<real_type>        weight_distributor;
-
-    static const unsigned input_size  = 4;
-    static const unsigned output_size = 1;
-    static const unsigned test_size   = 160000;
-
-    static real_type min_input()    { return real_type(-1.0); }
-    static real_type max_input()    { return real_type(1.0); }
-
-    static real_type min_output()   { return real_type(-1e4); }
-    static real_type max_output()   { return real_type(1e4); }
-
-    test4() 
-    {
-        learn::make_cascade_neural_network(learner, input_size, output_size, NUM_LAYERS, true);
-        learn::distribute_weights( learner, weight_distributor() );
-
-        // fill up functions
-        learn::setup_function( learner, 0, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( learner, 1, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( learner, 2, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( learner, 3, make_generic_function_with_derivative( learn::linear<real_type>() ) );
-    }
-
-    void operator () (real_type input[4], real_type output[1]) const
-    {
-        output[0] = 1.0*sin(input[0] - input[3] - 4*input[2]) - 0.5;
-        //output[1] = 30*cos(input[3]*23) + 24;
-        //output[2] = 0;
-        //output[3] = 8*sin(input[0] + input[1] + 765);
-    }
-
-    learner_type learner;
-};
-
-struct test5
-{
-    typedef double                                              real_type;
-    typedef learn::generic_function<real_type>                  activate_function;
-    typedef learn::neural_network<real_type, activate_function> network_type;
-    typedef learn::scalar_neural_network<network_type>          learner_type;
-    typedef learn::uniform_weight_distributor<real_type>        weight_distributor;
-
-    static const unsigned input_size  = 4;
-    static const unsigned output_size = 1;
-    static const unsigned test_size   = 160000;
-
-    static real_type min_input()    { return real_type(-1.0); }
-    static real_type max_input()    { return real_type(1.0); }
-
-    static real_type min_output()   { return real_type(-1e4); }
-    static real_type max_output()   { return real_type(1e4); }
-
-    test5() 
-    {
-        network_type network;
-        learn::make_cascade_neural_network(network, input_size, output_size, NUM_LAYERS, true);
-        learn::distribute_weights( network, weight_distributor() );
-
-        // fill up functions
-        learn::setup_function( network, 0, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( network, 1, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( network, 2, make_generic_function_with_derivative( learn::hyperbolic_tangent<real_type>() ) );
-        learn::setup_function( network, 3, make_generic_function_with_derivative( learn::linear<real_type>() ) );
-
-        learner = learner_type(network);
-    }
-
-    void operator () (real_type input[4], real_type output[1]) const
-    {
-        output[0] = 1.0*sin(input[0] - input[3] - 4*input[2]);
-        //output[1] = 30*cos(input[3]*23) + 24;
-        //output[2] = 0;
-        //output[3] = 8*sin(input[0] + input[1] + 765);
-    }
-
-    learner_type learner;
-};
-
-template<int N, typename T>
-void make_sample( unsigned value,
-                  unsigned dimSize,
-                  T        minVal,
-                  T        maxVal,
-                  T        sample[N] )
-{
-    unsigned size = 1;
-    for (int j = 0; j<N; ++j) 
-    {
-        unsigned intSample = (value / size) % dimSize;
-        size              *= dimSize;
-        sample[j]          = minVal + (maxVal - minVal) * (T(intSample) / dimSize);
-    }
-}
-template<typename Test>
-void check_error(const Test& test)
-{
-    // test
-    typename Test::real_type averageError  = Test::real_type(0.0);
-    typename Test::real_type maxError      = Test::real_type(0.0);
-    unsigned                 dimSize       = unsigned( pow(Test::test_size, Test::real_type(1.0) / Test::input_size) );
-
-    typename Test::real_type input[Test::input_size];
-    typename Test::real_type output[Test::output_size];
-    typename Test::real_type computed[Test::output_size];
-
-    for (int i = 0; i<Test::test_size; ++i)
-    {
-        make_sample<Test::input_size>(i, dimSize, Test::min_input(), Test::max_input(), input);
-        test(input, output);
-        test.learner.compute(input, input + Test::input_size, computed);
-
-        typename Test::real_type localError(0.0);
-        for (int j = 0; j<Test::output_size; ++j) {
-            localError += (output[j] - computed[j]) * (output[j] - computed[j]);
-        }
-        localError = sqrt(localError);
-
-        maxError        = std::max(maxError, localError);
-        averageError   += localError / Test::test_size;
-    }
-
-    std::cout << "Max error: "        << maxError << std::endl
-              << "Average error: "    << averageError << std::endl;
-}
-
-template<>
-void check_error<test5>(const test5& test)
-{
-    typedef test5 Test;
-
-    // test
-    Test::real_type averageError  = Test::real_type(0.0);
-    Test::real_type maxError      = Test::real_type(0.0);
-    unsigned        dimSize       = unsigned( pow(Test::test_size, Test::real_type(1.0) / Test::input_size) );
-
-    Test::real_type input[Test::input_size];
-    Test::real_type output[Test::output_size];
-    Test::real_type computed;
-
-    for (int i = 0; i<Test::test_size; ++i)
-    {
-        make_sample<Test::input_size>(i, dimSize, Test::min_input(), Test::max_input(), input);
-        test(input, output);
-        computed = test.learner.compute(input, input + Test::input_size);
-
-        Test::real_type localError(0.0);
-        for (int j = 0; j<Test::output_size; ++j) {
-            localError += (output[j] - computed) * (output[j] - computed);
-        }
-        localError = sqrt(localError);
-
-        maxError        = std::max(maxError, localError);
-        averageError   += localError / Test::test_size;
-    }
-
-    std::cout << "Max error: "        << maxError << std::endl
-              << "Average error: "    << averageError << std::endl;
-}
-#include <valarray>
-int main()
-{
-    typedef test5 Test;
-
-
-    // learner
-    Test test;
-
-    std::cout << "Learn speed: "            << LEARN_SPEED << std::endl
-              << "Num education samples: "  << NUM_EDUCATION_SAMPLES << std::endl
-              << "Test granularity: "       << Test::test_size << std::endl
-              << "=====================================\n";
-
-    std::cout << "No education:\n";
-    check_error(test);
-    std::cout << "=====================================\n";
-
-    //Test::real_type computed[Test::output_size];
-
-    size_t numSamples = 0;
-    Test::real_type step_size = LEARN_SPEED;
-    while (true)
-    {
+        // validate controllers
         {
-            using namespace learn;
+            const double        balance_time      = 10.0;
+            const physics::real time_step         = 0.1;
+            const physics::real balance_threshold = 0.1;
+            const size_t        num_steps         = size_t(balance_time / time_step + physics::real(0.1));
 
-            boost::mt19937 rng;
-            boost::uniform_real<Test::real_type> dist( Test::min_input(), Test::max_input() );
-            boost::variate_generator< boost::mt19937&,
-                                      boost::uniform_real<Test::real_type> > generator(rng, dist);
-            Test::real_type averageError  = Test::real_type(0.0);
-            Test::real_type maxError      = Test::real_type(0.0);
+            std::vector<physics::real> timeAxis(num_steps);
+            std::vector<physics::real> pdBalanceAxis(num_steps);
+            std::vector<physics::real> rlBalanceAxis(num_steps, 0);
 
-            // educate
-            Test::real_type input[Test::input_size];
-            Test::real_type output[Test::output_size];
-            for (int i = 0; i<NUM_EDUCATION_SAMPLES; ++i)
+            timer->setTime(0.0);
+            pdControl->acquire();
             {
-                for (int j = 0; j<Test::input_size; ++j) {
-                    input[j] = generator();
+                physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
+                for (size_t i = 0; i<num_steps; ++i)
+                {
+                    timeAxis[i] = timer->getTime();
+                    pdBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
+                    BOOST_CHECK(pdBalanceAxis[i] < balance_threshold);
+                    timer->setTime(timer->getTime() + time_step);
                 }
-
-                test(input, output);
-
-                Test::real_type computed = test.learner.compute(input, input + Test::input_size);
-                ublas::vector<Test::real_type> gradient(test.learner.num_params());
-                test.learner.get_gradient(input, input + Test::input_size, gradient.begin());
-
-                ublas::vector<Test::real_type> params(test.learner.num_params());
-                test.learner.get_params(params.begin());
-                params += step_size*(output[0] - computed)*gradient;
-                test.learner.set_params(params.begin(), params.end());
-                if (step_size > 0.01) step_size *= 0.999;
-
-                //test.learner.update(input, input + Test::input_size, output[0], LEARN_SPEED);
-
-                //test.learner.compute(input, input + Test::input_size, computed);
-                //test.learner.update( input, 
-                //                     input + Test::input_size, 
-                //                     output, 
-                //                     output + Test::output_size, 
-                //                     LEARN_SPEED );
-
-                //Test::real_type localError(0.0);
-                //for (int j = 0; j<Test::output_size; ++j) {
-                //    localError += (output[j] - computed[j]) * (output[j] - computed[j]);
-                //}
-                //localError = sqrt(localError);
-
-                //maxError        = std::max(maxError, localError);
-                //averageError   += localError / NUM_EDUCATION_SAMPLES;
             }
-            std::cout << "Num training samples: " << numSamples << std::endl;
-            std::cout << "On lrealning samples\n Max error: "        << maxError << std::endl
-                      << "Average error: "    << averageError << std::endl;
-            numSamples += NUM_EDUCATION_SAMPLES;
+            pdControl->unacquire();
+
+            // perform same check for rlControl
+
+            // plot data
+            plot.define_macro_quoted("TITLE", "Ballance maintenance");
+            plot.set_data_source(0, PrintTable(num_steps, &timeAxis[0], &pdBalanceAxis[0], &rlBalanceAxis[0]));
+            plot.execute("Data/Plots/ChainTest.plot");
         }
-
-
-        check_error(test);
-        std::cout << "=====================================\n";
     }
-
-    return 0;
 }

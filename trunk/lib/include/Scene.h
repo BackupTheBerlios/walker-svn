@@ -4,7 +4,6 @@
 #include "Control/Chain/PDControl.h"
 #include "Control/Chain/RLControl.h"
 #include "Control/Humanoid/Control.h"
-#include "Control/PhysicsControl.h"
 #include "Control/InverseDynamics/RLControl.h"
 #include <sgl/Font.h>
 #include <slon/Graphics/Renderable/DebugMesh.h>
@@ -63,6 +62,7 @@ public:
     Scene(const DESC& desc);
 
 private:
+    void dumpScene();
     void toggleHelpText();
     void takeScreenShot();
     void stopDemo();
