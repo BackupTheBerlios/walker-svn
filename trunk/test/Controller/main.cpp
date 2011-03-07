@@ -40,7 +40,7 @@ Engine* InitializeEngine()
     graphics::FFPRendererDesc rendererDesc;
     rendererDesc.useDebugRender = true;
     graphicsManager.initRenderer(rendererDesc);
-
+/*
         // Create skybox
         graphics::SkyBox* skyBox = new graphics::SkyBox();
         {
@@ -56,7 +56,7 @@ Engine* InitializeEngine()
             skyBox->MakeFromSideTextures(SKY_BOX_MAPS);
         }
         realm::currentWorld()->add(  new realm::EntityObject(*skyBox, false) );
-
+*/
 
     // Create camera
     scene::LookAtCamera* camera = new scene::LookAtCamera();

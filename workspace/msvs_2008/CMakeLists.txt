@@ -56,6 +56,8 @@ SET (BOOST_DLLS
     boost_system-vc90-mt-gd-1_45.dll
     boost_thread-vc90-mt-1_45.dll
     boost_thread-vc90-mt-gd-1_45.dll
+	boost_unit_test_framework-vc90-mt-1_45.dll
+	boost_unit_test_framework-vc90-mt-gd-1_45.dll
 )
 
 SET (DEVIL_DLLS
