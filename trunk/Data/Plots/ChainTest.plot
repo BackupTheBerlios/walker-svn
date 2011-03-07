@@ -1,3 +1,4 @@
+set autoscale;
 set terminal png;
 set output @OUTPUT;
 set title @TITLE;

@@ -62,7 +62,7 @@ public:
     Scene(const DESC& desc);
 
 private:
-    void dumpScene();
+    void dumpPhysicsScene();
     void toggleHelpText();
     void takeScreenShot();
     void stopDemo();

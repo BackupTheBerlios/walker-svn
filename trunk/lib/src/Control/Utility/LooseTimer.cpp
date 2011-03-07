@@ -37,7 +37,7 @@ bool LooseTimer::myIsBounded() const
 
 double LooseTimer::myGetMaxTime() const
 {
-	return myIsBounded() ? barriers[0] : time;
+    return myIsBounded() ? barriers.back() : time;
 }
 
 void LooseTimer::mySetTime(double time_)

@@ -300,6 +300,7 @@ Scene::Scene(const DESC& desc)
         keyboardHandler.reset( new KeyboardHandler() );
         inputManager.addInputHandler( keyboardHandler.get() );
 
+        keyboardHandler->connectKeyPressEventHandler( input::KEY_SCROLLOCK, bind(&Scene::dumpPhysicsScene,    this) );
         keyboardHandler->connectKeyPressEventHandler( input::KEY_F1,        bind(&Scene::toggleHelpText,    this) );
         keyboardHandler->connectKeyPressEventHandler( input::KEY_F9,        bind(&Scene::takeScreenShot,    this) );
         keyboardHandler->connectKeyPressEventHandler( input::KEY_ESCAPE,    bind(&Scene::stopDemo,          this) );
@@ -333,6 +334,10 @@ Scene::Scene(const DESC& desc)
     eDesc.grabInput     = false;
     timer->togglePause(false);
     engine->run(eDesc);
+}
+
+void Scene::dumpPhysicsScene()
+{
 }
 
 void Scene::toggleHelpText()   { drawHelp = !drawHelp; } // F1

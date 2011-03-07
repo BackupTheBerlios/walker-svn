@@ -443,13 +443,17 @@
 				<technique_common>
 					<dynamic>false</dynamic>
 					<mass>0.0</mass>
+                    <mass_frame>
+                        <translate sid="translate">0.00000 0.138188 0.548407</translate>
+                    </mass_frame>
 					<instance_physics_material url="#Cone0-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.00000 0.138188 0.548407</translate>
 						<tapered_cylinder>
-							<radius1>1.00000
-							1.00000</radius1>
+							<radius1>0.10000
+							0.10000</radius1>
 							<radius2>0 0</radius2>
-							<height>2.0</height>
+							<height>0.2</height>
 						</tapered_cylinder>
 					</shape>
 				</technique_common>
@@ -458,13 +462,17 @@
 				<technique_common>
 					<dynamic>true</dynamic>
 					<mass>1.0</mass>
+                    <mass_frame>
+                        <translate sid="translate">0.00000 0.583995 0.546344</translate>
+                    </mass_frame>
 					<instance_physics_material url="#Cone1-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.00000 0.583995 0.546344</translate>
 						<tapered_cylinder>
-							<radius1>1.00000
-							1.00000</radius1>
+							<radius1>0.10000
+							0.10000</radius1>
 							<radius2>0 0</radius2>
-							<height>2.0</height>
+							<height>0.2</height>
 						</tapered_cylinder>
 					</shape>
 				</technique_common>
@@ -473,59 +481,27 @@
 				<technique_common>
 					<dynamic>true</dynamic>
 					<mass>1.0</mass>
+                    <mass_frame>
+                        <translate sid="translate">0.00000 1.012910 0.547106</translate>
+                    </mass_frame>
 					<instance_physics_material url="#Cone2-PhysicsMaterial"/>
 					<shape>
+                        <translate sid="translate">0.00000 1.012910 0.547106</translate>
 						<tapered_cylinder>
-							<radius1>1.00000
-							1.00000</radius1>
+							<radius1>0.10000
+							0.10000</radius1>
 							<radius2>0 0</radius2>
-							<height>2.0</height>
+							<height>0.2</height>
 						</tapered_cylinder>
 					</shape>
 				</technique_common>
 			</rigid_body>
-			<!--rigid_body name="Cone3-RigidBody" sid="Cone3-RigidBody">
-				<technique_common>
-					<dynamic>true</dynamic>
-					<mass>1.0</mass>
-					<instance_physics_material url="#Cone3-PhysicsMaterial"/>
-					<shape>
-						<tapered_cylinder>
-							<radius1>1.00000
-							1.00000</radius1>
-							<radius2>0 0</radius2>
-							<height>2.0</height>
-						</tapered_cylinder>
-					</shape>
-				</technique_common>
-			</rigid_body!-->
-			<!--rigid_body name="Cone4-RigidBody" sid="Cone4-RigidBody">
-				<technique_common>
-					<dynamic>true</dynamic>
-					<mass>1.0</mass>
-					<instance_physics_material url="#Cone4-PhysicsMaterial"/>
-					<shape>
-						<tapered_cylinder>
-							<radius1>1.00000
-							1.00000</radius1>
-							<radius2>0 0</radius2>
-							<height>2.0</height>
-						</tapered_cylinder>
-					</shape>
-				</technique_common>
-			</rigid_body-->
 			<rigid_constraint name="Const4" sid="Const4">
 				<ref_attachment rigid_body="Cone0-RigidBody">
-					<translate>0.00000 -0.00602 2.25813</translate>
-					<rotate>1 0 0 0.53825</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
+					<translate>0.00000 0.22000 0.00000</translate>
 				</ref_attachment>
 				<attachment rigid_body="Cone1-RigidBody">
-					<translate>0.00000 0.00000 -2.20000</translate>
-					<rotate>1 0 0 0.00000</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
+					<translate>0.00000 -0.22000 0.00000</translate>
 				</attachment>
 				<technique_common>
 					<enabled>true</enabled>
@@ -535,24 +511,18 @@
 							<max>0.00000 0.00000 0.00000</max>
 						</linear>
 						<swing_cone_and_twist>
-							<min>-45.00000 -45.00000 0.00000</min>
-							<max>45.00000 45.00000 0.00000</max>
+							<min>-30.00000 0.00000 -30.00000</min>
+							<max>30.00000 0.00000 30.00000</max>
 						</swing_cone_and_twist>
 					</limits>
 				</technique_common>
 			</rigid_constraint>
 			<rigid_constraint name="Const3" sid="Const3">
 				<ref_attachment rigid_body="Cone1-RigidBody">
-					<translate>0.00000 0.00000 2.20000</translate>
-					<rotate>1 0 0 0.00000</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
+					<translate>0.00000 0.22000 0.00000</translate>
 				</ref_attachment>
 				<attachment rigid_body="Cone2-RigidBody">
-					<translate>0.00000 0.00000 -2.20000</translate>
-					<rotate>1 0 0 0.00000</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
+					<translate>0.00000 -0.22000 0.00000</translate>
 				</attachment>
 				<technique_common>
 					<enabled>true</enabled>
@@ -562,66 +532,12 @@
 							<max>0.00000 0.00000 0.00000</max>
 						</linear>
 						<swing_cone_and_twist>
-							<min>-30.00000 -30.00000 0.00000</min>
-							<max>30.00000 30.00000 0.00000</max>
+							<min>-30.00000 0.00000 -30.00000</min>
+							<max>30.00000 0.00000 30.00000</max>
 						</swing_cone_and_twist>
 					</limits>
 				</technique_common>
 			</rigid_constraint>
-			<!--rigid_constraint name="Const2" sid="Const2">
-				<ref_attachment rigid_body="Cone2-RigidBody">
-					<translate>-0.00000 -0.00858 2.08858</translate>
-					<rotate>1 0 0 -0.04631</rotate>
-					<rotate>0 1 0 -0.00000</rotate>
-					<rotate>0 0 1 -0.00000</rotate>
-				</ref_attachment>
-				<attachment rigid_body="Cone3-RigidBody">
-					<translate>0.00000 0.00000 -2.20000</translate>
-					<rotate>1 0 0 0.00000</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
-				</attachment>
-				<technique_common>
-					<enabled>true</enabled>
-					<limits>
-						<linear>
-							<min>0.00000 0.00000 0.00000</min>
-							<max>0.00000 0.00000 0.00000</max>
-						</linear>
-						<swing_cone_and_twist>
-							<min>-30.00000 -30.00000 -0.50000</min>
-							<max>30.00000 30.00000 0.50000</max>
-						</swing_cone_and_twist>
-					</limits>
-				</technique_common>
-			</rigid_constraint-->
-			<!--rigid_constraint name="Const1" sid="Const1">
-				<ref_attachment rigid_body="Cone3-RigidBody">
-					<translate>0.00000 -0.00505 2.08033</translate>
-					<rotate>1 0 0 0.44499</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
-				</ref_attachment>
-				<attachment rigid_body="Cone4-RigidBody">
-					<translate>0.00000 0.00000 -2.20000</translate>
-					<rotate>1 0 0 0.00000</rotate>
-					<rotate>0 1 0 0.00000</rotate>
-					<rotate>0 0 1 0.00000</rotate>
-				</attachment>
-				<technique_common>
-					<enabled>true</enabled>
-					<limits>
-						<linear>
-							<min>0.00000 0.00000 0.00000</min>
-							<max>0.00000 0.00000 0.00000</max>
-						</linear>
-						<swing_cone_and_twist>
-							<min>-30.00000 -30.00000 -0.50000</min>
-							<max>30.00000 30.00000 0.50000</max>
-						</swing_cone_and_twist>
-					</limits>
-				</technique_common>
-			</rigid_constraint-->
 		</physics_model>
 	</library_physics_models>
 	<library_physics_scenes>
