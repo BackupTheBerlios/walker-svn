@@ -40,23 +40,6 @@ Engine* InitializeEngine()
     graphics::FFPRendererDesc rendererDesc;
     rendererDesc.useDebugRender = true;
     graphicsManager.initRenderer(rendererDesc);
-/*
-        // Create skybox
-        graphics::SkyBox* skyBox = new graphics::SkyBox();
-        {
-            const std::string SKY_BOX_MAPS[6] =
-            {
-                "Data/SkyBox/thunder_west.jpg",
-                "Data/SkyBox/thunder_east.jpg",
-                "Data/SkyBox/thunder_up.jpg",
-                "Data/SkyBox/thunder_down.jpg",
-                "Data/SkyBox/thunder_south.jpg",
-                "Data/SkyBox/thunder_north.jpg"
-            };
-            skyBox->MakeFromSideTextures(SKY_BOX_MAPS);
-        }
-        realm::currentWorld()->add(  new realm::EntityObject(*skyBox, false) );
-*/
 
     // Create camera
     scene::LookAtCamera* camera = new scene::LookAtCamera();
@@ -77,7 +60,7 @@ Engine* InitializeEngine()
     light->setColor( math::Vector4f(0.8f, 0.8f, 0.8f, 1.0f) );
     light->setAmbient(0.3f);
     light->setIntensity(0.5f);
-    light->setDirection( math::Vector3f(-1.5f, -0.5f, -0.85f) );
+    light->setDirection( math::Vector3f(1.5f, -0.5f, 0.85f) );
 
     realm::currentWorld()->add( new realm::EntityObject(*light, false) );
 
@@ -164,7 +147,7 @@ std::string PrintTable(size_t nRows, const T* data0, const T* data1, const T* da
 {
     std::ostringstream dataOs;
     for (size_t i = 0; i<nRows; ++i) {
-        dataOs << data0[i] << " " << data1[1] << " " << data2[i] << std::endl;
+        dataOs << data0[i] << " " << data1[i] << " " << data2[i] << std::endl;
     }
 
     return dataOs.str();
