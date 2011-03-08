@@ -39,6 +39,10 @@ Engine* InitializeEngine()
                 
     graphics::FFPRendererDesc rendererDesc;
     rendererDesc.useDebugRender = true;
+    //graphics::ForwardRendererDesc rendererDesc;
+    //rendererDesc.useDepthPass   = true;
+    //rendererDesc.makeDepthMap   = false;
+    //rendererDesc.useDebugRender = true;
     graphicsManager.initRenderer(rendererDesc);
 
     // Create camera

@@ -100,6 +100,10 @@ void Control::loadConfig(const std::string& fileName)
     gravityCompensation = properties.get("GravityCompensation", false);
     maxForce            = properties.get("MaxForce", 20.0f);
     maxVelocity         = properties.get("MaxVelocity", 10.0f);
+        
+    if (targetModel && physicsModel) {
+        initialize();
+    }
 }
 
 void Control::setTargetModel(const scene::node_ptr& targetModel_)
