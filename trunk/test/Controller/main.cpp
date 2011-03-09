@@ -4,9 +4,6 @@
 #include <slon/Graphics/Renderer/FixedPipelineRenderer.h>
 #include <slon/Graphics/Renderer/ForwardRenderer.h>
 #include <slon/Graphics/Renderable/SkyBox.h>
-#include <slon/Realm/Object/CompoundObject.h>
-#include <slon/Realm/Object/EntityObject.h>
-#include <slon/Realm/World/ScalableWorld.h>
 #include <slon/Scene/Camera/LookAtCamera.h>
 #include <slon/Scene/Light/DirectionalLight.h>
 #include <slon/Utility/Plot/gnuplot.h>
@@ -18,16 +15,15 @@
 
 using namespace slon;
 
-ctrl::loose_timer_ptr        timer(new ctrl::LooseTimer);
-ctrl::chain::pd_control_ptr  pdControl(new ctrl::chain::PDControl(timer));
-ctrl::chain::rl_control_ptr  rlControl(new ctrl::chain::RLControl(timer));
-realm::compound_object_ptr   chain;
+ctrl::loose_timer_ptr       timer(new ctrl::LooseTimer);
+ctrl::chain::pd_control_ptr pdControl(new ctrl::chain::PDControl(timer));
+ctrl::chain::rl_control_ptr rlControl(new ctrl::chain::RLControl(timer));
+realm::object_ptr           chain;
 
 Engine* InitializeEngine()
 {
     Engine* engine = Engine::Instance();
 	engine->init();
-    engine->setWorld(new realm::ScalableWorld);
 
     // initialize logging
     log::currentLogManager().redirectOutput("", "log.txt");
@@ -66,7 +62,7 @@ Engine* InitializeEngine()
     light->setIntensity(0.5f);
     light->setDirection( math::Vector3f(1.5f, -0.5f, 0.85f) );
 
-    realm::currentWorld()->add( new realm::EntityObject(*light, false) );
+    realm::currentWorld().add(light, false);
 
     // initialize physics
     physics::PhysicsManager& physicsManager = physics::currentPhysicsManager();
@@ -125,10 +121,9 @@ void InitializeScene(const std::string& fileName)
     pdControl->loadConfig(pdConfigFile);
 
     if (chain) {
-        realm::currentWorld()->remove(chain.get());
+        realm::currentWorld().remove(chain.get());
     }
-    chain.reset( new realm::CompoundObject(graphicsModel.get(), true, physicsModel.get()) );
-	realm::currentWorld()->add(chain.get());
+    chain.reset( realm::currentWorld().add(graphicsModel.get(), true, physicsModel.get()) );
 }
 
 // get distance between initial center of mass and current

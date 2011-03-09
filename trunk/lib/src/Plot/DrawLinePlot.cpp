@@ -4,7 +4,6 @@
 #include <sgl/Math/Ray.hpp>
 #include <slon/Graphics/Common.h>
 #include <slon/Graphics/Renderable/Debug/DebugDrawCommon.h>
-#include <slon/Realm/Object/EntityObject.h>
 #include <slon/Realm/World.h>
 
 namespace {
@@ -132,15 +131,14 @@ DrawLinePlot<Dimemsion>::DrawLinePlot(const DESC& desc_) :
     points(desc_.bufferSize)
 {
     plotDebugMesh.reset( new PlotDebugMesh(this) );
-    plotObject.reset( new realm::EntityObject(*plotDebugMesh, false) );
-    realm::currentWorld()->add( plotObject.get() );
+    realm::currentWorld().add(plotDebugMesh.get(), false);
 }
 
 template<int Dimemsion>
 DrawLinePlot<Dimemsion>::~DrawLinePlot()
 {
     plotEnd();
-    realm::currentWorld()->remove( plotObject.get() );
+    realm::currentWorld().remove( plotObject.get() );
 }
 
 template<int Dimension>
@@ -148,12 +146,12 @@ void DrawLinePlot<Dimension>::hide(bool toggle)
 {
     if (hiding && !toggle)
     {
-        realm::currentWorld()->add( plotObject.get() );
+        realm::currentWorld().add( plotObject.get() );
         hiding = false;
     }
     else if (!hiding && toggle)
     {
-        realm::currentWorld()->remove( plotObject.get() );
+        realm::currentWorld().remove( plotObject.get() );
         hiding = true;
     }
 }

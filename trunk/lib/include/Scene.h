@@ -9,9 +9,8 @@
 #include <slon/Graphics/Renderable/DebugMesh.h>
 #include <slon/Input/KeyboardHandler.h>
 #include <slon/Input/MouseHandler.h>
+#include <slon/Realm/Object.h>
 #include <slon/Realm/World.h>
-#include <slon/Realm/Object/CompoundObject.h>
-#include <slon/Realm/Object/EntityObject.h>
 #include <slon/Scene/Camera/LookAtCamera.h>
 #include <vector>
 #undef CreateFont
@@ -85,11 +84,10 @@ private:
 
 private:
     // entities
-    realm::world_ptr            world;
-    realm::compound_object_ptr  cubeObject;
-    realm::compound_object_ptr  arenaObject;
-    realm::compound_object_ptr  modelObject;
-    realm::entity_object_ptr    skyboxObject;
+    realm::object_ptr           cubeObject;
+    realm::object_ptr           arenaObject;
+    realm::object_ptr           modelObject;
+    realm::object_ptr           skyboxObject;
     scene::look_at_camera_ptr	camera;
     graphics::debug_mesh_ptr    debugMesh;
     sgl::ref_ptr<sgl::Font>     debugFont;

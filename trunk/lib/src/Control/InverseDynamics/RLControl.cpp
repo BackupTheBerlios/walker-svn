@@ -17,8 +17,6 @@
 #include <slon/Graphics/Renderable/Debug/DebugDrawPhysics.h>
 #include <slon/Input/KeyboardHandler.h>
 #include <slon/Physics/PhysicsManager.h>
-#include <slon/Realm/Object/CompoundObject.h>
-#include <slon/Realm/Object/EntityObject.h>
 #include <slon/Realm/World.h>
 #undef CreateFont
 

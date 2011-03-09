@@ -11,9 +11,6 @@
 #include <slon/Graphics/Renderer/FixedPipelineRenderer.h>
 #include <slon/Graphics/Renderer/ForwardRenderer.h>
 #include <slon/Physics/PhysicsModel.h>
-#include <slon/Realm/Location/DbvtLocation.h>
-#include <slon/Realm/Object/EntityObject.h>
-#include <slon/Realm/World/ScalableWorld.h>
 #include <slon/Scene/Light/DirectionalLight.h>
 #include <slon/Scene/Group.h>
 #include <sstream>
@@ -92,8 +89,7 @@ Scene::Scene(const DESC& desc)
         }
 
         // create world
-        world.reset(new realm::ScalableWorld);
-        engine->setWorld( world.get() );
+        realm::World& world = realm::currentWorld();
 
         // Create skybox
         graphics::SkyBox* skyBox = new graphics::SkyBox();
@@ -109,8 +105,7 @@ Scene::Scene(const DESC& desc)
             };
             skyBox->MakeFromSideTextures(SKY_BOX_MAPS);
         }
-        skyboxObject.reset( new realm::EntityObject(*skyBox, false) );
-        world->add( skyboxObject.get() );
+        skyboxObject.reset( world.add(skyBox, false) );
 
         // create scene
         {
@@ -163,8 +158,7 @@ Scene::Scene(const DESC& desc)
                     transform->setTransform(desc.control.transform);
                 }
 
-				modelObject.reset( new realm::CompoundObject(graphicsModel.get(), true, physicsModel.get()) );
-				realm::currentWorld()->add( modelObject.get() );
+				modelObject.reset( realm::currentWorld().add(graphicsModel.get(), true, physicsModel.get()) );
 
                 if ( scene::MatrixTransform* transform = dynamic_cast<scene::MatrixTransform*>(graphicsModel.get()) ) {
                     transform->setTransform( math::make_identity<float, 4>() );
@@ -231,8 +225,7 @@ Scene::Scene(const DESC& desc)
                 scene::Node*           graphicsModel = library->getVisualScenes().front().second.get();
                 physics::PhysicsModel* physicsModel  = library->getPhysicsScenes().front().second.get();
 
-                arenaObject.reset( new realm::CompoundObject(graphicsModel, false, physicsModel) );
-                world->add( arenaObject.get() );
+                arenaObject.reset( world.add(graphicsModel, false, physicsModel) );
             }
 
             // create cube for throwing
@@ -241,8 +234,7 @@ Scene::Scene(const DESC& desc)
                 scene::Node*           graphicsModel = library->getVisualScenes().front().second.get();
                 physics::PhysicsModel* physicsModel  = library->getPhysicsScenes().front().second.get();
 
-                cubeObject.reset( new realm::CompoundObject(graphicsModel, true, physicsModel) );
-                world->add( cubeObject.get() );
+                cubeObject.reset( world.add(graphicsModel, true, physicsModel) );
             }
 
             // create light
@@ -252,7 +244,7 @@ Scene::Scene(const DESC& desc)
             light->setIntensity(0.5f);
             light->setDirection( math::Vector3f(1.5f, -0.5f, 0.85f) );
 
-            world->add( new realm::EntityObject(*light, false) );
+            world.add(light, false);
         }
 
         // Create camera
@@ -269,7 +261,7 @@ Scene::Scene(const DESC& desc)
 
         // create debug mesh
         debugMesh.reset(new graphics::DebugMesh);
-        world->add( new realm::EntityObject(*debugMesh, false) );
+        world.add(debugMesh.get(), false);
 
         // create font
         debugFont.reset( graphics::currentDevice()->CreateFont() );
@@ -357,31 +349,31 @@ void Scene::toggleRotation(bool toggle)
 
 void Scene::showScene()
 {
-    if ( !cubeObject->getWorld() )
+    realm::World& world = realm::currentWorld();
+    if ( !cubeObject->isInWorld() )
     {
-        world->add( cubeObject.get() );
-        world->add( arenaObject.get() );
-        world->add( modelObject.get() );
-        world->add( skyboxObject.get() );
+        world.add( cubeObject.get() );
+        world.add( arenaObject.get() );
+        world.add( modelObject.get() );
+        world.add( skyboxObject.get() );
     }
 }
 
 void Scene::hideScene()
 {
-    if ( cubeObject->getWorld() )
+    realm::World& world = realm::currentWorld();
+    if ( cubeObject->isInWorld() )
     {
-        world->remove( cubeObject.get() );
-        world->remove( arenaObject.get() );
-        world->remove( modelObject.get() );
-        world->remove( skyboxObject.get() );
+        world.remove( cubeObject.get() );
+        world.remove( arenaObject.get() );
+        world.remove( modelObject.get() );
+        world.remove( skyboxObject.get() );
     }
 }
 
 void Scene::switchRealtime()   
 {
     timer->toggleRealtime( !timer->isRealtime() ); 
-	 
-    realm::World* world = Engine::Instance()->getWorld();
     if ( timer->isRealtime() ) {
         hideScene();
     }
@@ -459,8 +451,8 @@ void Scene::restart()
 
 void Scene::throwCube()
 {
-    if ( cubeObject->getWorld() ) {
-        world->remove( cubeObject.get() );
+    if ( cubeObject->isInWorld() ) {
+        realm::currentWorld().remove( cubeObject.get() );
     }
 
     // throw rigid body
@@ -472,7 +464,7 @@ void Scene::throwCube()
 	}
 	rigidBody.reset(desc);
 
-    world->add( cubeObject.get() );
+    realm::currentWorld().add( cubeObject.get() );
 }
 
 void Scene::flyCamera(const math::Vector3f& speed)    
