@@ -190,7 +190,7 @@ Scene::Scene(const DESC& desc)
                             controls.push_back( ctrl::physics_control_ptr(control) );
                         }
 
-                        controlIndex = 2;
+                        controlIndex = 0;
 
                         break;
                     }
