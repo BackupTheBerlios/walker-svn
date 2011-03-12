@@ -72,7 +72,7 @@ private:
 	TimeBarrier					preTimerBarrier;
 	TimeBarrier					postTimerBarrier;
 
-protected:
+public:
     boost::mutex                syncMutex;
     scene::node_ptr             targetModel;
     physics::physics_model_ptr  physicsModel;

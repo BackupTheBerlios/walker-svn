@@ -61,6 +61,7 @@ void PDControl::acquire_safe()
 	needRestart = true;
 
     environment->setControlType(ctrl::PhysicsEnvironment::CONTROL_FORCE);
+    environment->reset();
 
     if ( Kp.size1() != environment->getActionSize() || Kp.size2() != environment->getActionSize() )
     {
@@ -109,14 +110,6 @@ void PDControl::unacquire_safe()
 
 double PDControl::pre_sync()
 {
-    if (needRestart)
-    {
-        acquire_safe();
-        environment->reset();
-        needRestart = false;
-        return physics::currentPhysicsManager().getDynamicsWorld()->getStateDesc().fixedTimeStep + math::EPS_6f;
-    }
-
     environment->makeState();
 
 	// calculate pd term

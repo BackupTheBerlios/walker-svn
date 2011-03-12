@@ -17,7 +17,7 @@ class Control :
 public:
     typedef Environment environment_type;
 	
-protected:
+public:
     // physics
     typedef sgl::vector
 	<
@@ -59,7 +59,7 @@ protected:
     // Misc
     ublas::vector<physics::real> getGravityCompensation() const;
 
-protected:
+public:
 	// settings
     bool            freeJoints;
     bool            randomStartup;

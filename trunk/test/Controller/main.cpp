@@ -76,7 +76,7 @@ Engine* InitializeEngine()
 
 	// timer
     timer->togglePause(true);
-    //timer->setTimeScale(1000.0); // simulate as fast as can
+    timer->setTimeScale(1000.0); // simulate as fast as can
 	physicsManager.setTimer( timer.get() );
 
     return engine;
@@ -126,6 +126,62 @@ void InitializeScene(const std::string& fileName)
     chain.reset( realm::currentWorld().add(graphicsModel.get(), true, physicsModel.get()) );
 }
 
+void BendChain(ctrl::chain::Control& control)
+{
+    using namespace physics;
+
+    // std axes
+    Vector3r axes[3] = 
+    {
+        physics::Vector3r(1.0, 0.0, 0.0),
+        physics::Vector3r(0.0, 1.0, 0.0),
+        physics::Vector3r(0.0, 0.0, 1.0),
+    };
+
+    // rotate rigid bodies around constraints
+    ctrl::chain::Control::rigid_body_desc_vector rigidBodiesDescs(control.rigidBodiesInitialDescs);
+    ctrl::chain::Control::constraint_desc_vector constraintDescs(control.constraintsInitialDescs);
+    for (size_t i = 0; i<constraintDescs.size(); ++i)
+    {
+        RigidBody* rbody0 = constraintDescs[i].rigidBodies[0];
+        RigidBody* rbody1 = constraintDescs[i].rigidBodies[1];
+
+        // find desc by name
+        RigidBody::state_desc* desc0 = 0;
+        RigidBody::state_desc* desc1 = 0;
+        for (size_t j = 0; j<rigidBodiesDescs.size(); ++j) 
+        {
+            if ( rigidBodiesDescs[j].name == rbody0->getName() ) {
+                desc0 = &rigidBodiesDescs[j];
+            }
+            else if ( rigidBodiesDescs[j].name == rbody1->getName() ) {
+                desc1 = &rigidBodiesDescs[j];
+            }
+        }
+        assert(desc0 && desc1);
+
+        // get transform of the constraint from bottom cone
+        Matrix4r transform = desc0->transform * constraintDescs[i].frames[0]; 
+        for (int j = 0; j<3; ++j) {
+            transform *= math::make_rotation(constraintDescs[i].angularLimits[0][j], axes[j]);
+        }
+
+        desc1->transform = transform * math::invert(constraintDescs[i].frames[1]);
+    }
+
+    // reset rigid bodies
+    {
+        ctrl::chain::Control::rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
+
+        for (PhysicsModel::rigid_body_iterator iter  = control.physicsModel->firstRigidBody();
+                                               iter != control.physicsModel->endRigidBody(); 
+                                               ++iter, ++descIter)
+        {
+            (*iter)->reset(*descIter);
+        }
+    }
+}
+
 // get distance between initial center of mass and current
 physics::Vector3r GetCOM(const ctrl::PhysicsEnvironment& env)
 {
@@ -167,12 +223,9 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
     for (size_t i = 0; i<num_tests; ++i)
     {
         InitializeScene(test_configs[i]);
-        
         slon::gnuplot plot;
-        std::string   plotName = std::string("Data/Plots/Ballance_") + boost::lexical_cast<std::string>(i + 2) + "_gc.png";
-        plot.define_macro_quoted("OUTPUT", plotName);
 
-        // validate controllers
+        // check balance maintainance
         {
             const double        balance_time      = 5.0;
             const physics::real time_step         = 0.1;
@@ -208,8 +261,52 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
 
             // perform same check for rlControl
 
-            // plot data
+            // plot data        
+            plot.define_macro_quoted("OUTPUT", std::string("Data/Plots/BalanceMaintainance_") + boost::lexical_cast<std::string>(i + 2) + "_gc.png");
             plot.define_macro_quoted("TITLE", "Ballance maintenance");
+            plot.set_data_source(0, PrintTable(num_steps, &timeAxis[0], &pdBalanceAxis[0], &rlBalanceAxis[0]));
+            plot.execute("Data/Plots/ChainTest.plot");
+        }
+            
+        // check balance restoration
+        {
+            const double        balance_time      = (i + 1) * 7.0;
+            const physics::real time_step         = 0.1;
+            const physics::real balance_threshold = 0.1;
+            const size_t        num_steps         = size_t(balance_time / time_step + physics::real(0.1));
+
+            std::vector<physics::real> timeAxis(num_steps);
+            std::vector<physics::real> pdBalanceAxis(num_steps);
+            std::vector<physics::real> rlBalanceAxis(num_steps, 0);
+
+            ctrl::TimeBarrier tb(timer, 0.0);
+            timer->setTime(0.0);
+            {
+                pdControl->acquire();
+                physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
+                
+                BendChain(*pdControl);
+                engine->frame();
+                timer->togglePause(false);
+
+                for (size_t i = 0; i<num_steps; ++i)
+                {
+                    timeAxis[i] = timer->getTime();
+                    pdBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
+                    tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
+                    while ( timer->getTime() < timeAxis[i] + time_step ) {
+                        engine->frame();
+                    }
+                }
+                BOOST_CHECK(pdBalanceAxis[num_steps - 1] < balance_threshold);
+
+                timer->togglePause(true);
+            }
+            pdControl->unacquire();
+
+            // plot data
+            plot.define_macro_quoted("OUTPUT", std::string("Data/Plots/BalanceRestoration_") + boost::lexical_cast<std::string>(i + 2) + "_gc.png");
+            plot.define_macro_quoted("TITLE", "Ballance restoration");
             plot.set_data_source(0, PrintTable(num_steps, &timeAxis[0], &pdBalanceAxis[0], &rlBalanceAxis[0]));
             plot.execute("Data/Plots/ChainTest.plot");
         }
