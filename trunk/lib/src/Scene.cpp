@@ -330,6 +330,7 @@ Scene::Scene(const DESC& desc)
 
 void Scene::dumpPhysicsScene()
 {
+    database::savePhysicsScene("Data/Dump/model.bullet", modelObject->getPhysicsModel());
 }
 
 void Scene::toggleHelpText()   { drawHelp = !drawHelp; } // F1
