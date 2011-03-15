@@ -39,6 +39,18 @@ namespace {
         throw std::runtime_error("Invalid RL type");
     }
 
+    PhysicsEnvironment::CONTROL_TYPE getControlType(const std::string& str)
+    {
+        if (str == "FORCE") {
+            return PhysicsEnvironment::CONTROL_FORCE;
+        }
+        else if (str == "VELOCITY") {
+            return PhysicsEnvironment::CONTROL_VELOCITY;
+        }
+        
+        throw std::runtime_error("Invalid control type");
+    }
+
 } // anonymous namespace
 
 namespace ctrl {
@@ -221,6 +233,7 @@ void RLControl::loadConfig(const std::string& configFile)
 	autosaveTime        = properties.get("AutosaveTime", 60.0);
     episodic            = properties.get("Episodic", false);
     episodeLength       = properties.get("EpisodeLength", 0.0);
+    controlType         = getControlType( properties.get("ControlType", "VELOCITY") );
     rlType              = getRLType( properties.get("Learner", "DirectRL") );
     rlConfig            = properties.get("LearnerConfig", "");
 }
@@ -248,7 +261,6 @@ void RLControl::initialize()
 	}
 
     environment->toggleEpisodic(episodic);
-    environment->setControlType(PhysicsEnvironment::CONTROL_VELOCITY);
     switch (rlType)
     {
         case RL_TD_LAMBDA:
@@ -368,7 +380,7 @@ void RLControl::acquire_safe()
 {
 	Control::acquire_safe();
 	needRestart = true;
-    environment->setControlType(ctrl::PhysicsEnvironment::CONTROL_VELOCITY);
+    environment->setControlType(controlType);
 }
 
 void RLControl::unacquire_safe()
@@ -411,6 +423,10 @@ double RLControl::pre_sync()
 
         case Environment::WAITING_ACTION:
         {
+            if (controlType == PhysicsEnvironment::CONTROL_FORCE && gravityCompensation) {
+                environment->targetForce += getGravityCompensation();
+            }
+
             // perform delayed action in physics thread and unlock timer
             lastUpdate = timer->getTime();
             environment->makeAction();

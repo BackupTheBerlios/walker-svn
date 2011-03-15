@@ -43,7 +43,12 @@ public:
                 force = -1.0f;
             }
 
-            env->targetVelocity[i] = force * env->maxVelocity;
+            if ( env->getControlType() == PhysicsEnvironment::CONTROL_VELOCITY ) {
+                env->targetVelocity[i] = force * env->maxVelocity;
+            }
+            else {
+                env->targetForce[i] = force * env->maxForce;
+            }
         }
 
         // wait for action
