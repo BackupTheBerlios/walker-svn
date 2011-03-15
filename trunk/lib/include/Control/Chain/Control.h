@@ -47,6 +47,10 @@ public:
 
     environment_type* getEnvironment() { return environment.get(); }
 
+    // Methods for testing and debug
+    void bendMax();
+    void bendRandom();
+
 protected:
     virtual void initialize();
 	virtual void drawDebugInfo();
@@ -59,7 +63,7 @@ protected:
     // Misc
     ublas::vector<physics::real> getGravityCompensation() const;
 
-public:
+protected:
 	// settings
     bool            freeJoints;
     bool            randomStartup;

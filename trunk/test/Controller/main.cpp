@@ -132,62 +132,6 @@ void InitializeScene(const std::string& fileName)
     chain.reset( realm::currentWorld().add(graphicsModel.get(), true, physicsModel.get()) );
 }
 
-void BendChain(ctrl::chain::Control& control)
-{
-    using namespace physics;
-
-    // std axes
-    Vector3r axes[3] = 
-    {
-        physics::Vector3r(1.0, 0.0, 0.0),
-        physics::Vector3r(0.0, 1.0, 0.0),
-        physics::Vector3r(0.0, 0.0, 1.0),
-    };
-
-    // rotate rigid bodies around constraints
-    ctrl::chain::Control::rigid_body_desc_vector rigidBodiesDescs(control.rigidBodiesInitialDescs);
-    ctrl::chain::Control::constraint_desc_vector constraintDescs(control.constraintsInitialDescs);
-    for (size_t i = 0; i<constraintDescs.size(); ++i)
-    {
-        RigidBody* rbody0 = constraintDescs[i].rigidBodies[0];
-        RigidBody* rbody1 = constraintDescs[i].rigidBodies[1];
-
-        // find desc by name
-        RigidBody::state_desc* desc0 = 0;
-        RigidBody::state_desc* desc1 = 0;
-        for (size_t j = 0; j<rigidBodiesDescs.size(); ++j) 
-        {
-            if ( rigidBodiesDescs[j].name == rbody0->getName() ) {
-                desc0 = &rigidBodiesDescs[j];
-            }
-            else if ( rigidBodiesDescs[j].name == rbody1->getName() ) {
-                desc1 = &rigidBodiesDescs[j];
-            }
-        }
-        assert(desc0 && desc1);
-
-        // get transform of the constraint from bottom cone
-        Matrix4r transform = desc0->transform * constraintDescs[i].frames[0]; 
-        for (int j = 0; j<3; ++j) {
-            transform *= math::make_rotation(constraintDescs[i].angularLimits[0][j], axes[j]);
-        }
-
-        desc1->transform = transform * math::invert(constraintDescs[i].frames[1]);
-    }
-
-    // reset rigid bodies
-    {
-        ctrl::chain::Control::rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
-
-        for (PhysicsModel::rigid_body_iterator iter  = control.physicsModel->firstRigidBody();
-                                               iter != control.physicsModel->endRigidBody(); 
-                                               ++iter, ++descIter)
-        {
-            (*iter)->reset(*descIter);
-        }
-    }
-}
-
 // get distance between initial center of mass and current
 physics::Vector3r GetCOM(const ctrl::PhysicsEnvironment& env)
 {
@@ -318,7 +262,7 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
                 pdControl->acquire();
                 physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
                 
-                BendChain(*pdControl);
+                pdControl->bendMax();
                 engine->frame();
                 timer->togglePause(false);
 
@@ -344,7 +288,7 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
                 pdGcControl->acquire();
                 physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
                 
-                BendChain(*pdControl);
+                pdControl->bendMax();
                 engine->frame();
                 timer->togglePause(false);
 

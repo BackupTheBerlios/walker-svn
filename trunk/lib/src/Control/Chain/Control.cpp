@@ -149,6 +149,123 @@ void Control::toggleDebugDraw(bool toggle)
     }
 }
 
+void Control::bendMax()
+{
+    using namespace physics;
+
+    // std axes
+    Vector3r axes[3] = 
+    {
+        physics::Vector3r(1.0, 0.0, 0.0),
+        physics::Vector3r(0.0, 1.0, 0.0),
+        physics::Vector3r(0.0, 0.0, 1.0),
+    };
+
+    // rotate rigid bodies around constraints
+    rigid_body_desc_vector rigidBodiesDescs(rigidBodiesInitialDescs);
+    constraint_desc_vector constraintDescs(constraintsInitialDescs);
+    for (size_t i = 0; i<constraintDescs.size(); ++i)
+    {
+        RigidBody* rbody0 = constraintDescs[i].rigidBodies[0];
+        RigidBody* rbody1 = constraintDescs[i].rigidBodies[1];
+
+        // find desc by name
+        RigidBody::state_desc* desc0 = 0;
+        RigidBody::state_desc* desc1 = 0;
+        for (size_t j = 0; j<rigidBodiesDescs.size(); ++j) 
+        {
+            if ( rigidBodiesDescs[j].name == rbody0->getName() ) {
+                desc0 = &rigidBodiesDescs[j];
+            }
+            else if ( rigidBodiesDescs[j].name == rbody1->getName() ) {
+                desc1 = &rigidBodiesDescs[j];
+            }
+        }
+        assert(desc0 && desc1);
+
+        // get transform of the constraint from bottom cone
+        Matrix4r transform = desc0->transform * constraintDescs[i].frames[0]; 
+        for (int j = 0; j<3; ++j) {
+            transform *= math::make_rotation(constraintDescs[i].angularLimits[0][j], axes[j]);
+        }
+
+        desc1->transform = transform * math::invert(constraintDescs[i].frames[1]);
+    }
+
+    // reset rigid bodies
+    {
+        rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
+
+        for (PhysicsModel::rigid_body_iterator iter  = physicsModel->firstRigidBody();
+                                               iter != physicsModel->endRigidBody(); 
+                                               ++iter, ++descIter)
+        {
+            (*iter)->reset(*descIter);
+        }
+    }
+}
+
+void Control::bendRandom()
+{
+    using namespace physics;
+
+    boost::variate_generator< boost::mt19937&, 
+                              boost::uniform_real<physics::real> > generator(rng, boost::uniform_real<physics::real>(0, 1));
+
+    // std axes
+    physics::Vector3r axes[3] = 
+    {
+        physics::Vector3r(1.0, 0.0, 0.0),
+        physics::Vector3r(0.0, 1.0, 0.0),
+        physics::Vector3r(0.0, 0.0, 1.0),
+    };
+
+    // rotate rigid bodies around constraints
+    rigid_body_desc_vector rigidBodiesDescs(rigidBodiesInitialDescs);
+    constraint_desc_vector constraintsDescs(constraintsInitialDescs);
+    for (size_t i = 0; i<constraintsDescs.size(); ++i)
+    {
+        physics::RigidBody* rbody0 = constraintsInitialDescs[i].rigidBodies[0];
+        physics::RigidBody* rbody1 = constraintsInitialDescs[i].rigidBodies[1];
+
+        // find desc by name
+        physics::RigidBody::state_desc* desc0 = 0;
+        physics::RigidBody::state_desc* desc1 = 0;
+        for (size_t j = 0; j<rigidBodiesDescs.size(); ++j) 
+        {
+            if ( rigidBodiesDescs[j].name == rbody0->getName() ) {
+                desc0 = &rigidBodiesDescs[j];
+            }
+            else if ( rigidBodiesDescs[j].name == rbody1->getName() ) {
+                desc1 = &rigidBodiesDescs[j];
+            }
+        }
+        assert(desc0 && desc1);
+
+        // get transform of the constraint from bottom cone
+        physics::Matrix4r transform = desc0->transform * constraintsDescs[i].frames[0]; 
+        for (int j = 0; j<3; ++j)
+        {
+            physics::real angle = constraintsDescs[i].angularLimits[0][j] + generator() * (constraintsDescs[i].angularLimits[1][j] - constraintsDescs[i].angularLimits[0][j]);
+            transform *= math::make_rotation(angle, axes[j]);
+        }
+
+        desc1->transform = transform * math::invert(constraintsDescs[i].frames[1]);
+    }
+
+    // reset rigid bodies
+    {
+        rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
+
+        for (PhysicsModel::rigid_body_iterator iter  = physicsModel->firstRigidBody();
+                                               iter != physicsModel->endRigidBody(); 
+                                               ++iter, ++descIter)
+        {
+            (*iter)->reset(*descIter);
+        }
+    }
+}
+
 void Control::acquire_safe()
 {
     using namespace physics;
@@ -178,62 +295,8 @@ void Control::acquire_safe()
         }
     }
 
-    if (randomStartup)
-    {
-
-        boost::variate_generator< boost::mt19937&, 
-                                  boost::uniform_real<float> > generator(rng, boost::uniform_real<float>(0.0f, 1.0f));
-
-        // std axes
-        physics::Vector3r axes[3] = 
-        {
-            physics::Vector3r(1.0, 0.0, 0.0),
-            physics::Vector3r(0.0, 1.0, 0.0),
-            physics::Vector3r(0.0, 0.0, 1.0),
-        };
-
-        // rotate rigid bodies around constraints
-        for (size_t i = 0; i<constraintsDescs.size(); ++i)
-        {
-            physics::RigidBody* rbody0 = constraintsInitialDescs[i].rigidBodies[0];
-            physics::RigidBody* rbody1 = constraintsInitialDescs[i].rigidBodies[1];
-
-            // find desc by name
-            physics::RigidBody::state_desc* desc0 = 0;
-            physics::RigidBody::state_desc* desc1 = 0;
-            for (size_t j = 0; j<rigidBodiesDescs.size(); ++j) 
-            {
-                if ( rigidBodiesDescs[j].name == rbody0->getName() ) {
-                    desc0 = &rigidBodiesDescs[j];
-                }
-                else if ( rigidBodiesDescs[j].name == rbody1->getName() ) {
-                    desc1 = &rigidBodiesDescs[j];
-                }
-            }
-            assert(desc0 && desc1);
-
-            // get transform of the constraint from bottom cone
-            physics::Matrix4r transform = desc0->transform * constraintsDescs[i].frames[0]; 
-            for (int j = 0; j<3; ++j)
-            {
-                physics::real angle = constraintsDescs[i].angularLimits[0][j] + generator() * (constraintsDescs[i].angularLimits[1][j] - constraintsDescs[i].angularLimits[0][j]);
-                transform *= math::make_rotation(angle, axes[j]);
-            }
-
-            desc1->transform = transform * math::invert(constraintsDescs[i].frames[1]);
-        }
-
-        // reset rigid bodies
-        {
-            rigid_body_desc_vector::iterator descIter = rigidBodiesDescs.begin();
-
-            for (PhysicsModel::rigid_body_iterator iter  = physicsModel->firstRigidBody();
-                                                   iter != physicsModel->endRigidBody(); 
-                                                   ++iter, ++descIter)
-            {
-                (*iter)->reset(*descIter);
-            }
-        }
+    if (randomStartup) {
+        bendRandom();
     }
 
     if ( scene::Group* group = dynamic_cast<scene::Group*>(targetModel.get()) ) 
