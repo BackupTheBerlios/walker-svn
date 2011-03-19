@@ -18,8 +18,11 @@ using namespace slon;
 ctrl::loose_timer_ptr       timer(new ctrl::LooseTimer);
 ctrl::chain::pd_control_ptr pdControl(new ctrl::chain::PDControl(timer));
 ctrl::chain::pd_control_ptr pdGcControl(new ctrl::chain::PDControl(timer));
+ctrl::chain::pd_control_ptr pdVdControl(new ctrl::chain::PDControl(timer));
 ctrl::chain::rl_control_ptr rlControl(new ctrl::chain::RLControl(timer));
 realm::object_ptr           chain;
+            
+const size_t num_controls = 4;
 
 Engine* InitializeEngine()
 {
@@ -92,6 +95,7 @@ void InitializeScene(const std::string& fileName)
     std::string graphicsModelFile = properties.get("GraphicsModel", "");
     std::string pdConfigFile      = properties.get("PDConfigFile", "");
     std::string pdGcConfigFile    = properties.get("PDGCConfigFile", "");
+    std::string pdVdConfigFile    = properties.get("PDVDConfigFile", "");
 
     // setup controller
     scene::node_ptr             graphicsModel;
@@ -126,6 +130,10 @@ void InitializeScene(const std::string& fileName)
     pdGcControl->setPhysicsModel(physicsModel);
     pdGcControl->loadConfig(pdGcConfigFile);
 
+    pdVdControl->setTargetModel(graphicsModel);
+    pdVdControl->setPhysicsModel(physicsModel);
+    pdVdControl->loadConfig(pdVdConfigFile);
+
     if (chain) {
         realm::currentWorld().remove(chain.get());
     }
@@ -147,11 +155,16 @@ physics::Vector3r GetCOM(const ctrl::PhysicsEnvironment& env)
     return COM;
 }
 
-std::string PrintTable(size_t nRows, const double* data0, const float* data1, const float* data2, const float* data3)
+std::string PrintTable(size_t nRows, size_t nColumns, const double* timeAxis, const std::vector<physics::real>* data)
 {
     std::ostringstream dataOs;
-    for (size_t i = 0; i<nRows; ++i) {
-        dataOs << data0[i] << " " << data1[i] << " " << data2[i] << " " << data3[i] << std::endl;
+    for (size_t i = 0; i<nRows; ++i) 
+    {
+        dataOs << timeAxis[i];
+        for (size_t j = 0; j<nColumns; ++j) {
+            dataOs << " " << data[j][i];
+        }
+        dataOs << std::endl;
     }
 
     return dataOs.str();
@@ -182,9 +195,10 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             const size_t        num_steps         = size_t(physics::real(balance_time) / time_step + physics::real(0.1));
 
             std::vector<double>        timeAxis(num_steps);
-            std::vector<physics::real> pdBalanceAxis(num_steps);
-            std::vector<physics::real> pdGcBalanceAxis(num_steps);
-            std::vector<physics::real> rlBalanceAxis(num_steps, 0);
+            std::vector<physics::real> balanceAxis[num_controls];
+            for (size_t j = 0; j<num_controls; ++j) {
+                balanceAxis[j].resize(num_steps, 0);
+            }
 
             // PD
             ctrl::TimeBarrier tb(timer, 0.0);
@@ -198,8 +212,8 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
                 for (size_t i = 0; i<num_steps; ++i)
                 {
                     timeAxis[i] = timer->getTime();
-                    pdBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
-                    BOOST_CHECK(pdBalanceAxis[i] < balance_threshold);
+                    balanceAxis[0][i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
+                    BOOST_CHECK(balanceAxis[0][i] < balance_threshold);
                     tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
                     while ( timer->getTime() < timeAxis[i] + time_step ) {
                         engine->frame();
@@ -218,12 +232,12 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             {
                 timer->togglePause(false);
 
-                physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
+                physics::Vector3r initialCOM = GetCOM( *pdGcControl->getEnvironment() );
                 for (size_t i = 0; i<num_steps; ++i)
                 {
                     timeAxis[i] = timer->getTime();
-                    pdGcBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
-                    BOOST_CHECK(pdGcBalanceAxis[i] < balance_threshold);
+                    balanceAxis[1][i] = math::length(GetCOM( *pdGcControl->getEnvironment() ) - initialCOM);
+                    BOOST_CHECK(balanceAxis[1][i] < balance_threshold);
                     tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
                     while ( timer->getTime() < timeAxis[i] + time_step ) {
                         engine->frame();
@@ -234,12 +248,36 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             }
             pdGcControl->unacquire();
 
+            // velocity driven PD
+            tb.swap( ctrl::TimeBarrier(timer, 0.0) );
+            timer->setTime(0.0);
+            pdVdControl->acquire();
+            engine->frame();
+            {
+                timer->togglePause(false);
+
+                physics::Vector3r initialCOM = GetCOM( *pdVdControl->getEnvironment() );
+                for (size_t i = 0; i<num_steps; ++i)
+                {
+                    timeAxis[i] = timer->getTime();
+                    balanceAxis[2][i] = math::length(GetCOM( *pdVdControl->getEnvironment() ) - initialCOM);
+                    BOOST_CHECK(balanceAxis[2][i] < balance_threshold);
+                    tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
+                    while ( timer->getTime() < timeAxis[i] + time_step ) {
+                        engine->frame();
+                    }
+                }
+
+                timer->togglePause(true);
+            }
+            pdVdControl->unacquire();
+
             // RL
 
             // plot data        
             plot.define_macro_quoted("OUTPUT", std::string("Data/Plots/BalanceMaintainance_") + boost::lexical_cast<std::string>(i + 2) + ".png");
             plot.define_macro_quoted("TITLE", "Ballance maintenance");
-            plot.set_data_source(0, PrintTable(num_steps, &timeAxis[0], &pdBalanceAxis[0], &pdGcBalanceAxis[0], &rlBalanceAxis[0]));
+            plot.set_data_source(0, PrintTable(num_steps, num_controls, &timeAxis[0], balanceAxis));
             plot.execute("Data/Plots/ChainTest.plot");
         }
             
@@ -251,9 +289,10 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             const size_t        num_steps         = size_t(physics::real(balance_time) / time_step + physics::real(0.1));
 
             std::vector<double>        timeAxis(num_steps);
-            std::vector<physics::real> pdBalanceAxis(num_steps);
-            std::vector<physics::real> pdGcBalanceAxis(num_steps);
-            std::vector<physics::real> rlBalanceAxis(num_steps, 0);
+            std::vector<physics::real> balanceAxis[num_controls];
+            for (size_t j = 0; j<num_controls; ++j) {
+                balanceAxis[j].resize(num_steps, 0);
+            }
 
             // PD
             ctrl::TimeBarrier tb(timer, 0.0);
@@ -269,13 +308,13 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
                 for (size_t i = 0; i<num_steps; ++i)
                 {
                     timeAxis[i] = timer->getTime();
-                    pdBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
+                    balanceAxis[0][i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
                     tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
                     while ( timer->getTime() < timeAxis[i] + time_step ) {
                         engine->frame();
                     }
                 }
-                BOOST_CHECK(pdBalanceAxis[num_steps - 1] < balance_threshold);
+                BOOST_CHECK(balanceAxis[0][num_steps - 1] < balance_threshold);
 
                 timer->togglePause(true);
             }
@@ -286,51 +325,77 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             timer->setTime(0.0);
             {
                 pdGcControl->acquire();
-                physics::Vector3r initialCOM = GetCOM( *pdControl->getEnvironment() );
+                physics::Vector3r initialCOM = GetCOM( *pdGcControl->getEnvironment() );
                 
-                pdControl->bendMax();
+                pdGcControl->bendMax();
                 engine->frame();
                 timer->togglePause(false);
 
                 for (size_t i = 0; i<num_steps; ++i)
                 {
                     timeAxis[i] = timer->getTime();
-                    pdGcBalanceAxis[i] = math::length(GetCOM( *pdControl->getEnvironment() ) - initialCOM);
+                    balanceAxis[1][i] = math::length(GetCOM( *pdGcControl->getEnvironment() ) - initialCOM);
                     tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
                     while ( timer->getTime() < timeAxis[i] + time_step ) {
                         engine->frame();
                     }
                 }
-                BOOST_CHECK(pdGcBalanceAxis[num_steps - 1] < balance_threshold);
+                BOOST_CHECK(balanceAxis[1][num_steps - 1] < balance_threshold);
 
                 timer->togglePause(true);
             }
             pdGcControl->unacquire();
 
+            // velocity driven PD
+            tb.swap( ctrl::TimeBarrier(timer, 0.0) );
+            timer->setTime(0.0);
+            {
+                pdVdControl->acquire();
+                physics::Vector3r initialCOM = GetCOM( *pdVdControl->getEnvironment() );
+                
+                pdVdControl->bendMax();
+                engine->frame();
+                timer->togglePause(false);
+
+                for (size_t i = 0; i<num_steps; ++i)
+                {
+                    timeAxis[i] = timer->getTime();
+                    balanceAxis[2][i] = math::length(GetCOM( *pdVdControl->getEnvironment() ) - initialCOM);
+                    tb.swap( ctrl::TimeBarrier(timer, timeAxis[i] + time_step) );
+                    while ( timer->getTime() < timeAxis[i] + time_step ) {
+                        engine->frame();
+                    }
+                }
+                BOOST_CHECK(balanceAxis[2][num_steps - 1] < balance_threshold);
+
+                timer->togglePause(true);
+            }
+            pdVdControl->unacquire();
+
             // cut plot
             const double        balance_maintain_time  = 1.5;
             const size_t        balance_maintain_steps = size_t(balance_maintain_time / time_step);
-            const physics::real small_threshold        = 0.05;
+            const physics::real small_threshold        = physics::real(0.05);
 
             size_t steps = 0;
             for (size_t j = 0; j<num_steps; ++j)
             {
-                if ( fabs(pdBalanceAxis[j]) < small_threshold
-                     && fabs(pdGcBalanceAxis[j]) < small_threshold
-                     && fabs(rlBalanceAxis[j]) < small_threshold )
+                bool maintain = true;
+                for (size_t k = 0; k<num_controls; ++k)
                 {
-                    ++steps;
+                    if ( fabs(balanceAxis[k][j]) > small_threshold ) {
+                        maintain = false;
+                    }
                 }
-                else {
-                    steps = 0;
-                }
+                steps = maintain ? steps + 1 : 0;
 
                 if (steps == balance_maintain_steps) 
                 {
-                    timeAxis.resize(j);
-                    pdBalanceAxis.resize(j);
-                    pdGcBalanceAxis.resize(j);
-                    rlBalanceAxis.resize(j);
+                    for (size_t k = 0; k<num_controls; ++k) 
+                    {
+                        timeAxis.resize(j);
+                        balanceAxis[k].resize(j);
+                    }
                     break;
                 }
             }
@@ -338,7 +403,7 @@ BOOST_AUTO_TEST_CASE(chain_controller_test)
             // plot data
             plot.define_macro_quoted("OUTPUT", std::string("Data/Plots/BalanceRestoration_") + boost::lexical_cast<std::string>(i + 2) + ".png");
             plot.define_macro_quoted("TITLE", "Ballance restoration");
-            plot.set_data_source(0, PrintTable(timeAxis.size(), &timeAxis[0], &pdBalanceAxis[0], &pdGcBalanceAxis[0], &rlBalanceAxis[0]));
+            plot.set_data_source(0, PrintTable(timeAxis.size(), num_controls, &timeAxis[0], balanceAxis));
             plot.execute("Data/Plots/ChainTest.plot");
         }
     }

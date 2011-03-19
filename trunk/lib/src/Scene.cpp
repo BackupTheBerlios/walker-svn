@@ -166,7 +166,20 @@ Scene::Scene(const DESC& desc)
 
     	        switch (controlType)
                 {
-                    case CHAIN_CONTROL:
+                    case CHAIN_PD_CONTROL:
+                    {
+                        chain_pd_control* control = new chain_pd_control(timer);
+			            control->loadConfig(desc.control.config);
+			            control->setTargetModel(graphicsModel);
+			            control->setPhysicsModel(physicsModel);
+                        controls.push_back( ctrl::physics_control_ptr(control) );
+
+                        controlIndex = 0;
+
+                        break;
+                    }
+
+                    case CHAIN_RL_CONTROL:
                     {
                         {
                             chain_rl_control* lc = new chain_rl_control(timer);
@@ -180,14 +193,6 @@ Scene::Scene(const DESC& desc)
                                                                                  lc->getActionFunction(),
                                                                                  lc->getTimeInterval() );
                             controls.push_back( ctrl::physics_control_ptr(dc) );
-                        }
-
-                        {
-                            chain_pd_control* control = new chain_pd_control(timer);
-				            control->loadConfig(desc.control.config);
-				            control->setTargetModel(graphicsModel);
-				            control->setPhysicsModel(physicsModel);
-                            controls.push_back( ctrl::physics_control_ptr(control) );
                         }
 
                         controlIndex = 0;

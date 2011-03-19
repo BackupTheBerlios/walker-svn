@@ -65,12 +65,11 @@ protected:
 
 protected:
 	// settings
-    bool            freeJoints;
-    bool            randomStartup;
-    bool            gravityCompensation;
-    double          episodeLength;
-    physics::real   maxForce;
-    physics::real   maxVelocity;
+    bool                                freeJoints;
+    bool                                gravityCompensation;
+    physics::real                       maxForce;
+    physics::real                       maxVelocity;
+    PhysicsEnvironment::CONTROL_TYPE    controlType;
 	
     bool            debugDraw;
     float           debugDrawForceScale;

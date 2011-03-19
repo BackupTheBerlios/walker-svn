@@ -60,7 +60,7 @@ void PDControl::acquire_safe()
 	Control::acquire_safe();
 	needRestart = true;
 
-    environment->setControlType(ctrl::PhysicsEnvironment::CONTROL_FORCE);
+    environment->setControlType(controlType);
     environment->reset();
 
     if ( Kp.size1() != environment->getActionSize() || Kp.size2() != environment->getActionSize() )
@@ -113,12 +113,20 @@ double PDControl::pre_sync()
     environment->makeState();
 
 	// calculate pd term
-    environment->targetForce = ublas::prod(Kd, targetVelocity - environment->velocity) + ublas::prod(Kp, targetPosition - environment->position);
-    if (gravityCompensation) {
-        environment->targetForce += getGravityCompensation();
+    if (controlType == PhysicsEnvironment::CONTROL_FORCE)
+    {
+        environment->targetForce = ublas::prod(Kd, targetVelocity - environment->velocity) + ublas::prod(Kp, targetPosition - environment->position);
+        if (gravityCompensation) {
+            environment->targetForce += getGravityCompensation();
+        }
+        environment->makeAction();
     }
-    environment->makeAction();
-    
+    else 
+    {
+        environment->targetVelocity = ublas::prod(Kp, targetPosition - environment->position);
+        environment->makeAction();
+    }
+
     return timeInterval;
 }
 

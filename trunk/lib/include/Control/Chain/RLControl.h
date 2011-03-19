@@ -148,7 +148,7 @@ private:
 	double			autosaveTime;
     bool            episodic;
     double          episodeLength;
-    PhysicsEnvironment::CONTROL_TYPE    controlType;
+    bool            randomStartup;
 
     // flow
     bool            needRestart;

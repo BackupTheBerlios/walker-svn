@@ -39,18 +39,6 @@ namespace {
         throw std::runtime_error("Invalid RL type");
     }
 
-    PhysicsEnvironment::CONTROL_TYPE getControlType(const std::string& str)
-    {
-        if (str == "FORCE") {
-            return PhysicsEnvironment::CONTROL_FORCE;
-        }
-        else if (str == "VELOCITY") {
-            return PhysicsEnvironment::CONTROL_VELOCITY;
-        }
-        
-        throw std::runtime_error("Invalid control type");
-    }
-
 } // anonymous namespace
 
 namespace ctrl {
@@ -233,7 +221,7 @@ void RLControl::loadConfig(const std::string& configFile)
 	autosaveTime        = properties.get("AutosaveTime", 60.0);
     episodic            = properties.get("Episodic", false);
     episodeLength       = properties.get("EpisodeLength", 0.0);
-    controlType         = getControlType( properties.get("ControlType", "VELOCITY") );
+    randomStartup       = properties.get("RandomStartup", false);
     rlType              = getRLType( properties.get("Learner", "DirectRL") );
     rlConfig            = properties.get("LearnerConfig", "");
 }
@@ -241,6 +229,10 @@ void RLControl::loadConfig(const std::string& configFile)
 void RLControl::initialize()
 {
 	Control::initialize();
+
+    if (randomStartup) {
+        bendRandom();
+    }
 
     size_t stateSize  = environment->getStateSize();
     size_t actionSize = environment->getActionSize();

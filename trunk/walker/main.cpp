@@ -24,9 +24,12 @@ void ReadConfigFile(const char* fileName, Scene::DESC& sceneDesc)
     graphicsModel            = properties.get("GraphicsModel", graphicsModel);
     configFile               = properties.get("ConfigFile", "");
 
-    std::string controlType  = properties.get("Control", "Chain");
-    if (controlType == "Chain") { 
-        sceneDesc.control.type = Scene::CHAIN_CONTROL;
+    std::string controlType  = properties.get("Control", "ChainPD");
+    if (controlType == "ChainPD") { 
+        sceneDesc.control.type = Scene::CHAIN_PD_CONTROL;
+    }
+    else if (controlType == "ChainRL") { 
+        sceneDesc.control.type = Scene::CHAIN_RL_CONTROL;
     }
     else if (controlType == "Humanoid") { 
         sceneDesc.control.type = Scene::HUMANOID_CONTROL;

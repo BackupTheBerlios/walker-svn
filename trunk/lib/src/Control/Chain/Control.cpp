@@ -13,8 +13,23 @@
 
 #undef CreateFont
 
-namespace {
+namespace 
+{
     boost::mt19937 rng;
+
+    using namespace ctrl;
+
+    PhysicsEnvironment::CONTROL_TYPE getControlType(const std::string& str)
+    {
+        if (str == "FORCE") {
+            return PhysicsEnvironment::CONTROL_FORCE;
+        }
+        else if (str == "VELOCITY") {
+            return PhysicsEnvironment::CONTROL_VELOCITY;
+        }
+        
+        throw std::runtime_error("Invalid control type");
+    }
 }
 
 namespace ctrl {
@@ -96,10 +111,10 @@ void Control::loadConfig(const std::string& fileName)
 	boost::property_tree::read_ini(fileName, properties);
 
     freeJoints          = properties.get("FreeJoints", true);
-    randomStartup       = properties.get("RandomStartup", false);
     gravityCompensation = properties.get("GravityCompensation", false);
     maxForce            = properties.get("MaxForce", 20.0f);
     maxVelocity         = properties.get("MaxVelocity", 10.0f);
+    controlType         = getControlType( properties.get("ControlType", "VELOCITY") );
         
     if (targetModel && physicsModel) {
         initialize();
@@ -293,10 +308,6 @@ void Control::acquire_safe()
         {
             (*iter)->reset(*descIter);
         }
-    }
-
-    if (randomStartup) {
-        bendRandom();
     }
 
     if ( scene::Group* group = dynamic_cast<scene::Group*>(targetModel.get()) ) 
