@@ -1,0 +1,1774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA version="1.4.0" xmlns="http://www.collada.org/2005/11/COLLADASchema">
+	<asset>
+		<contributor>
+			<author>Illusoft Collada 1.4.0 plugin for Blender - http://colladablender.illusoft.com</author>
+			<authoring_tool>Blender v:249 - Illusoft Collada Exporter v:0.3.161</authoring_tool>
+			<comments></comments>
+			<copyright></copyright>
+			<source_data>file:///mnt/win_c2/Resources/Models/robot2.blend</source_data>
+		</contributor>
+		<created>2009-09-07T20:16:56.816506</created>
+		<modified>2009-09-07T20:16:56.816524</modified>
+		<unit meter="0.01" name="centimeter"/>
+		<up_axis>Z_UP</up_axis>
+	</asset>
+	<library_effects>
+		<effect id="TorsoMaterial-fx" name="TorsoMaterial-fx">
+			<profile_COMMON>
+				<technique sid="blender">
+					<phong>
+						<emission>
+							<color>0.00000 0.00000 0.00000 1</color>
+						</emission>
+						<ambient>
+							<color>0.21868 0.00714 0.00714 1</color>
+						</ambient>
+						<diffuse>
+							<color>0.43736 0.01428 0.01428 1</color>
+						</diffuse>
+						<specular>
+							<color>0.50000 0.50000 0.50000 1</color>
+						</specular>
+						<shininess>
+							<float>12.5</float>
+						</shininess>
+						<reflective>
+							<color>1.00000 1.00000 1.00000 1</color>
+						</reflective>
+						<reflectivity>
+							<float>0.0</float>
+						</reflectivity>
+						<transparent>
+							<color>1 1 1 1</color>
+						</transparent>
+						<transparency>
+							<float>0.0</float>
+						</transparency>
+					</phong>
+				</technique>
+			</profile_COMMON>
+		</effect>
+		<effect id="ArmMaterial-fx" name="ArmMaterial-fx">
+			<profile_COMMON>
+				<technique sid="blender">
+					<phong>
+						<emission>
+							<color>0.00000 0.00000 0.00000 1</color>
+						</emission>
+						<ambient>
+							<color>0.35486 0.50000 0.01079 1</color>
+						</ambient>
+						<diffuse>
+							<color>0.70971 1.00000 0.02158 1</color>
+						</diffuse>
+						<specular>
+							<color>0.50000 0.50000 0.50000 1</color>
+						</specular>
+						<shininess>
+							<float>12.5</float>
+						</shininess>
+						<reflective>
+							<color>1.00000 1.00000 1.00000 1</color>
+						</reflective>
+						<reflectivity>
+							<float>0.0</float>
+						</reflectivity>
+						<transparent>
+							<color>1 1 1 1</color>
+						</transparent>
+						<transparency>
+							<float>0.0</float>
+						</transparency>
+					</phong>
+				</technique>
+			</profile_COMMON>
+		</effect>
+		<effect id="WristMaterial-fx" name="WristMaterial-fx">
+			<profile_COMMON>
+				<technique sid="blender">
+					<phong>
+						<emission>
+							<color>0.00000 0.00000 0.00000 1</color>
+						</emission>
+						<ambient>
+							<color>0.23886 0.02171 0.28229 1</color>
+						</ambient>
+						<diffuse>
+							<color>0.47771 0.04341 0.56457 1</color>
+						</diffuse>
+						<specular>
+							<color>0.50000 0.50000 0.50000 1</color>
+						</specular>
+						<shininess>
+							<float>12.5</float>
+						</shininess>
+						<reflective>
+							<color>1.00000 1.00000 1.00000 1</color>
+						</reflective>
+						<reflectivity>
+							<float>0.0</float>
+						</reflectivity>
+						<transparent>
+							<color>1 1 1 1</color>
+						</transparent>
+						<transparency>
+							<float>0.0</float>
+						</transparency>
+					</phong>
+				</technique>
+			</profile_COMMON>
+		</effect>
+		<effect id="LegMaterial-fx" name="LegMaterial-fx">
+			<profile_COMMON>
+				<technique sid="blender">
+					<phong>
+						<emission>
+							<color>0.00000 0.00000 0.00000 1</color>
+						</emission>
+						<ambient>
+							<color>0.00335 0.15507 0.02755 1</color>
+						</ambient>
+						<diffuse>
+							<color>0.00669 0.31014 0.05510 1</color>
+						</diffuse>
+						<specular>
+							<color>0.50000 0.50000 0.50000 1</color>
+						</specular>
+						<shininess>
+							<float>12.5</float>
+						</shininess>
+						<reflective>
+							<color>1.00000 1.00000 1.00000 1</color>
+						</reflective>
+						<reflectivity>
+							<float>0.0</float>
+						</reflectivity>
+						<transparent>
+							<color>1 1 1 1</color>
+						</transparent>
+						<transparency>
+							<float>0.0</float>
+						</transparency>
+					</phong>
+				</technique>
+			</profile_COMMON>
+		</effect>
+		<effect id="HeadMaterial-fx" name="HeadMaterial-fx">
+			<profile_COMMON>
+				<technique sid="blender">
+					<phong>
+						<emission>
+							<color>0.00000 0.00000 0.00000 1</color>
+						</emission>
+						<ambient>
+							<color>0.40000 0.40000 0.40000 1</color>
+						</ambient>
+						<diffuse>
+							<color>0.80000 0.80000 0.80000 1</color>
+						</diffuse>
+						<specular>
+							<color>0.50000 0.50000 0.50000 1</color>
+						</specular>
+						<shininess>
+							<float>12.5</float>
+						</shininess>
+						<reflective>
+							<color>1.00000 1.00000 1.00000 1</color>
+						</reflective>
+						<reflectivity>
+							<float>0.0</float>
+						</reflectivity>
+						<transparent>
+							<color>1 1 1 1</color>
+						</transparent>
+						<transparency>
+							<float>0.0</float>
+						</transparency>
+					</phong>
+				</technique>
+			</profile_COMMON>
+		</effect>
+	</library_effects>
+	<library_materials>
+		<material id="TorsoMaterial" name="TorsoMaterial">
+			<instance_effect url="#TorsoMaterial-fx"/>
+		</material>
+		<material id="ArmMaterial" name="ArmMaterial">
+			<instance_effect url="#ArmMaterial-fx"/>
+		</material>
+		<material id="WristMaterial" name="WristMaterial">
+			<instance_effect url="#WristMaterial-fx"/>
+		</material>
+		<material id="LegMaterial" name="LegMaterial">
+			<instance_effect url="#LegMaterial-fx"/>
+		</material>
+		<material id="HeadMaterial" name="HeadMaterial">
+			<instance_effect url="#HeadMaterial-fx"/>
+		</material>
+	</library_materials>
+	<library_geometries>
+		<geometry id="Torso-Geometry" name="Torso-Geometry">
+			<mesh>
+				<source id="Torso-Geometry-Position">
+					<float_array count="24" id="Torso-Geometry-Position-array">1.00000 1.00000 -1.00000 0.87101 -1.00000 -0.87101 -0.87101 -1.00000 -0.87101 -1.00000 1.00000 -1.00000 1.00000 1.00000 1.00000 0.87101 -1.00000 0.87101 -0.87101 -1.00000 0.87101 -1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="8" source="#Torso-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="Torso-Geometry-Normals">
+					<float_array count="18" id="Torso-Geometry-Normals-array">-0.00000 -0.06436 -0.99793 -0.00000 -0.06436 0.99793 0.99793 -0.06436 -0.00000 -0.00000 -1.00000 -0.00000 -0.99793 -0.06436 -0.00000 0.00000 1.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#Torso-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="Torso-Geometry-Vertex">
+					<input semantic="POSITION" source="#Torso-Geometry-Position"/>
+				</vertices>
+				<triangles count="12" material="TorsoMaterial">
+					<input offset="0" semantic="VERTEX" source="#Torso-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#Torso-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightShoulder-Geometry" name="RightShoulder-Geometry">
+			<mesh>
+				<source id="RightShoulder-Geometry-Position">
+					<float_array count="48" id="RightShoulder-Geometry-Position-array">0.84576 0.82005 -0.82005 0.84576 -0.82005 -0.82005 -0.71291 -1.00000 -1.00000 -0.71291 1.00000 -1.00000 0.84576 0.82005 0.82005 0.84576 -0.82005 0.82005 -0.71291 -1.00000 1.00000 -0.71291 1.00000 1.00000 -1.00684 0.39327 0.39327 -1.00684 -0.39327 0.39327 -1.00684 0.39327 -0.39327 -1.00684 -0.39327 -0.39327 1.06449 -0.15768 0.15768 1.06449 0.15768 0.15768 1.06449 -0.15768 -0.15768 1.06449 0.15768 -0.15768</float_array>
+					<technique_common>
+						<accessor count="16" source="#RightShoulder-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightShoulder-Geometry-Normals">
+					<float_array count="42" id="RightShoulder-Geometry-Normals-array">0.11469 -0.00000 -0.99340 0.11469 -0.00000 0.99340 0.11469 -0.99340 -0.00000 0.11469 0.99340 0.00000 -0.89996 0.43597 -0.00000 -0.89996 -0.43597 -0.00000 -0.89996 0.00000 0.43597 -0.89996 0.00000 -0.43597 -1.00000 0.00000 -0.00000 0.94956 0.31357 -0.00000 0.94956 -0.31357 0.00000 0.94956 -0.00000 0.31357 0.94956 0.00000 -0.31357 1.00000 -0.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#RightShoulder-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightShoulder-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightShoulder-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="ArmMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightShoulder-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightShoulder-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 1 2 5 2 6 2 6 2 2 2 1 2 4 3 0 3 3 3 3 3 7 3 4 3 7 4 3 4 10 4 10 4 8 4 7 4 2 5 6 5 9 5 9 5 11 5 2 5 6 6 7 6 8 6 8 6 9 6 6 6 3 7 2 7 11 7 11 7 10 7 3 7 11 8 9 8 8 8 8 8 10 8 11 8 0 9 4 9 13 9 13 9 15 9 0 9 5 10 1 10 14 10 14 10 12 10 5 10 4 11 5 11 12 11 12 11 13 11 4 11 1 12 0 12 15 12 15 12 14 12 1 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightShoulder-ConvexGeom" name="RightShoulder-ConvexGeom">
+			<convex_mesh convex_hull_of="#RightShoulder-Geometry"/>
+		</geometry>
+		<geometry id="RightArm-Geometry" name="RightArm-Geometry">
+			<mesh>
+				<source id="RightArm-Geometry-Position">
+					<float_array count="36" id="RightArm-Geometry-Position-array">0.99993 0.57160 -0.54997 0.99836 -0.05249 -0.54997 -0.68510 -0.81253 -0.81253 -0.68510 0.81253 -0.81253 0.99993 0.57160 0.54997 0.99836 -0.05249 0.54997 -0.68510 -0.81253 0.81253 -0.68510 0.81253 0.81253 -0.94047 0.16105 0.16105 -0.94047 -0.16105 0.16105 -0.94047 0.16105 -0.16105 -0.94047 -0.16105 -0.16105</float_array>
+					<technique_common>
+						<accessor count="12" source="#RightArm-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightArm-Geometry-Normals">
+					<float_array count="30" id="RightArm-Geometry-Normals-array">0.15405 -0.00011 -0.98806 0.15405 -0.00011 0.98806 1.00000 -0.00251 0.00000 0.41148 -0.91142 0.00000 0.14154 0.98993 0.00000 -0.93102 0.36496 -0.00000 -0.93102 -0.36496 -0.00000 -0.93102 0.00000 0.36496 -0.93102 0.00000 -0.36496 -1.00000 -0.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="10" source="#RightArm-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightArm-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightArm-Geometry-Position"/>
+				</vertices>
+				<triangles count="20" material="ArmMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightArm-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightArm-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 4 4 0 4 3 4 3 4 7 4 4 4 7 5 3 5 10 5 10 5 8 5 7 5 2 6 6 6 9 6 9 6 11 6 2 6 6 7 7 7 8 7 8 7 9 7 6 7 3 8 2 8 11 8 11 8 10 8 3 8 11 9 9 9 8 9 8 9 10 9 11 9</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightArm-ConvexGeom" name="RightArm-ConvexGeom">
+			<convex_mesh convex_hull_of="#RightArm-Geometry"/>
+		</geometry>
+		<geometry id="RightCluster-Geometry" name="RightCluster-Geometry">
+			<mesh>
+				<source id="RightCluster-Geometry-Position">
+					<float_array count="24" id="RightCluster-Geometry-Position-array">1.00000 0.78594 -0.78594 1.00000 -0.78594 -0.78594 -1.00000 -1.00000 -1.00000 -1.00000 1.00000 -1.00000 1.00000 0.78594 0.78594 1.00000 -0.78594 0.78594 -1.00000 -1.00000 1.00000 -1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="8" source="#RightCluster-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightCluster-Geometry-Normals">
+					<float_array count="18" id="RightCluster-Geometry-Normals-array">0.10642 -0.00000 -0.99432 0.10642 -0.00000 0.99432 1.00000 -0.00000 0.00000 0.10642 -0.99432 -0.00000 -1.00000 0.00000 -0.00000 0.10642 0.99432 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#RightCluster-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightCluster-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightCluster-Geometry-Position"/>
+				</vertices>
+				<triangles count="12" material="WristMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightCluster-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightCluster-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="Waist-Geometry" name="Waist-Geometry">
+			<mesh>
+				<source id="Waist-Geometry-Position">
+					<float_array count="24" id="Waist-Geometry-Position-array">1.31559 1.00000 -0.79017 1.31439 -1.00000 -0.61304 -1.31439 -1.00000 -0.61304 -1.31559 1.00000 -0.79017 1.31559 1.00000 0.86647 1.31439 -1.00000 0.72749 -1.31439 -1.00000 0.72749 -1.31559 1.00000 0.86647</float_array>
+					<technique_common>
+						<accessor count="8" source="#Waist-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="Waist-Geometry-Normals">
+					<float_array count="18" id="Waist-Geometry-Normals-array">-0.00000 -0.08822 -0.99610 -0.00000 -0.06932 0.99759 1.00000 -0.00060 0.00000 -0.00000 -1.00000 -0.00000 -1.00000 -0.00060 -0.00000 0.00000 1.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#Waist-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="Waist-Geometry-Vertex">
+					<input semantic="POSITION" source="#Waist-Geometry-Position"/>
+				</vertices>
+				<triangles count="12" material="TorsoMaterial">
+					<input offset="0" semantic="VERTEX" source="#Waist-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#Waist-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftThigh-Geometry" name="LeftThigh-Geometry">
+			<mesh>
+				<source id="LeftThigh-Geometry-Position">
+					<float_array count="48" id="LeftThigh-Geometry-Position-array">1.00000 0.71053 -1.00072 0.79757 -0.77114 -0.78087 -0.79757 -0.77114 -0.78087 -1.00000 0.71053 -1.00072 1.00000 0.71053 0.99928 0.79757 -0.77114 0.78202 -0.79757 -0.77114 0.78202 -1.00000 0.71053 0.99928 -0.36214 1.00603 0.36142 0.36214 1.00603 0.36142 -0.36214 1.00603 -0.36287 0.36214 1.00603 -0.36287 -0.25111 -0.97226 0.24660 0.25111 -0.97226 0.24660 -0.25111 -0.97226 -0.24546 0.25111 -0.97226 -0.24546</float_array>
+					<technique_common>
+						<accessor count="16" source="#LeftThigh-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftThigh-Geometry-Normals">
+					<float_array count="42" id="LeftThigh-Geometry-Normals-array">-0.00000 -0.14677 -0.98917 -0.00000 -0.14508 0.98942 0.99080 -0.13537 -0.00000 -0.99080 -0.13537 -0.00000 -0.42035 0.90736 0.00000 0.42036 0.90736 0.00000 0.00000 0.90736 0.42035 0.00000 0.90736 -0.42035 0.00000 1.00000 0.00000 -0.34540 -0.93846 0.00000 0.34539 -0.93846 -0.00000 -0.00000 -0.93613 0.35165 -0.00000 -0.93613 -0.35165 -0.00000 -1.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#LeftThigh-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftThigh-Geometry-Vertex">
+					<input semantic="POSITION" source="#LeftThigh-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftThigh-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftThigh-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 2 3 6 3 7 3 7 3 3 3 2 3 3 4 7 4 8 4 8 4 10 4 3 4 4 5 0 5 11 5 11 5 9 5 4 5 7 6 4 6 9 6 9 6 8 6 7 6 0 7 3 7 10 7 10 7 11 7 0 7 9 8 11 8 10 8 10 8 8 8 9 8 6 9 2 9 14 9 14 9 12 9 6 9 1 10 5 10 13 10 13 10 15 10 1 10 5 11 6 11 12 11 12 11 13 11 5 11 2 12 1 12 15 12 15 12 14 12 2 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftThigh-ConvexGeom" name="LeftThigh-ConvexGeom">
+			<convex_mesh convex_hull_of="#LeftThigh-Geometry"/>
+		</geometry>
+		<geometry id="LeftCalve-Geometry" name="LeftCalve-Geometry">
+			<mesh>
+				<source id="LeftCalve-Geometry-Position">
+					<float_array count="48" id="LeftCalve-Geometry-Position-array">1.00000 0.82529 -1.00048 0.64038 -0.81857 -0.50299 -0.64038 -0.81857 -0.50299 -1.00000 0.82529 -1.00048 1.00000 0.82529 0.99952 0.64038 -0.81857 0.50398 -0.64038 -0.81857 0.50398 -1.00000 0.82529 0.99952 -0.31840 1.08064 0.31792 0.31840 1.08064 0.31792 -0.31840 1.08064 -0.31887 0.31840 1.08064 -0.31887 -0.23043 -1.01344 0.18166 0.23043 -1.01344 0.18166 -0.23043 -1.01344 -0.18067 0.23043 -1.01344 -0.18067</float_array>
+					<technique_common>
+						<accessor count="16" source="#LeftCalve-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftCalve-Geometry-Normals">
+					<float_array count="42" id="LeftCalve-Geometry-Normals-array">-0.00000 -0.28966 -0.95713 -0.00000 -0.28863 0.95744 0.97690 -0.21371 -0.00000 -0.97690 -0.21371 -0.00000 -0.35082 0.93644 0.00000 0.35082 0.93644 0.00000 0.00000 0.93644 0.35082 0.00000 0.93644 -0.35082 0.00000 1.00000 0.00000 -0.42931 -0.90315 0.00000 0.42931 -0.90316 -0.00000 -0.00000 -0.85575 0.51739 -0.00000 -0.85575 -0.51739 -0.00000 -1.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#LeftCalve-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftCalve-Geometry-Vertex">
+					<input semantic="POSITION" source="#LeftCalve-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftCalve-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftCalve-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 2 3 6 3 7 3 7 3 3 3 2 3 3 4 7 4 8 4 8 4 10 4 3 4 4 5 0 5 11 5 11 5 9 5 4 5 7 6 4 6 9 6 9 6 8 6 7 6 0 7 3 7 10 7 10 7 11 7 0 7 9 8 11 8 10 8 10 8 8 8 9 8 6 9 2 9 14 9 14 9 12 9 6 9 1 10 5 10 13 10 13 10 15 10 1 10 5 11 6 11 12 11 12 11 13 11 5 11 2 12 1 12 15 12 15 12 14 12 2 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftCalve-ConvexGeom" name="LeftCalve-ConvexGeom">
+			<convex_mesh convex_hull_of="#LeftCalve-Geometry"/>
+		</geometry>
+		<geometry id="LeftFoot-Geometry" name="LeftFoot-Geometry">
+			<mesh>
+				<source id="LeftFoot-Geometry-Position">
+					<float_array count="36" id="LeftFoot-Geometry-Position-array">0.54500 0.99194 -0.67508 0.95853 -0.45633 -1.01323 -1.00863 -0.45633 -1.01323 -0.59455 0.99194 -0.67508 0.54500 0.99194 0.25612 0.97494 -0.45506 0.59461 -1.02505 -0.45506 0.59461 -0.59455 0.99194 0.25612 -1.00836 0.19234 2.25853 -1.02505 -0.45485 2.25888 0.97494 -0.45485 2.25888 0.95881 0.19234 2.25853</float_array>
+					<technique_common>
+						<accessor count="12" source="#LeftFoot-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftFoot-Geometry-Normals">
+					<float_array count="30" id="LeftFoot-Geometry-Normals-array">0.00000 0.22737 -0.97381 0.96007 0.27969 -0.00635 -0.00000 -1.00000 0.00079 -0.95997 0.28004 -0.00635 0.00000 1.00000 0.00000 0.00000 0.92869 0.37085 -0.97790 0.19795 -0.06721 -0.00000 -1.00000 0.00012 0.97800 0.19743 -0.06733 0.00000 0.00053 1.00000</float_array>
+					<technique_common>
+						<accessor count="10" source="#LeftFoot-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftFoot-Geometry-color">
+					<float_array count="240" id="LeftFoot-Geometry-color-array">1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="60" source="#LeftFoot-Geometry-color-array" stride="4">
+							<param type="float" name="R"></param>
+							<param type="float" name="G"></param>
+							<param type="float" name="B"></param>
+							<param type="float" name="A"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftFoot-Geometry-Vertex">
+					<input semantic="POSITION" source="#LeftFoot-Geometry-Position"/>
+				</vertices>
+				<triangles count="20" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftFoot-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftFoot-Geometry-Normals"/>
+					<input offset="2" semantic="COLOR" source="#LeftFoot-Geometry-color"/>
+					<p>0 0 0 1 0 1 2 0 2 2 0 3 3 0 4 0 0 5 0 1 6 4 1 7 5 1 8 5 1 9 1 1 10 0 1 11 1 2 12 5 2 13 6 2 14 6 2 15 2 2 16 1 2 17 2 3 18 6 3 19 7 3 20 7 3 21 3 3 22 2 3 23 4 4 24 0 4 25 3 4 26 3 4 27 7 4 28 4 4 29 4 5 30 7 5 31 8 5 32 8 5 33 11 5 34 4 5 35 7 6 36 6 6 37 9 6 38 9 6 39 8 6 40 7 6 41 6 7 42 5 7 43 10 7 44 10 7 45 9 7 46 6 7 47 5 8 48 4 8 49 11 8 50 11 8 51 10 8 52 5 8 53 11 9 54 8 9 55 9 9 56 9 9 57 10 9 58 11 9 59</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftFoot-ConvexGeom" name="LeftFoot-ConvexGeom">
+			<convex_mesh convex_hull_of="#LeftFoot-Geometry"/>
+		</geometry>
+		<geometry id="RightThigh-Geometry" name="RightThigh-Geometry">
+			<mesh>
+				<source id="RightThigh-Geometry-Position">
+					<float_array count="48" id="RightThigh-Geometry-Position-array">1.00000 0.71053 -1.00072 0.79757 -0.77114 -0.78087 -0.79757 -0.77114 -0.78087 -1.00000 0.71053 -1.00072 1.00000 0.71053 0.99928 0.79757 -0.77114 0.78202 -0.79757 -0.77114 0.78202 -1.00000 0.71053 0.99928 -0.36214 1.00603 0.36142 0.36214 1.00603 0.36142 -0.36214 1.00603 -0.36287 0.36214 1.00603 -0.36287 -0.25111 -0.97226 0.24660 0.25111 -0.97226 0.24660 -0.25111 -0.97226 -0.24546 0.25111 -0.97226 -0.24546</float_array>
+					<technique_common>
+						<accessor count="16" source="#RightThigh-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightThigh-Geometry-Normals">
+					<float_array count="42" id="RightThigh-Geometry-Normals-array">-0.00000 -0.14677 -0.98917 -0.00000 -0.14508 0.98942 0.99080 -0.13537 -0.00000 -0.99080 -0.13537 -0.00000 -0.42035 0.90736 0.00000 0.42036 0.90736 0.00000 0.00000 0.90736 0.42035 0.00000 0.90736 -0.42035 0.00000 1.00000 0.00000 -0.34540 -0.93846 0.00000 0.34539 -0.93846 -0.00000 -0.00000 -0.93613 0.35165 -0.00000 -0.93613 -0.35165 -0.00000 -1.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#RightThigh-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightThigh-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightThigh-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightThigh-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightThigh-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 2 3 6 3 7 3 7 3 3 3 2 3 3 4 7 4 8 4 8 4 10 4 3 4 4 5 0 5 11 5 11 5 9 5 4 5 7 6 4 6 9 6 9 6 8 6 7 6 0 7 3 7 10 7 10 7 11 7 0 7 9 8 11 8 10 8 10 8 8 8 9 8 6 9 2 9 14 9 14 9 12 9 6 9 1 10 5 10 13 10 13 10 15 10 1 10 5 11 6 11 12 11 12 11 13 11 5 11 2 12 1 12 15 12 15 12 14 12 2 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightThigh-ConvexGeom" name="RightThigh-ConvexGeom">
+			<convex_mesh convex_hull_of="#RightThigh-Geometry"/>
+		</geometry>
+		<geometry id="RightCalve-Geometry" name="RightCalve-Geometry">
+			<mesh>
+				<source id="RightCalve-Geometry-Position">
+					<float_array count="48" id="RightCalve-Geometry-Position-array">1.00000 0.82529 -1.00048 0.64038 -0.81857 -0.50299 -0.64038 -0.81857 -0.50299 -1.00000 0.82529 -1.00048 1.00000 0.82529 0.99952 0.64038 -0.81857 0.50398 -0.64038 -0.81857 0.50398 -1.00000 0.82529 0.99952 -0.31840 1.08064 0.31792 0.31840 1.08064 0.31792 -0.31840 1.08064 -0.31887 0.31840 1.08064 -0.31887 -0.23043 -1.01344 0.18166 0.23043 -1.01344 0.18166 -0.23043 -1.01344 -0.18067 0.23043 -1.01344 -0.18067</float_array>
+					<technique_common>
+						<accessor count="16" source="#RightCalve-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightCalve-Geometry-Normals">
+					<float_array count="42" id="RightCalve-Geometry-Normals-array">-0.00000 -0.28966 -0.95713 -0.00000 -0.28863 0.95744 0.97690 -0.21371 -0.00000 -0.97690 -0.21371 -0.00000 -0.35082 0.93644 0.00000 0.35082 0.93644 0.00000 0.00000 0.93644 0.35082 0.00000 0.93644 -0.35082 0.00000 1.00000 0.00000 -0.42931 -0.90315 0.00000 0.42931 -0.90316 -0.00000 -0.00000 -0.85575 0.51739 -0.00000 -0.85575 -0.51739 -0.00000 -1.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#RightCalve-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightCalve-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightCalve-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightCalve-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightCalve-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 2 3 6 3 7 3 7 3 3 3 2 3 3 4 7 4 8 4 8 4 10 4 3 4 4 5 0 5 11 5 11 5 9 5 4 5 7 6 4 6 9 6 9 6 8 6 7 6 0 7 3 7 10 7 10 7 11 7 0 7 9 8 11 8 10 8 10 8 8 8 9 8 6 9 2 9 14 9 14 9 12 9 6 9 1 10 5 10 13 10 13 10 15 10 1 10 5 11 6 11 12 11 12 11 13 11 5 11 2 12 1 12 15 12 15 12 14 12 2 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightCalve-ConvexGeom" name="RightCalve-ConvexGeom">
+			<convex_mesh convex_hull_of="#RightCalve-Geometry"/>
+		</geometry>
+		<geometry id="RightFoot-Geometry" name="RightFoot-Geometry">
+			<mesh>
+				<source id="RightFoot-Geometry-Position">
+					<float_array count="36" id="RightFoot-Geometry-Position-array">0.54500 0.99194 -0.67508 0.95853 -0.45633 -1.01323 -1.00863 -0.45633 -1.01323 -0.59455 0.99194 -0.67508 0.54500 0.99194 0.25612 0.97494 -0.45506 0.59461 -1.02505 -0.45506 0.59461 -0.59455 0.99194 0.25612 -1.00836 0.19234 2.25853 -1.02505 -0.45485 2.25888 0.97494 -0.45485 2.25888 0.95881 0.19234 2.25853</float_array>
+					<technique_common>
+						<accessor count="12" source="#RightFoot-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightFoot-Geometry-Normals">
+					<float_array count="30" id="RightFoot-Geometry-Normals-array">0.00000 0.22737 -0.97381 0.96007 0.27969 -0.00635 -0.00000 -1.00000 0.00079 -0.95997 0.28004 -0.00635 0.00000 1.00000 0.00000 0.00000 0.92869 0.37085 -0.97790 0.19795 -0.06721 -0.00000 -1.00000 0.00012 0.97800 0.19743 -0.06733 0.00000 0.00053 1.00000</float_array>
+					<technique_common>
+						<accessor count="10" source="#RightFoot-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="RightFoot-Geometry-color">
+					<float_array count="240" id="RightFoot-Geometry-color-array">1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="60" source="#RightFoot-Geometry-color-array" stride="4">
+							<param type="float" name="R"></param>
+							<param type="float" name="G"></param>
+							<param type="float" name="B"></param>
+							<param type="float" name="A"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="RightFoot-Geometry-Vertex">
+					<input semantic="POSITION" source="#RightFoot-Geometry-Position"/>
+				</vertices>
+				<triangles count="20" material="LegMaterial">
+					<input offset="0" semantic="VERTEX" source="#RightFoot-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#RightFoot-Geometry-Normals"/>
+					<input offset="2" semantic="COLOR" source="#RightFoot-Geometry-color"/>
+					<p>0 0 0 1 0 1 2 0 2 2 0 3 3 0 4 0 0 5 0 1 6 4 1 7 5 1 8 5 1 9 1 1 10 0 1 11 1 2 12 5 2 13 6 2 14 6 2 15 2 2 16 1 2 17 2 3 18 6 3 19 7 3 20 7 3 21 3 3 22 2 3 23 4 4 24 0 4 25 3 4 26 3 4 27 7 4 28 4 4 29 4 5 30 7 5 31 8 5 32 8 5 33 11 5 34 4 5 35 7 6 36 6 6 37 9 6 38 9 6 39 8 6 40 7 6 41 6 7 42 5 7 43 10 7 44 10 7 45 9 7 46 6 7 47 5 8 48 4 8 49 11 8 50 11 8 51 10 8 52 5 8 53 11 9 54 8 9 55 9 9 56 9 9 57 10 9 58 11 9 59</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="RightFoot-ConvexGeom" name="RightFoot-ConvexGeom">
+			<convex_mesh convex_hull_of="#RightFoot-Geometry"/>
+		</geometry>
+		<geometry id="Neck-Geometry" name="Neck-Geometry">
+			<mesh>
+				<source id="Neck-Geometry-Position">
+					<float_array count="24" id="Neck-Geometry-Position-array">0.71182 1.00000 -0.71313 1.00000 -1.00000 -1.00000 -1.00000 -1.00000 -1.00000 -0.71182 1.00000 -0.71313 0.71182 1.00000 0.71313 1.00000 -1.00000 1.00000 -1.00000 -1.00000 1.00000 -0.71182 1.00000 0.71313</float_array>
+					<technique_common>
+						<accessor count="8" source="#Neck-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="Neck-Geometry-Normals">
+					<float_array count="18" id="Neck-Geometry-Normals-array">0.00000 0.14198 -0.98987 0.00000 0.14198 0.98987 0.98978 0.14262 0.00000 -0.00000 -1.00000 -0.00000 -0.98978 0.14262 -0.00000 0.00000 1.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#Neck-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="Neck-Geometry-Vertex">
+					<input semantic="POSITION" source="#Neck-Geometry-Position"/>
+				</vertices>
+				<triangles count="12" material="HeadMaterial">
+					<input offset="0" semantic="VERTEX" source="#Neck-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#Neck-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="Head-Geometry" name="Head-Geometry">
+			<mesh>
+				<source id="Head-Geometry-Position">
+					<float_array count="24" id="Head-Geometry-Position-array">1.00000 1.00000 -1.00000 1.00000 -1.00000 -1.00000 -1.00000 -1.00000 -1.00000 -1.00000 1.00000 -1.00000 1.00000 1.00000 1.00000 1.00000 -1.00000 1.00000 -1.00000 -1.00000 1.00000 -1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="8" source="#Head-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="Head-Geometry-Normals">
+					<float_array count="18" id="Head-Geometry-Normals-array">0.00000 0.00000 -1.00000 0.00000 -0.00000 1.00000 1.00000 -0.00000 0.00000 -0.00000 -1.00000 -0.00000 -1.00000 0.00000 -0.00000 0.00000 1.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#Head-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="Head-Geometry-Vertex">
+					<input semantic="POSITION" source="#Head-Geometry-Position"/>
+				</vertices>
+				<triangles count="12" material="HeadMaterial">
+					<input offset="0" semantic="VERTEX" source="#Head-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#Head-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftShoulder-Geometry" name="LeftShoulder-Geometry">
+			<mesh>
+				<source id="LeftShoulder-Geometry-Position">
+					<float_array count="48" id="LeftShoulder-Geometry-Position-array">0.84576 0.82005 -0.82005 0.84576 -0.82005 -0.82005 -0.71291 -1.00000 -1.00000 -0.71291 1.00000 -1.00000 0.84576 0.82005 0.82005 0.84576 -0.82005 0.82005 -0.71291 -1.00000 1.00000 -0.71291 1.00000 1.00000 -1.00684 0.39327 0.39327 -1.00684 -0.39327 0.39327 -1.00684 0.39327 -0.39327 -1.00684 -0.39327 -0.39327 1.06449 -0.15768 0.15768 1.06449 0.15768 0.15768 1.06449 -0.15768 -0.15768 1.06449 0.15768 -0.15768</float_array>
+					<technique_common>
+						<accessor count="16" source="#LeftShoulder-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftShoulder-Geometry-Normals">
+					<float_array count="42" id="LeftShoulder-Geometry-Normals-array">0.11469 -0.00000 -0.99340 0.11469 -0.00000 0.99340 0.11469 -0.99340 -0.00000 0.11469 0.99340 0.00000 -0.89996 0.43597 -0.00000 -0.89996 -0.43597 -0.00000 -0.89996 0.00000 0.43597 -0.89996 0.00000 -0.43597 -1.00000 0.00000 -0.00000 0.94956 0.31357 -0.00000 0.94956 -0.31357 0.00000 0.94956 -0.00000 0.31357 0.94956 0.00000 -0.31357 1.00000 -0.00000 -0.00000</float_array>
+					<technique_common>
+						<accessor count="14" source="#LeftShoulder-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftShoulder-Geometry-Vertex">
+					<input semantic="POSITION" source="#LeftShoulder-Geometry-Position"/>
+				</vertices>
+				<triangles count="28" material="ArmMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftShoulder-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftShoulder-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 1 2 5 2 6 2 6 2 2 2 1 2 4 3 0 3 3 3 3 3 7 3 4 3 7 4 3 4 10 4 10 4 8 4 7 4 2 5 6 5 9 5 9 5 11 5 2 5 6 6 7 6 8 6 8 6 9 6 6 6 3 7 2 7 11 7 11 7 10 7 3 7 11 8 9 8 8 8 8 8 10 8 11 8 0 9 4 9 13 9 13 9 15 9 0 9 5 10 1 10 14 10 14 10 12 10 5 10 4 11 5 11 12 11 12 11 13 11 4 11 1 12 0 12 15 12 15 12 14 12 1 12 15 13 13 13 12 13 12 13 14 13 15 13</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftShoulder-ConvexGeom" name="LeftShoulder-ConvexGeom">
+			<convex_mesh convex_hull_of="#LeftShoulder-Geometry"/>
+		</geometry>
+		<geometry id="LeftArm-Geometry" name="LeftArm-Geometry">
+			<mesh>
+				<source id="LeftArm-Geometry-Position">
+					<float_array count="36" id="LeftArm-Geometry-Position-array">0.99993 0.57160 -0.54997 0.99836 -0.05249 -0.54997 -0.68510 -0.81253 -0.81253 -0.68510 0.81253 -0.81253 0.99993 0.57160 0.54997 0.99836 -0.05249 0.54997 -0.68510 -0.81253 0.81253 -0.68510 0.81253 0.81253 -0.94047 0.16105 0.16105 -0.94047 -0.16105 0.16105 -0.94047 0.16105 -0.16105 -0.94047 -0.16105 -0.16105</float_array>
+					<technique_common>
+						<accessor count="12" source="#LeftArm-Geometry-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftArm-Geometry-Normals">
+					<float_array count="30" id="LeftArm-Geometry-Normals-array">0.15405 -0.00011 -0.98806 0.15405 -0.00011 0.98806 1.00000 -0.00251 0.00000 0.41148 -0.91142 0.00000 0.14154 0.98993 0.00000 -0.93102 0.36496 -0.00000 -0.93102 -0.36496 -0.00000 -0.93102 0.00000 0.36496 -0.93102 0.00000 -0.36496 -1.00000 -0.00000 0.00000</float_array>
+					<technique_common>
+						<accessor count="10" source="#LeftArm-Geometry-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftArm-Geometry-Vertex">
+					<input semantic="POSITION" source="#LeftArm-Geometry-Position"/>
+				</vertices>
+				<triangles count="20" material="ArmMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftArm-Geometry-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftArm-Geometry-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 4 4 0 4 3 4 3 4 7 4 4 4 7 5 3 5 10 5 10 5 8 5 7 5 2 6 6 6 9 6 9 6 11 6 2 6 6 7 7 7 8 7 8 7 9 7 6 7 3 8 2 8 11 8 11 8 10 8 3 8 11 9 9 9 8 9 8 9 10 9 11 9</p>
+				</triangles>
+			</mesh>
+		</geometry>
+		<geometry id="LeftArm-ConvexGeom" name="LeftArm-ConvexGeom">
+			<convex_mesh convex_hull_of="#LeftArm-Geometry"/>
+		</geometry>
+		<geometry id="LeftCluster_005" name="LeftCluster_005">
+			<mesh>
+				<source id="LeftCluster_005-Position">
+					<float_array count="24" id="LeftCluster_005-Position-array">1.00000 0.78594 -0.78594 1.00000 -0.78594 -0.78594 -1.00000 -1.00000 -1.00000 -1.00000 1.00000 -1.00000 1.00000 0.78594 0.78594 1.00000 -0.78594 0.78594 -1.00000 -1.00000 1.00000 -1.00000 1.00000 1.00000</float_array>
+					<technique_common>
+						<accessor count="8" source="#LeftCluster_005-Position-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="LeftCluster_005-Normals">
+					<float_array count="18" id="LeftCluster_005-Normals-array">0.10642 -0.00000 -0.99432 0.10642 -0.00000 0.99432 1.00000 -0.00000 0.00000 0.10642 -0.99432 -0.00000 -1.00000 0.00000 -0.00000 0.10642 0.99432 0.00000</float_array>
+					<technique_common>
+						<accessor count="6" source="#LeftCluster_005-Normals-array" stride="3">
+							<param type="float" name="X"></param>
+							<param type="float" name="Y"></param>
+							<param type="float" name="Z"></param>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="LeftCluster_005-Vertex">
+					<input semantic="POSITION" source="#LeftCluster_005-Position"/>
+				</vertices>
+				<triangles count="12" material="WristMaterial">
+					<input offset="0" semantic="VERTEX" source="#LeftCluster_005-Vertex"/>
+					<input offset="1" semantic="NORMAL" source="#LeftCluster_005-Normals"/>
+					<p>0 0 1 0 2 0 2 0 3 0 0 0 4 1 7 1 6 1 6 1 5 1 4 1 0 2 4 2 5 2 5 2 1 2 0 2 1 3 5 3 6 3 6 3 2 3 1 3 2 4 6 4 7 4 7 4 3 4 2 4 4 5 0 5 3 5 3 5 7 5 4 5</p>
+				</triangles>
+			</mesh>
+		</geometry>
+	</library_geometries>
+	<library_visual_scenes>
+		<visual_scene id="Scene" name="Scene">
+			<node layer="L1" id="Torso" name="Torso">
+				<translate sid="translate">0.00235 9.04962 -0.09051</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">1.41639 1.53486 0.89757</scale>
+				<instance_geometry url="#Torso-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="TorsoMaterial" target="#TorsoMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightShoulder" name="RightShoulder">
+				<translate sid="translate">-2.84906 10.12795 0.00470</translate>
+				<rotate sid="rotateZ">0 0 1 -0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -179.95425</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">1.36546 0.44912 0.42153</scale>
+				<instance_geometry url="#RightShoulder-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="ArmMaterial" target="#ArmMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightArm" name="RightArm">
+				<translate sid="translate">-5.66232 10.12795 0.00627</translate>
+				<rotate sid="rotateZ">0 0 1 -0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -179.95425</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">1.31572 0.40435 0.40435</scale>
+				<instance_geometry url="#RightArm-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="ArmMaterial" target="#ArmMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightCluster" name="RightCluster">
+				<translate sid="translate">-7.55468 10.23479 0.02167</translate>
+				<rotate sid="rotateZ">0 0 1 -0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -179.95425</rotate>
+				<rotate sid="rotateX">1 0 0 0.05747</rotate>
+				<scale sid="scale">0.39460 -0.12134 0.27587</scale>
+				<instance_geometry url="#RightCluster-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="WristMaterial" target="#WristMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="Waist" name="Waist">
+				<translate sid="translate">-0.01541 6.79602 -0.09501</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.92039 0.61775 0.92039</scale>
+				<instance_geometry url="#Waist-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="TorsoMaterial" target="#TorsoMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftThigh" name="LeftThigh">
+				<translate sid="translate">0.77961 4.58319 -0.01526</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.54233 1.48242 0.59445</scale>
+				<instance_geometry url="#LeftThigh-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftCalve" name="LeftCalve">
+				<translate sid="translate">0.77407 1.81438 -0.01248</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.40376 1.15687 0.42645</scale>
+				<instance_geometry url="#LeftCalve-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftFoot" name="LeftFoot">
+				<translate sid="translate">0.77433 0.30437 0.22412</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.36409 0.26553 0.50468</scale>
+				<instance_geometry url="#LeftFoot-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightThigh" name="RightThigh">
+				<translate sid="translate">-0.77594 4.58319 -0.01526</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.54233 1.48242 0.59445</scale>
+				<instance_geometry url="#RightThigh-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightCalve" name="RightCalve">
+				<translate sid="translate">-0.78149 1.81438 -0.01248</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.40376 1.15687 0.42645</scale>
+				<instance_geometry url="#RightCalve-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="RightFoot" name="RightFoot">
+				<translate sid="translate">-0.78123 0.30437 0.22412</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.36409 0.26553 0.50468</scale>
+				<instance_geometry url="#RightFoot-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="LegMaterial" target="#LegMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="Neck" name="Neck">
+				<translate sid="translate">0.01372 11.01944 0.01199</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.50889 0.32108 0.46444</scale>
+				<instance_geometry url="#Neck-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="HeadMaterial" target="#HeadMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="Head" name="Head">
+				<translate sid="translate">0.00441 12.37172 0.02415</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">0.88388 0.88388 0.88388</scale>
+				<instance_geometry url="#Head-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="HeadMaterial" target="#HeadMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftShoulder" name="LeftShoulder">
+				<translate sid="translate">2.89213 10.12795 -0.00185</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">1.36546 0.44912 0.42153</scale>
+				<instance_geometry url="#LeftShoulder-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="ArmMaterial" target="#ArmMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftArm" name="LeftArm">
+				<translate sid="translate">5.70539 10.12795 -0.00117</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 -0.05747</rotate>
+				<scale sid="scale">1.31572 0.40435 0.40435</scale>
+				<instance_geometry url="#LeftArm-Geometry">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="ArmMaterial" target="#ArmMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+			<node layer="L1" id="LeftCluster" name="LeftCluster">
+				<translate sid="translate">7.59776 10.23479 -0.01506</translate>
+				<rotate sid="rotateZ">0 0 1 0.00000</rotate>
+				<rotate sid="rotateY">0 1 0 -0.00000</rotate>
+				<rotate sid="rotateX">1 0 0 0.05747</rotate>
+				<scale sid="scale">0.39460 -0.12134 0.27587</scale>
+				<instance_geometry url="#LeftCluster_005">
+					<bind_material>
+						<technique_common>
+							<instance_material symbol="WristMaterial" target="#WristMaterial">
+								<bind_vertex_input input_semantic="TEXCOORD" input_set="1" semantic="CHANNEL1"/>
+							</instance_material>
+						</technique_common>
+					</bind_material>
+				</instance_geometry>
+			</node>
+		</visual_scene>
+	</library_visual_scenes>
+	<library_physics_materials>
+		<physics_material id="Torso-PhysicsMaterial" name="Torso-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightShoulder-PhysicsMaterial" name="RightShoulder-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightArm-PhysicsMaterial" name="RightArm-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightCluster-PhysicsMaterial" name="RightCluster-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="Waist-PhysicsMaterial" name="Waist-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftThigh-PhysicsMaterial" name="LeftThigh-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftCalve-PhysicsMaterial" name="LeftCalve-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftFoot-PhysicsMaterial" name="LeftFoot-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightThigh-PhysicsMaterial" name="RightThigh-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightCalve-PhysicsMaterial" name="RightCalve-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="RightFoot-PhysicsMaterial" name="RightFoot-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="Neck-PhysicsMaterial" name="Neck-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="Head-PhysicsMaterial" name="Head-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftShoulder-PhysicsMaterial" name="LeftShoulder-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftArm-PhysicsMaterial" name="LeftArm-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+		<physics_material id="LeftCluster-PhysicsMaterial" name="LeftCluster-PhysicsMaterial">
+			<technique_common>
+				<dynamic_friction>0.5</dynamic_friction>
+				<restitution>0.0</restitution>
+				<static_friction>0.5</static_friction>
+			</technique_common>
+		</physics_material>
+	</library_physics_materials>
+	<library_physics_models>
+		<physics_model id="Scene-PhysicsModel" name="Scene-PhysicsModel">
+			<rigid_body name="Torso-RigidBody" sid="Torso-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>30.0</mass>
+					<instance_physics_material url="#Torso-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.00000 1.00000 1.00000</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightShoulder-RigidBody" sid="RightShoulder-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>3.0</mass>
+					<instance_physics_material url="#RightShoulder-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#RightShoulder-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightArm-RigidBody" sid="RightArm-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>1.0</mass>
+					<instance_physics_material url="#RightArm-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#RightArm-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightCluster-RigidBody" sid="RightCluster-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>0.5</mass>
+					<instance_physics_material url="#RightCluster-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.00000 1.00000 1.00000</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="Waist-RigidBody" sid="Waist-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>10.0</mass>
+					<instance_physics_material url="#Waist-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.31559 1.00000 0.82832</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftThigh-RigidBody" sid="LeftThigh-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>5.0</mass>
+					<instance_physics_material url="#LeftThigh-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#LeftThigh-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftCalve-RigidBody" sid="LeftCalve-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>3.0</mass>
+					<instance_physics_material url="#LeftCalve-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#LeftCalve-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftFoot-RigidBody" sid="LeftFoot-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>1.0</mass>
+					<instance_physics_material url="#LeftFoot-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#LeftFoot-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightThigh-RigidBody" sid="RightThigh-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>5.0</mass>
+					<instance_physics_material url="#RightThigh-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#RightThigh-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightCalve-RigidBody" sid="RightCalve-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>3.0</mass>
+					<instance_physics_material url="#RightCalve-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#RightCalve-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="RightFoot-RigidBody" sid="RightFoot-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>1.0</mass>
+					<instance_physics_material url="#RightFoot-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#RightFoot-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="Neck-RigidBody" sid="Neck-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>1.0</mass>
+					<instance_physics_material url="#Neck-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.00000 1.00000 1.00000</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="Head-RigidBody" sid="Head-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>5.0</mass>
+					<instance_physics_material url="#Head-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.00000 1.00000 1.00000</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftShoulder-RigidBody" sid="LeftShoulder-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>3.0</mass>
+					<instance_physics_material url="#LeftShoulder-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#LeftShoulder-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftArm-RigidBody" sid="LeftArm-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>1.0</mass>
+					<instance_physics_material url="#LeftArm-PhysicsMaterial"/>
+					<shape>
+						<instance_geometry url="#LeftArm-ConvexGeom"/>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_body name="LeftCluster-RigidBody" sid="LeftCluster-RigidBody">
+				<technique_common>
+					<dynamic>true</dynamic>
+					<mass>0.5</mass>
+					<instance_physics_material url="#LeftCluster-PhysicsMaterial"/>
+					<shape>
+						<box>
+							<half_extents>1.00000 1.00000 1.00000</half_extents>
+						</box>
+					</shape>
+				</technique_common>
+			</rigid_body>
+			<rigid_constraint name="RightShoulderConst" sid="RightShoulderConst">
+				<ref_attachment rigid_body="Torso-RigidBody">
+					<translate>-1.00091 0.70250 0.10601</translate>
+					<rotate>1 0 0 -0.19654</rotate>
+					<rotate>0 1 0 -179.92781</rotate>
+					<rotate>0 0 1 0.00004</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightShoulder-RigidBody">
+					<translate>-1.05000 0.00000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="RightArmConst" sid="RightArmConst">
+				<ref_attachment rigid_body="RightShoulder-RigidBody">
+					<translate>1.09673 0.00000 0.00162</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightArm-RigidBody">
+					<translate>-1.00000 0.00000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="RightClusterConst" sid="RightClusterConst">
+				<ref_attachment rigid_body="RightArm-RigidBody">
+					<translate>1.09339 0.26425 -0.03409</translate>
+					<rotate>1 0 0 -152.35277</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 -0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightCluster-RigidBody">
+					<translate>-1.15000 0.00000 0.00000</translate>
+					<rotate>1 0 0 195.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="WaistConst" sid="WaistConst">
+				<ref_attachment rigid_body="Torso-RigidBody">
+					<translate>-0.01254 -1.04567 -0.00753</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 -0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="Waist-RigidBody">
+					<translate>0.00000 1.05000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftThighConst" sid="LeftThighConst">
+				<ref_attachment rigid_body="Waist-RigidBody">
+					<translate>0.86379 -1.06251 0.08424</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftThigh-RigidBody">
+					<translate>0.00000 1.05000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftCalveConst" sid="LeftCalveConst">
+				<ref_attachment rigid_body="LeftThigh-RigidBody">
+					<translate>-0.01023 -1.04834 -0.00000</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftCalve-RigidBody">
+					<translate>0.00000 1.05000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftFootConst" sid="LeftFootConst">
+				<ref_attachment rigid_body="LeftCalve-RigidBody">
+					<translate>0.00065 -1.05298 0.55127</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftFoot-RigidBody">
+					<translate>0.00000 1.10000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="RightThighConst" sid="RightThighConst">
+				<ref_attachment rigid_body="Waist-RigidBody">
+					<translate>-0.82632 -1.06251 0.08424</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightThigh-RigidBody">
+					<translate>0.00000 1.05000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="RightCalveConst" sid="RightCalveConst">
+				<ref_attachment rigid_body="RightThigh-RigidBody">
+					<translate>-0.01023 -1.04834 -0.00000</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightCalve-RigidBody">
+					<translate>0.00000 1.05000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="RightFootConst" sid="RightFootConst">
+				<ref_attachment rigid_body="RightCalve-RigidBody">
+					<translate>0.00065 -1.05298 0.55127</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="RightFoot-RigidBody">
+					<translate>0.00000 1.10000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="NeckConst" sid="NeckConst">
+				<ref_attachment rigid_body="Torso-RigidBody">
+					<translate>0.00803 1.03229 0.11641</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 -0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="Neck-RigidBody">
+					<translate>0.00000 -1.20000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="HeadConst" sid="HeadConst">
+				<ref_attachment rigid_body="Neck-RigidBody">
+					<translate>-0.01829 1.18348 0.02910</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="Head-RigidBody">
+					<translate>0.00000 -1.10000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftShoulderConst" sid="LeftShoulderConst">
+				<ref_attachment rigid_body="Torso-RigidBody">
+					<translate>1.02800 0.70250 0.09998</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftShoulder-RigidBody">
+					<translate>-1.05000 0.00000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftArmConst" sid="LeftArmConst">
+				<ref_attachment rigid_body="LeftShoulder-RigidBody">
+					<translate>1.09673 -0.00000 0.00162</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 -0.00000</rotate>
+					<rotate>0 0 1 -0.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftArm-RigidBody">
+					<translate>-1.00000 0.00000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 0.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF 0 0</min>
+							<max>INF 0 0</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+			<rigid_constraint name="LeftClusterConst" sid="LeftClusterConst">
+				<ref_attachment rigid_body="LeftArm-RigidBody">
+					<translate>1.09339 0.26425 -0.03409</translate>
+					<rotate>1 0 0 -0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 90.00000</rotate>
+				</ref_attachment>
+				<attachment rigid_body="LeftCluster-RigidBody">
+					<translate>-1.15000 0.00000 0.00000</translate>
+					<rotate>1 0 0 0.00000</rotate>
+					<rotate>0 1 0 0.00000</rotate>
+					<rotate>0 0 1 -90.00000</rotate>
+				</attachment>
+				<technique_common>
+					<enabled>true</enabled>
+					<limits>
+						<linear>
+							<min>0 0 0</min>
+							<max>0 0 0</max>
+						</linear>
+						<swing_cone_and_twist>
+							<min>-INF -INF -INF</min>
+							<max>INF INF INF</max>
+						</swing_cone_and_twist>
+					</limits>
+				</technique_common>
+			</rigid_constraint>
+		</physics_model>
+	</library_physics_models>
+	<library_physics_scenes>
+		<physics_scene id="Scene-Physics" name="Scene-Physics">
+			<instance_physics_model url="#Scene-PhysicsModel">
+				<instance_rigid_body body="Torso-RigidBody" target="#Torso"/>
+				<instance_rigid_body body="RightShoulder-RigidBody" target="#RightShoulder"/>
+				<instance_rigid_body body="RightArm-RigidBody" target="#RightArm"/>
+				<instance_rigid_body body="RightCluster-RigidBody" target="#RightCluster"/>
+				<instance_rigid_body body="Waist-RigidBody" target="#Waist"/>
+				<instance_rigid_body body="LeftThigh-RigidBody" target="#LeftThigh"/>
+				<instance_rigid_body body="LeftCalve-RigidBody" target="#LeftCalve"/>
+				<instance_rigid_body body="LeftFoot-RigidBody" target="#LeftFoot"/>
+				<instance_rigid_body body="RightThigh-RigidBody" target="#RightThigh"/>
+				<instance_rigid_body body="RightCalve-RigidBody" target="#RightCalve"/>
+				<instance_rigid_body body="RightFoot-RigidBody" target="#RightFoot"/>
+				<instance_rigid_body body="Neck-RigidBody" target="#Neck"/>
+				<instance_rigid_body body="Head-RigidBody" target="#Head"/>
+				<instance_rigid_body body="LeftShoulder-RigidBody" target="#LeftShoulder"/>
+				<instance_rigid_body body="LeftArm-RigidBody" target="#LeftArm"/>
+				<instance_rigid_body body="LeftCluster-RigidBody" target="#LeftCluster"/>
+				<instance_rigid_constraint constraint="RightShoulderConst"/>
+				<instance_rigid_constraint constraint="RightArmConst"/>
+				<instance_rigid_constraint constraint="RightClusterConst"/>
+				<instance_rigid_constraint constraint="WaistConst"/>
+				<instance_rigid_constraint constraint="LeftThighConst"/>
+				<instance_rigid_constraint constraint="LeftCalveConst"/>
+				<instance_rigid_constraint constraint="LeftFootConst"/>
+				<instance_rigid_constraint constraint="RightThighConst"/>
+				<instance_rigid_constraint constraint="RightCalveConst"/>
+				<instance_rigid_constraint constraint="RightFootConst"/>
+				<instance_rigid_constraint constraint="NeckConst"/>
+				<instance_rigid_constraint constraint="HeadConst"/>
+				<instance_rigid_constraint constraint="LeftShoulderConst"/>
+				<instance_rigid_constraint constraint="LeftArmConst"/>
+				<instance_rigid_constraint constraint="LeftClusterConst"/>
+			</instance_physics_model>
+		</physics_scene>
+	</library_physics_scenes>
+	<scene>
+		<instance_physics_scene url="#Scene-Physics"/>
+		<instance_visual_scene url="#Scene"/>
+	</scene>
+</COLLADA>

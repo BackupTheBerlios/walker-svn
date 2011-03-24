@@ -1,0 +1,56 @@
+<control>
+  <model>Data/Models/sausage.dae</model>
+  <actuators>
+    <joint_actuator id="Actuator1">
+	  <constraint>Const1</constraint>
+	  <normal>0.0 0.0 1.0</normal>
+	  <rigid_body>Cone1-RigidBody</rigid_body>
+	</joint_actuator>
+    <joint_actuator id="Actuator2">
+	  <constraint>Const2</constraint>
+	  <normal>0.0 0.0 1.0</normal>
+	  <rigid_body>Cone2-RigidBody</rigid_body>
+	</joint_actuator>
+    <!--joint_actuator id="Actuator3">
+	  <constraint>Const3</constraint>
+	  <normal>0.0 0.0 1.0</normal>
+      <rigid_body>Cone3-RigidBody</rigid_body>
+	</joint_actuator-->
+    <!--joint_actuator id="Actuator4">
+	  <constraint>Const1</constraint>
+	  <normal>0.0 0.0 1.0</normal>
+	  <rigid_body>Cone4-RigidBody</rigid_body>
+	</joint_actuator-->
+  </actuators>
+  <elements>
+    <element id="Cone0">
+      <rigid_body>Cone0-RigidBody</rigid_body>
+	  <geometry>Cone0-Geometry</geometry>
+      <shape_debug target="Cone0-Geometry">1</shape_debug>
+    </element>
+    <element id="Cone1">
+	  <actuator>Actuator1</actuator>
+      <rigid_body>Cone1-RigidBody</rigid_body>
+	  <geometry>Cone1-Geometry</geometry>
+      <shape_debug target="Cone1-Geometry">0</shape_debug>
+    </element>
+    <element id="Cone2">
+	  <actuator>Actuator2</actuator>
+      <rigid_body>Cone2-RigidBody</rigid_body>
+	  <geometry>Cone2-Geometry</geometry>
+      <shape_debug target="Cone2-Geometry">1</shape_debug>
+    </element>
+    <!--element id="Cone3">
+	  <actuator>Actuator3</actuator>
+      <rigid_body>Cone3-RigidBody</rigid_body>
+	  <geometry>Cone3_001</geometry>
+      <shape_debug target="Cone3-Geometry">1</shape_debug>
+    </element-->
+    <!--element id="Cone4">
+	  <actuator>Actuator4</actuator>
+      <rigid_body>Cone4-RigidBody</rigid_body>
+	  <geometry>Cone4-Geometry</geometry>
+      <shape_debug target="Cone4-Geometry">0</shape_debug>
+    </element-->
+  </elements>
+</control>
